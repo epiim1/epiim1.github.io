@@ -8,8 +8,11 @@
 <body>
     
     <div id="flag">
-        <div>
-            
+        <div id="title">
+            <h1> e<sup>πi</sup> = 附1 </h1>
+        </div>
+        <div id="subtitle">
+            <h2> 師大附中數理資優班第35屆成果發表會 </h2>
         </div>
         <div id="logo">
             <img src="res/img/logo.jpg">
@@ -51,26 +54,39 @@
             border-right: 50vw solid transparent;
         }
         #title {
-            
+            position: absolute;
+            top: 6vh;
+            font-family: '微軟正黑體', 'Microsoft JhengHei', 'PingFang', sans-serif;
+            font-size: calc( ( 16px + 1vmax ) * 1.2 );
+            letter-spacing: 2px;
+        }
+        #subtitle {
+            position: absolute;
+            top: calc( 16vh + ( 16px + 1vmax ) * 2 );
+            font-family: '微軟正黑體', 'Microsoft JhengHei', 'PingFang', sans-serif;
+            font-size: calc( ( 16px + 1vmax ) * 0.8 );
+            letter-spacing: -1px;
         }
         #logo {
             display: inline-block;
             position: absolute;
-            bottom: 10%;
+            bottom: 10vh;
             background: white;
             z-index: 2;
             border-radius: 50%;
             padding: 8px;
-            max-width: 30vw;
-            max-height: 30vw;
+            max-width: 360px;
+            max-height: 360px;
             min-width: 180px;
             min-height: 180px;
         }
         #logo > img {
             display: block;
             margin: 0 auto;
-            max-width: 30vw;
-            max-height: 30vw;
+            width: 30vw;
+            height: 30vw;
+            max-width: 360px;
+            max-height: 360px;
             min-width: 180px;
             min-height: 180px;
             border-radius: 50%;
