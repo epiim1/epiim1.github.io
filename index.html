@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>e^(πi) = 附1</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    
+    <div id="flag">
+        <div>
+            
+        </div>
+        <div id="logo">
+            <img src="res/img/logo.jpg">
+        </div>
+    </div>
+    <div></div>
+    
+    <style>
+        html, body {
+            width: 100vw;
+            height: 100vh;
+        }
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        #flag {
+            width: 100vw;
+            height: 70vh;
+            box-sizing: content-box;
+            padding-top: 15px;
+            position: relative;
+            background: DeepSkyBlue;
+            color: white;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+        #flag:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-bottom: 20vh solid White;
+            border-left: 50vw solid transparent;
+            border-right: 50vw solid transparent;
+        }
+        #title {
+            
+        }
+        #logo {
+            display: inline-block;
+            position: absolute;
+            bottom: 10%;
+            background: white;
+            z-index: 2;
+            border-radius: 50%;
+            padding: 8px;
+            max-width: 30vw;
+            max-height: 30vw;
+            min-width: 180px;
+            min-height: 180px;
+        }
+        #logo > img {
+            display: block;
+            margin: 0 auto;
+            max-width: 30vw;
+            max-height: 30vw;
+            min-width: 180px;
+            min-height: 180px;
+            border-radius: 50%;
+        }
+    </style>
+    
+</body>
+</html>
