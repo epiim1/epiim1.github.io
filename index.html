@@ -107,6 +107,17 @@
             border-radius: 50%;
         }
     </style>
-    
+    <script>
+        (function() {
+            let n = 0,
+                titles = [
+                "e^(πi) = 附1",
+                "師大附中數理資優班第35屆成果發表會"
+            ];
+            setInterval(function() {
+                document.title = titles[(n++)%titles.length];
+            }, 10*1000);
+        })();
+    </script>
 </body>
 </html>
