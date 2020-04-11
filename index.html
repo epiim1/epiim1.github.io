@@ -76,13 +76,13 @@
         }
         #title {
             position: absolute;
-            top: 6vh;
+            top: calc( 6vh - 24px );
             font-size: calc( ( 16px + 1vmax ) * 1.2 );
             letter-spacing: 2px;
         }
         #subtitle {
             position: absolute;
-            top: calc( 16vh + ( 16px + 1vmax ) * 1.4 );
+            top: calc( 20vh - 24px + ( 16px + 1vmax ) * 1.4 );
             font-size: calc( ( 16px + 1vmax ) * 0.6 );
             letter-spacing: -1px;
         }
@@ -94,20 +94,20 @@
             z-index: 10;
             border-radius: 50%;
             padding: 8px;
-            max-width: 360px;
-            max-height: 360px;
-            min-width: 180px;
-            min-height: 180px;
+            max-width: 30vmin;
+            max-height: 30vmin;
+            min-width: 10vmin;
+            min-height: 10vmin;
         }
         #logo > img {
             display: block;
             margin: 0 auto;
-            width: 30vw;
-            height: 30vw;
-            max-width: 360px;
-            max-height: 360px;
-            min-width: 180px;
-            min-height: 180px;
+            width: 240px;
+            height: 240px;
+            max-width: 30vmin;
+            max-height: 30vmin;
+            min-width: 10vmin;
+            min-height: 10vmin;
             border-radius: 50%;
         }
         
