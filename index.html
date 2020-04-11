@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+    <div class="fl">
+        <div><span></span></div>
+        <div><div id="fl"></div></div>
+    </div>
     
     <div id="flag">
         <div id="title">
@@ -87,7 +91,7 @@
             position: absolute;
             bottom: 10vh;
             background: white;
-            z-index: 2;
+            z-index: 10;
             border-radius: 50%;
             padding: 8px;
             max-width: 360px;
@@ -106,18 +110,92 @@
             min-height: 180px;
             border-radius: 50%;
         }
+        
+        .fl {
+            position: fixed;
+            z-index: 5;
+            min-width: 100vw;
+            max-width: 100%;
+            min-height: 100vh;
+            max-height: 100%;
+            background-color: white;
+        }
+        .fl-done {
+            animation: fl-done .8s linear 1 forwards;
+        }
+        .fl > div {
+            min-width: 100%;
+            min-height: 100%;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .fl > div > span {
+            border: min( 3vmin, 16px ) solid rgba(208, 40, 40, 0);
+            border-radius: 50%;
+            border-top: min( 3vmin, 16px ) solid #3498db;
+            width: 248px;
+            height: 248px;
+            max-width: calc( 30vmin + 8px );
+            max-height: calc( 30vmin + 8px );
+            min-width: 10vmin;
+            min-height: 10vmin;
+            animation: fl-loader .5s linear infinite;
+            position: absolute;
+            bottom: calc( 30vh + 4px - min( 3vmin, 16px ) );
+        }
+        .fl > div > div {
+            width: 240px;
+            height: 240px;
+            max-width: 30vmin;
+            max-height: 30vmin;
+            min-width: 10vmin;
+            min-height: 10vmin;
+            position: absolute;
+            background-color: rgba(59, 222, 255, 0.2);
+            border-radius: 50%;
+            transition: width .6s, height .6s;
+            bottom: calc( 30vh + 8px );
+        }
+        @keyframes fl-loader {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes fl-done {
+            0% { opacity: 1; }
+            90% { opacity: 0; }
+            100% { opacity: 0; display: none; }
+        }
     </style>
     <script>
         (function() {
             let n = 0,
                 titles = [
-                "e^(πi) = 附1",
-                "師大附中數理資優班第35屆成果發表會"
-            ];
+                    "e^(πi) = 附1",
+                    "師大附中數理資優班第35屆成果發表會"
+                ];
             setInterval(function() {
                 document.title = titles[(n++)%titles.length];
             }, 10*1000);
         })();
+        
+        setTimeout(fl_update(25), 800);
+        setTimeout(fl_update(70), 2400);
+        setTimeout(fl_update(100), 3200);
+        
+        function fl_update(n = 0) {
+            if(n>=100) n = 150;
+            var ldr = document.getElementById("fl");
+            var s = "" + (10 + n * 1.1) + "vmax";
+            ldr.style.width = s;
+            ldr.style.height = s;
+            if(n>=100)
+                setTimeout(function() {
+                    document.getElementsByClassName("fl")[0].classList.add("fl-done");
+                }, 500);
+        }
     </script>
 </body>
 </html>
