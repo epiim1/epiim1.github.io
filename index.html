@@ -180,9 +180,9 @@
             }, 10*1000);
         })();
         
-        setTimeout(fl_update(25), 2000);
-        setTimeout(fl_update(70), 4000);
-        setTimeout(fl_update(100), 7500);
+        setTimeout(function(){fl_update(25)}, 800);
+        setTimeout(function(){fl_update(70)}, 3000);
+        setTimeout(function(){fl_update(100)}, 5000);
         
         function fl_update(n = 0) {
             if(n>=100) n = 150;
