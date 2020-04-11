@@ -156,7 +156,7 @@
             position: absolute;
             background-color: rgba(59, 222, 255, 0.2);
             border-radius: 50%;
-            transition: width .6s, height .6s;
+            transition: width .6s, height .6s, bottom .6s;
             bottom: calc( 30vh + 8px );
         }
         @keyframes fl-loader {
@@ -191,6 +191,9 @@
             var s = "" + (10 + n * 1.1) + "vmax";
             ldr.style.width = s;
             ldr.style.height = s;
+            ldr.style.maxWidth = s;
+            ldr.style.maxHeight = s;
+            ldr.style.bottom = `calc( 30vh + ( max( min( 15vmin, 120px ), 5vmin ) ) - ${"" + (10 + n * 1.1)/2 + "vmax"} )`;
             if(n>=100)
                 setTimeout(function() {
                     document.getElementsByClassName("fl")[0].classList.add("fl-done");
