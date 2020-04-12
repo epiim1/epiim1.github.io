@@ -10,7 +10,7 @@
         <div><span></span></div>
         <div><div id="fl"></div></div>
     </div>
-    
+
     <div id="flag">
         <div id="title">
             <h1> e<sup>πi</sup> = 附1 </h1>
@@ -23,7 +23,7 @@
         </div>
     </div>
     <div></div>
-    
+
     <style>
         @font-face {
             font-family: "huninn";
@@ -109,7 +109,7 @@
             min-height: 10vmin;
             border-radius: 50%;
         }
-        
+
         .fl {
             position: fixed;
             z-index: 5;
@@ -164,8 +164,8 @@
         }
         @keyframes fl-done {
             0% { opacity: 1; }
-            90% { opacity: 0; }
-            100% { opacity: 0; display: none; }
+            99% { opacity: 0; }
+            100% { opacity: 0; display: none;}
         }
     </style>
     <script>
@@ -179,12 +179,12 @@
                 document.title = titles[(n++)%titles.length];
             }, 10*1000);
         })();
-        
+
         fl_update(0);
         setTimeout(function(){fl_update(25)}, 800);
         setTimeout(function(){fl_update(70)}, 2400);
         setTimeout(function(){fl_update(100)}, 3400);
-        
+
         function fl_update(n = 0) {
             if(n>=100) n = 150;
             var ldr = document.getElementById("fl");
@@ -194,10 +194,14 @@
             ldr.style.maxWidth = s;
             ldr.style.maxHeight = s;
             ldr.style.bottom = `calc( 30vh + ( max( min( 15vmin, 120px ), 5vmin ) ) - ${"" + (10 + n * 1.1)/2 + "vmax"} )`;
-            if(n>=100)
+            if(n>=100) {
                 setTimeout(function() {
                     document.getElementsByClassName("fl")[0].classList.add("fl-done");
                 }, 500);
+                setTimeout(function() {
+                    document.getElementsByClassName("fl")[0].style.display = "none";
+                }, 1300);
+            }
         }
     </script>
 </body>
