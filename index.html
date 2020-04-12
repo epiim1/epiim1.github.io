@@ -157,7 +157,7 @@
             display: flex;
             align-items: center;
             flex-direction: column;
-            padding: 32px 6px;
+            margin: 32px 6px;
             width: 100%;
         }
         #posts > div {
@@ -237,6 +237,7 @@
         })();
 
         fl_update(0);
+        //scrollTo(0, 0);
         setTimeout(function(){fl_update(35)}, 500);
         fetch("https://www.instagram.com/epii_equals_81minus82/?__a=1").then(r=>r.json()).then(ig => {return {name:ig.graphql.user.username, posts:ig.graphql.user.edge_owner_to_timeline_media.edges}}).then(ig => {
             for(var i = 0; i < ig.posts.length; i++) {
