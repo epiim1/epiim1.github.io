@@ -219,7 +219,6 @@
         setLoadingSteps(2, 30, 100);
         loadFont().then(loadingStep);
         loadInstagramPosts().then(loadingStep);
-        setTimeout(function(){window.instgrm.Embeds.process();}, 20000);
 
 
         function setLoadingSteps(step, from, to) {
