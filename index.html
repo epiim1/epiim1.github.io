@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body onload="setTimeout(function(){scrollBy(-1000000,-1000000)}, 10);">
+    <div id="noIE">
+        <div>
+            <h1>請不要使用 IE 瀏覽器<br class="brk-600">瀏覽此網頁</h1>
+            <h3>使用 IE 瀏覽器瀏覽可能<br class="brk-600">什麼都看不到</h3>
+        </div>
+    </div>
+    <div id="noEdge">
+        <div>
+            <h1>請不要使用 Edge 瀏覽器<br class="brk-600">瀏覽此網頁</h1>
+            <h3>使用 Edge 瀏覽器瀏覽可能<br class="brk-600">會有部分內容無法正確顯示</h3>
+        </div>
+    </div>
     <div class="fl">
         <div><span></span></div>
         <div><div id="fl"></div></div>
@@ -41,6 +53,26 @@
         body {
             padding: 0;
             margin: 0;
+        }
+        @media screen and (min-width: 600px) {
+            br.brk-600 {
+              display: none;
+            }
+        }
+        #noEdge, #noIE {
+            display: none;
+            position: fixed;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+            background-color: rgba(59, 222, 255, 0.2);
+        }
+        #noEdge > div > h1, #noEdge > div > h3, #noIE > div > h1, #noIE > div > h3 {
+          position: relative;
+          bottom: 48px;
         }
         #flag {
             width: 100vw;
@@ -213,7 +245,18 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
     <script src="res/js/ig-embed.js"></script>
     <script>
-
+        killEdge();
+        killIE();
+        function killEdge() {
+            if(navigator.userAgent.search("Edge/") > -1)
+                document.getElementById("noEdge").style.display = "flex";
+        }
+        function killIE() {
+            if(navigator.userAgent.search("MSIE") > -1 || navigator.userAgent.search("Trident") > -1)
+                document.getElementById("noIE").style.display = "flex";
+        }
+    </script>
+    <script>
         var title_interval = titleRunner();
 
         fl_update(0);
