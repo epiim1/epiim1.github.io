@@ -248,7 +248,7 @@
         killEdge();
         killIE();
         function killEdge() {
-            if(navigator.userAgent.search("Edge/") > -1)
+            if(navigator.userAgent.search("Edge") > -1 || navigator.userAgent.search("Edg") > -1)
                 document.getElementById("noEdge").style.display = "flex";
         }
         function killIE() {
