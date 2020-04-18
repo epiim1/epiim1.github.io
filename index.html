@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body onload="setTimeout(function(){scrollBy(-1000000,-1000000)}, 10);">
+<body onload="setTimeout(function(){scrollBy(-1000000,-1000000)}, 5);">
     <div id="noIE">
         <div>
             <h1>請不要使用 IE 瀏覽器<br class="brk-600">瀏覽此網頁</h1>
@@ -251,6 +251,16 @@
             99% { opacity: 0; }
             100% { opacity: 0; display: none;}
         }
+        
+        .debugger.log {
+            color: deepskyblue;
+        }
+        .debugger.warn {
+            color: orange;
+        }
+        .debugger.error {
+            color: red;
+        }
     </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
     <script src="res/js/ig-embed.js"></script>
@@ -269,10 +279,12 @@
         var title_interval = titleRunner();
 
         fl_update(0);
-        setTimeout(function(){scrollBy(-1000000,-1000000)}, 10);
+        regLocationKey();
         setLoadingSteps(14, 30, 100);
         loadFont().then(loadingStep);
         loadInstagramPosts().then(loadingStep);
+        
+        devMode();
 
 
         function setLoadingSteps(step, from, to) {
@@ -287,6 +299,35 @@
             }
             return 0;
         };
+        
+        function regLocationKey() {
+            location.key = (function(){
+                let kv = {};
+                location.search.substr(1).split("&").forEach(k => {
+                    kv[k.split("=")[0]] = k.split("=")[1];
+                });
+                return kv;
+            })();
+        }
+        
+        function devMode() {
+            if(location.key && location.key["mode"] == "dev") {
+                document.getElementById("debugger").style.display = "block";
+                document.getElementById("debugger").style.width = "100%";
+                console.log = function(thing) {
+                    document.getElementById("debugger").innerHTML += `<span class="debugger log">${thing}</span><br>`;
+                };
+                console.info = function(thing) {
+                    document.getElementById("debugger").innerHTML += `<span class="debugger log">${thing}</span><br>`;
+                };
+                console.warn = function(thing) {
+                    document.getElementById("debugger").innerHTML += `<span class="debugger warn">${thing}</span><br>`;
+                };
+                console.error = function(thing) {
+                    document.getElementById("debugger").innerHTML += `<span class="debugger error">${thing}</span><br>`;
+                };
+            }
+        }
 
         async function loadFont() {
             var font_huninn = new FontFace('huninn', 'url("res/font/jf-openhuninn-10.woff2") format("woff2")');
