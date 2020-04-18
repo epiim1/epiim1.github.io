@@ -59,6 +59,11 @@
               display: none;
             }
         }
+        @supports (-webkit-touch-callout: none) {
+            #flag {
+                background-attachment: scroll;
+            }
+        }
         #noOldBrowsers, #noIE {
             display: none;
             position: fixed;
