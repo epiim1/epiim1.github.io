@@ -350,9 +350,6 @@
                     document.getElementById("posts").innerHTML += post;
                 }
                 instgrm.Embeds.process();
-                Array.from(document.querySelectorAll("#posts > div > iframe")).forEach(iframe => {
-                    iframe.addEventListener("load", function(){loadingStep});
-                })
                 return true;
             });
         }
