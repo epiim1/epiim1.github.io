@@ -285,6 +285,7 @@
         loadFont().then(loadingStep);
         loadInstagramPosts().then(loadingStep);
         
+        regService();
 
         function setLoadingSteps(step, from, to) {
             window.loadingSteps = { step, from, to, finished: 0 };
@@ -385,6 +386,10 @@
             return setInterval(function() {
                 document.title = titles[(n++)%titles.length];
             }, 10*1000);
+        }
+        
+        async function regService() {
+            return await navigator.serviceWorker.register("res/js/service.js").then(()=>{return true});
         }
     </script>
 </body>
