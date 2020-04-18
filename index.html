@@ -314,15 +314,19 @@
                 document.getElementById("debugger").style.display = "block";
                 document.getElementById("debugger").style.width = "100%";
                 console.log = function(thing) {
+                    if(typeof thing != "string") thing = JSON.stringify(thing);
                     document.getElementById("debugger").innerHTML += `<span class="debugger log">${thing}</span><br>`;
                 };
                 console.info = function(thing) {
+                    if(typeof thing != "string") thing = JSON.stringify(thing);
                     document.getElementById("debugger").innerHTML += `<span class="debugger log">${thing}</span><br>`;
                 };
                 console.warn = function(thing) {
+                    if(typeof thing != "string") thing = JSON.stringify(thing);
                     document.getElementById("debugger").innerHTML += `<span class="debugger warn">${thing}</span><br>`;
                 };
                 console.error = function(thing) {
+                    if(typeof thing != "string") thing = JSON.stringify(thing);
                     document.getElementById("debugger").innerHTML += `<span class="debugger error">${thing}</span><br>`;
                 };
                 console.warn("Entered Developer Mode.");
