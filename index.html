@@ -276,16 +276,15 @@
         }
     </script>
     <script>
-        var title_interval = titleRunner();
-
-        fl_update(0);
         regLocationKey();
+        devMode();
+        
+        fl_update(0);
+        titleRunner();
         setLoadingSteps(14, 30, 100);
         loadFont().then(loadingStep);
         loadInstagramPosts().then(loadingStep);
         
-        devMode();
-
 
         function setLoadingSteps(step, from, to) {
             window.loadingSteps = { step, from, to, finished: 0 };
