@@ -325,6 +325,8 @@
                 console.error = function(thing) {
                     document.getElementById("debugger").innerHTML += `<span class="debugger error">${thing}</span><br>`;
                 };
+                console.warn("Entered Developer Mode.");
+                console.warn("----------");
             }
         }
 
