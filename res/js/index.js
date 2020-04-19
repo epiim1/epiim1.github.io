@@ -20,6 +20,18 @@ function elmPos(elm) {
     return {x: x, y: y};
 }
 
+function setupWow() {
+    var wow = new WOW({
+        boxClass:     'wow',
+        animateClass: 'animated',
+        offset:       window.innerHeight * 0.15,
+        mobile:       true,
+        live:         true
+    });
+    wow.init();
+    return wow;
+}
+
 function setLoadingSteps(step, from, to) {
     window.loadingSteps = { step, from, to, finished: 0 };
     return 1;
