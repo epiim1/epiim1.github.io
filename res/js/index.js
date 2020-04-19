@@ -10,6 +10,16 @@ function deviceDetection() {
     return 1;
 }
 
+function elmPos(elm) {
+    var x = 0, y = 0;
+    while(elm) {
+        x += elm.offsetLeft - elm.scrollLeft + elm.clientLeft;
+        y += elm.offsetTop - elm.scrollLeft + elm.clientTop;
+        elm = elm.offsetParent;
+    }
+    return {x: x, y: y};
+}
+
 function setLoadingSteps(step, from, to) {
     window.loadingSteps = { step, from, to, finished: 0 };
     return 1;
