@@ -1,5 +1,18 @@
+function deviceDetection() {
+    var ua = new UAParser();
+    console.log(ua.getResult());
+    if(ua.getBrowser().name.search("IE") > -1) {
+        document.getElementById("noIE").style.display = "flex";
+    }
+    else if(!CSS.supports("min-width: min( 1px, 1% )")) {
+        document.getElementById("noOldBrowsers").style.display = "flex";
+    }
+    return 1;
+}
+
 function setLoadingSteps(step, from, to) {
     window.loadingSteps = { step, from, to, finished: 0 };
+    return 1;
 }
 
 function loadingStep(step) {
@@ -19,6 +32,7 @@ function regLocationKey() {
         });
         return kv;
     })();
+    return location.key;
 }
 
 function devMode() {
@@ -43,7 +57,9 @@ function devMode() {
         };
         console.warn("Entered Developer Mode.");
         console.warn("----------");
+        return 1;
     }
+    return 0;
 }
 
 async function loadFont() {
