@@ -60,6 +60,7 @@
         /* Loading */
         fl_update(0);
         titleRunner();
+        setTimeout(function(){scrollBy(-1000000,-1000000)}, 10);
         setLoadingSteps(14, 30, 100);
         loadFont().then(loadingStep);
         loadInstagramPosts().then(loadingStep);
