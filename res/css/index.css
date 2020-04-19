@@ -41,7 +41,7 @@ body {
     height: 80vh;
     box-sizing: content-box;
     position: relative;
-    background-image: url("res/img/bg.svg"), linear-gradient(DeepSkyBlue, DeepSkyBlue);
+    background-image: url("/res/img/bg.svg"), linear-gradient(DeepSkyBlue, DeepSkyBlue);
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
