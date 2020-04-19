@@ -22,11 +22,11 @@ function elmPos(elm) {
 
 function setupWow() {
     var wow = new WOW({
-        boxClass:     'wow',
+        boxClass: 'wow',
         animateClass: 'animated',
-        offset:       window.innerHeight * 0.15,
-        mobile:       true,
-        live:         true
+        offset: window.innerHeight * 0.15,
+        mobile: true,
+        live: true
     });
     wow.init();
     return wow;
