@@ -45,6 +45,7 @@
 
     <link href="res/css/animate.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="res/js/wow.js"></script>
     <script src="res/js/ig-embed.js"></script>
     <script src="res/js/ua-parser.min.js"></script>
     <script src="res/js/index.js"></script>
@@ -60,6 +61,7 @@
         setLoadingSteps(14, 30, 100);
         loadFont().then(loadingStep);
         loadInstagramPosts().then(loadingStep);
+        setupWow();
         
         /* Register Service */
         regService();
