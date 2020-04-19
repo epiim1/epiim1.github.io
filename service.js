@@ -7,7 +7,10 @@ var assets = [
 	'/res/img/logo.jpg',
 	'/res/img/logo_240.jpg',
 	'/res/js/ig-embed.js',
-	'/res/js/ua-parser.min.js'
+	'/res/js/ua-parser.min.js',
+	'/res/js/index.js',
+	'/res/css/index.css',
+	'/res/css/animate.min.css'
 ];
 
 self.addEventListener('install', function(evt) {
