@@ -22,7 +22,8 @@ self.addEventListener('fetch', function(evt) {
     console.log('[Service] Serving Asset.');
     console.log(evt.request);
     evt.respondWith(fromCache(evt.request));
-    evt.waitUntil(update(evt.request));
+    if(!isPicture(evt.request.url))
+        evt.waitUntil(update(evt.request));
 });
 
 function precache() {
@@ -47,4 +48,12 @@ function update(request) {
             return cache.put(request, response);
         });
     });
+}
+
+function isPicture(url) {
+    var types = ["jpg","jpeg","png","svg"];
+    for(var i = 0; i < types.length; i++) {
+        if(url.toLowerCase().includes(types[i])) return true;
+    }
+    return false;
 }
