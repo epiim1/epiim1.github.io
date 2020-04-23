@@ -51,9 +51,9 @@ function update(request) {
 }
 
 function isPicture(url) {
-    var types = ["jpg","jpeg","png","svg"];
+    var types = ["jpg","jpeg","png","svg","ico"];
     for(var i = 0; i < types.length; i++) {
-        if(url.toLowerCase().includes(types[i])) return true;
+        if(url.toLowerCase().includes("."+types[i])) return true;
     }
     return false;
 }
