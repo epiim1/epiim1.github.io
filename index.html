@@ -52,7 +52,9 @@
     <script src="res/js/ua-parser.min.js"></script>
     <script src="res/js/index.js"></script>
     <!-- Slick (Still Testing) -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.min.css"/>
+    <link href="res/css/index.css" rel="stylesheet" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -66,7 +68,7 @@
         fl_update(0);
         titleRunner();
         setTimeout(function(){scrollBy(-1000000,-1000000)}, 10);
-        setLoadingSteps(14, 30, 100);
+        setLoadingSteps(2, 30, 100);
         loadFont().then(loadingStep);
         loadInstagramPosts().then(loadingStep);
         setupWow();
@@ -75,7 +77,7 @@
         regService();
 
         /* test area */
-        $('#posts').slick();
+
     </script>
 </body>
 </html>

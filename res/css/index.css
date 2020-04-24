@@ -50,6 +50,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 #flag:after {
     content: "";
@@ -142,12 +143,26 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin: 32px 6px;
-    width: 100%;
+    margin: 32px auto;
+    width: 90%;
 }
 #posts > div {
     max-width: 100%;
-    min-width: min( 810px, 96% );
+    min-width: min(90%, 400px);
+}
+.ig-post-image {
+    margin: 0 16px;
+    max-width: 90%;
+    min-width: min(40%, 400px);
+}
+.slick-next {
+    right: -20px;
+}
+.slick-prev {
+    left: -20px;
+}
+.slick-next::before, .slick-prev::before {
+  color: #333;
 }
 .fl {
     position: fixed;
@@ -215,4 +230,11 @@ body {
 }
 .debugger.error {
     color: red;
+}
+
+.slick-initialized .slick-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
