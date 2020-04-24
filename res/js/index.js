@@ -175,6 +175,9 @@ function fl_update(n = 0) {
     ldr.style.bottom = `calc( 30vh + ( max( min( 15vmin, 120px ), 5vmin ) ) - ${"" + (10 + n * 1.1)/2 + "vmax"} )`;
     if(n>=100) {
         setTimeout(function() {
+            document.getElementById("logo-img").classList.add("animated", "pulse");
+        }, 200);
+        setTimeout(function() {
             document.getElementsByClassName("fl")[0].classList.add("fl-done");
         }, 500);
         setTimeout(function() {
