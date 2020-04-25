@@ -32,8 +32,9 @@ function setupWow() {
     return wow;
 }
 
-function setLoadingSteps(step, from, to) {
+function setLoadingSteps(step, from, to, forceStop=24000) {
     window.loadingSteps = { step, from, to, finished: 0 };
+    setTimeout(function() { fl_update(100); }, forceStop);
     return 1;
 }
 
