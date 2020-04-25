@@ -102,8 +102,7 @@ async function loadInstagramPosts() {
         for(var i = 0; i < posts.length; i++) {
             if((posts[i].node.edge_media_to_caption.edges[0].node.text != previous) && (previous = posts[i].node.edge_media_to_caption.edges[0].node.text)) {
                 let post = document.createElement("div"), link = document.createElement("a"), image = document.createElement("img");
-                if(window.innerWidth < 1000) image.src = posts[i].node.display_url;
-                else image.dataset.lazy = posts[i].node.display_url;
+                image.src = posts[i].node.display_url;
                 image.classList.add("ig-post-image");
                 link.href = "https://www.instagram.com/p/" + posts[i].node.shortcode + "/";
                 link.target = "_blank";
@@ -115,7 +114,7 @@ async function loadInstagramPosts() {
                 slide.appendChild(post);
             }
         }
-        slide.innerHTML += `<div><br><br><br><br><a href="https://www.instagram.com/epii_equals_81minus82/" target="_blank" class="wow flipInX" style="visibility: visible; animation-name: flipInX;"><div class="ig-follow"><div class="ig-border"><div class="ig-color"> <i class="fa fa-instagram ig-color"></i> 查看更多</div></div></div></a></div>`;
+        slide.innerHTML += `<div title="到 Instagram 查看更多!" class="ig-post"><a href="https://www.instagram.com/epii_equals_81minus82/" target="_blank"><img class="ig-post-image" src="res/img/instagram-more-1050.png"></a></div>`;
         slide.classList.add("ig-post-slide");
         document.getElementById("posts").appendChild(slide);
         $(".ig-post-slide").slick({
@@ -135,7 +134,6 @@ async function loadInstagramPosts() {
             responsive: [{
                 breakpoint: 1600,
                 settings: {
-                    lazyLoad: "ondemand",
                     slidesToShow: 3,
                     slidesToScroll: 3,
                     infinite: true,
@@ -148,7 +146,6 @@ async function loadInstagramPosts() {
             {
                 breakpoint: 1000,
                 settings: {
-                    lazyLoad: "ondemand",
                     slidesToShow: 2,
                     slidesToScroll: 2,
                     infinite: true,

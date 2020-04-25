@@ -154,6 +154,7 @@ body {
     margin: 0 16px;
     max-width: 90%;
     min-width: min(40%, 400px);
+    border-radius: min(1.5vmin, 8px);
 }
 .slick-next {
     right: -20px;
