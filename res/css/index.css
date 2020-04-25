@@ -149,6 +149,7 @@ body {
 #posts > div {
     max-width: 100%;
     min-width: min(90%, 400px);
+    border-radius: min(1.5vmin, 8px);
 }
 .ig-post-image {
     margin: 0 16px;
