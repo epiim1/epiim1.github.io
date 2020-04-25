@@ -55,14 +55,14 @@ body {
 #flag:after {
     content: "";
     position: absolute;
-    left: -4.5vw;
+    left: 0vw;
     bottom: -1px;
     width: 0;
     height: 0;
     border-bottom: 20vh solid White;
     border-left: 50vw solid transparent;
     border-right: 50vw solid transparent;
-    zoom: 1.1;
+    transform: scale(1.1);
 }
 #title {
     position: absolute;
