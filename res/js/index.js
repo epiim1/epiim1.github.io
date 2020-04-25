@@ -115,7 +115,7 @@ async function loadInstagramPosts() {
                 slide.appendChild(post);
             }
         }
-        slide.innerHTML += `<div title="到 Instagram 查看更多!" class="ig-post"><a href="https://www.instagram.com/epii_equals_81minus82/" target="_blank"><img class="ig-post-image" src="res/img/instagram_more_1050.png"></a></div>`;
+        slide.innerHTML += `<div title="到 Instagram 查看更多!" class="ig-post"><a href="https://www.instagram.com/epii_equals_81minus82/" target="_blank"><img class="ig-post-image animated infinite pulse" src="res/img/instagram_more_1050.png"></a></div>`;
         slide.classList.add("ig-post-slide");
         document.getElementById("posts").appendChild(slide);
         $(".ig-post-slide").slick({
