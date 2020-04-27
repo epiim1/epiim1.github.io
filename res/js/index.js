@@ -109,7 +109,7 @@ async function loadInstagramPosts() {
                 link.target = "_blank";
                 post.title = previous;
                 post.classList.add("ig-post");
-                if(previous.includes("#特別公告") || previous.includes("#重要公告")) image.classList.add("wow", "pulse", "infinite");
+                // if(previous.includes("#特別公告") || previous.includes("#重要公告")) image.classList.add("wow", "pulse", "infinite");
                 link.appendChild(image);
                 post.appendChild(link);
                 slide.appendChild(post);

@@ -1,0 +1,89 @@
+* {
+    font-family: '微軟正黑體', 'Microsoft JhengHei', 'PingFang', sans-serif;
+    font-weight: normal;
+}
+html, body {
+    width: 100vw;
+    height: 100vh;
+}
+body {
+    padding: 0;
+    margin: 0;
+}
+@media screen and (min-width: 600px) {
+    br.brk-600 {
+        display: none;
+    }
+}
+#noOldBrowsers, #noIE {
+    display: none;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background-color: rgba(59, 222, 255, 0.2);
+}
+#noOldBrowsers > div > h1, #noOldBrowsers > div > h3, #noIE > div > h1, #noIE > div > h3 {
+    position: relative;
+    bottom: 48px;
+}
+.fl {
+    position: fixed;
+    z-index: 5;
+    min-width: 100vw;
+    max-width: 100%;
+    min-height: 100vh;
+    max-height: 100%;
+    background-color: white;
+}
+.fl-done {
+    animation: fl-done .8s linear 1 forwards;
+}
+.fl > div {
+    min-width: 100vw;
+    min-height: 100vh;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.fl > div > span {
+    border: min( 3vmin, 16px ) solid rgba(208, 40, 40, 0);
+    border-radius: 50%;
+    border-top: min( 3vmin, 16px ) solid #3498db;
+    width: 248px;
+    height: 248px;
+    max-width: calc( 30vmin + 8px );
+    max-height: calc( 30vmin + 8px );
+    min-width: 10vmin;
+    min-height: 10vmin;
+    animation: fl-loader .5s linear infinite;
+    position: absolute;
+    bottom: calc( 30vh + 4px - min( 3vmin, 16px ) );
+}
+.fl > div > div {
+    width: 240px;
+    height: 240px;
+    max-width: 30vmin;
+    max-height: 30vmin;
+    min-width: 10vmin;
+    min-height: 10vmin;
+    position: absolute;
+    background-color: rgba(59, 222, 255, 0.2);
+    border-radius: 50%;
+    transition: width .6s, height .6s, bottom .6s;
+    bottom: calc( 30vh + 8px );
+}
+@keyframes fl-loader {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes fl-done {
+    0% { opacity: 1; }
+    99% { opacity: 0; }
+    100% { opacity: 0; display: none;}
+}
