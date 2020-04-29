@@ -123,14 +123,47 @@
     min-width: min(90%, 400px);
 }
 .ig-post {
+    position: relative;
     border-radius: min(1.5vmin, 8px);
+    margin: 16px 0;
+}
+.ig-post-link {
+    position: relative;
 }
 .ig-post-image {
-    margin: 0 16px;
+    margin: 0 5%;
     max-width: 90%;
     min-width: min(40%, 400px);
     border-radius: min(1.5vmin, 8px);
 }
+.new-post {
+    position: absolute;
+    height: 100%;
+    width: 90%;
+    margin: 0 5%;
+    border-radius: min(1.5vmin, 8px);
+}
+.new-post::before, .new-post::after {
+	content: '';
+	position: absolute;
+	left: -2px;
+	top: -2px;
+	background: linear-gradient(-225deg, #2CD8D5 0%, #C5C1FF 56%, #FFBAC3 100%, #C5C1FF 56%, #2CD8D5 0%);
+	background-size: 400%;
+	width: calc(100% + 4px);
+	height: calc(100% + 4px);
+	z-index: -1;
+	animation: newPostBorder 20s linear infinite;
+    border-radius: min(1.675vmin, 9px);
+}
+.new-post::after {
+	filter: blur(6px);
+}
+@keyframes newPostBorder {
+    0% {background-position: 0 0;}
+    100% {background-position: 400% 400%;}
+}
+
 .slick-next {
     right: -20px;
 }

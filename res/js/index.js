@@ -102,14 +102,17 @@ async function loadInstagramPosts() {
         var slide = document.createElement("div");
         for(var i = 0; i < posts.length; i++) {
             if((posts[i].node.edge_media_to_caption.edges[0].node.text != previous) && (previous = posts[i].node.edge_media_to_caption.edges[0].node.text)) {
-                let post = document.createElement("div"), link = document.createElement("a"), image = document.createElement("img");
+                let post = document.createElement("div"), link = document.createElement("a"), newPost = document.createElement("div"), image = document.createElement("img");
+                newPost.classList.add("new-post");
                 image.src = posts[i].node.display_url;
                 image.classList.add("ig-post-image");
                 link.href = "https://www.instagram.com/p/" + posts[i].node.shortcode + "/";
                 link.target = "_blank";
+                link.classList.add("ig-post-link");
                 post.title = previous;
                 post.classList.add("ig-post");
                 // if(previous.includes("#特別公告") || previous.includes("#重要公告")) image.classList.add("wow", "pulse", "infinite");
+                if((Date.now() - parseInt(posts[i].node.taken_at_timestamp)*1000) < 24*60*60*1000) link.appendChild(newPost);
                 link.appendChild(image);
                 post.appendChild(link);
                 slide.appendChild(post);
