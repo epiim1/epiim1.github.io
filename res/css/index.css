@@ -17,7 +17,7 @@
     left: -1px;
     position: fixed;
     z-index: 4;
-    width: max(5%, 50px);
+    width: max(4%, 50px);
     background-color: rgba(255,255,255,.5);
     margin: 16px 0;
     border: solid 1px rgba(0, 0, 0,.5);
