@@ -58,6 +58,14 @@ function regLocationKey() {
     return location.key;
 }
 
+async function sha256(text="") {
+    var utf8Array = new TextEncoder().encode(text);
+    var hashBuffer = await crypto.subtle.digest("SHA-256", utf8Array);
+    var hashArray = Array.from(new Uint8Array(hashBuffer));
+    var hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+    return hashHex;
+}
+
 function devMode() {
     if(location.key && location.key["mode"] == "dev") {
         document.getElementById("debugger").style.display = "block";
