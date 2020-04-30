@@ -8,6 +8,27 @@
         background-size: initial !important;
     }
 }
+.menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    bottom: 0;
+    left: -1px;
+    position: fixed;
+    z-index: 4;
+    width: max(5%, 50px);
+    background-color: rgba(255,255,255,.5);
+    margin: 16px 0;
+    border: solid 1px rgba(0, 0, 0, 0.5);
+    border-radius: 0 6px 6px 0;
+    background-color: white;
+}
+.menu-item {
+    font-size: 32px;
+    margin: 4px;
+    color: rgba(0, 0, 0, 0.9);
+}
 #flag {
     width: 100vw;
     height: 80vh;
@@ -144,20 +165,20 @@
     border-radius: min(1.5vmin, 8px);
 }
 .new-post::before, .new-post::after {
-	content: '';
-	position: absolute;
-	left: -2px;
-	top: -2px;
-	background: linear-gradient(-225deg, #2CD8D5 0%, #C5C1FF 56%, #FFBAC3 100%, #C5C1FF 56%, #2CD8D5 0%);
-	background-size: 400%;
-	width: calc(100% + 4px);
-	height: calc(100% + 4px);
-	z-index: -1;
-	animation: newPostBorder 20s linear infinite;
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    background: linear-gradient(-225deg, #2CD8D5 0%, #C5C1FF 56%, #FFBAC3 100%, #C5C1FF 56%, #2CD8D5 0%);
+    background-size: 400%;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    z-index: -1;
+    animation: newPostBorder 20s linear infinite;
     border-radius: min(1.675vmin, 9px);
 }
 .new-post::after {
-	filter: blur(6px);
+    filter: blur(6px);
 }
 @keyframes newPostBorder {
     0% {background-position: 0 0;}
@@ -171,7 +192,7 @@
     left: -20px;
 }
 .slick-next::before, .slick-prev::before {
-  color: #333;
+    color: #333;
 }
 
 .debugger.log {
