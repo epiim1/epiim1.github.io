@@ -144,7 +144,7 @@ async function loadInstagramPosts() {
             nextArrow: "",
             dotsClass: "slick-dots dots-small-margin",
             responsive: [{
-                breakpoint: 1600,
+                breakpoint: 1100,
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 3,
@@ -156,7 +156,7 @@ async function loadInstagramPosts() {
                 }
             },
             {
-                breakpoint: 1000,
+                breakpoint: 650,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,
