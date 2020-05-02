@@ -33,12 +33,14 @@
     color: rgba(0, 0, 0, 0.9);
     width: 32px;
     background-image: linear-gradient(black, black);
+    background-color: black;
     background-size: cover;
+    background-clip: text;
+    text-fill-color: transparent;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -moz-background-clip: text;
     -moz-text-fill-color: transparent;
-    transition: background-image .3s;
 }
 .menu-toggle {
     transition: transform .3s, top .3s;
