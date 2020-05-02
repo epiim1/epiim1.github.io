@@ -10,14 +10,14 @@
 }
 .menu {
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
     justify-content: space-around;
     align-items: center;
     bottom: 0;
-    left: -42px;
+    left: calc( -50px * 2);
     position: fixed;
     z-index: 4;
-    width: 50px;
+    height: 46px;
     margin: 16px 0;
     border: solid 1px rgba(0, 0, 0,.5);
     border-radius: 0 6px 6px 0;
@@ -29,8 +29,31 @@
 }
 .menu-item {
     font-size: 32px;
-    margin: 4px 0;
+    margin: 4px 8px;
     color: rgba(0, 0, 0, 0.9);
+    width: 32px;
+    background-image: linear-gradient(black, black);
+    background-size: cover;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    transition: background-image .3s;
+}
+.menu-toggle {
+    transition: transform .3s, top .3s;
+    position: relative;
+    width: initial;
+}
+.menu:hover > .menu-toggle , .menu:focus > .menu-toggle , .menu:active > .menu-toggle {
+    transform: rotate(540deg);
+    top: -1px;
+}
+#menu-anonysend:hover {
+    background-image: url("https://anonysend.ml/resource/img/background/background.svg");
+}
+#menu-instagram:hover {
+    background-image: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
 }
 #flag {
     width: 100vw;
@@ -66,11 +89,17 @@
     font-size: calc( ( 16px + 1vmax ) * 1.2 );
     letter-spacing: 2px;
 }
+#title:hover {
+    animation: tada 1s 1;
+}
 #subtitle {
     position: absolute;
     top: calc( 20vh - 24px + ( 16px + 1vmax ) * 1.4 );
     font-size: calc( ( 16px + 1vmax ) * 0.6 );
     letter-spacing: -1px;
+}
+#subtitle:hover {
+    animation: jello 1s 1;
 }
 #logo {
     display: inline-block;
@@ -85,6 +114,9 @@
     min-width: 10vmin;
     min-height: 10vmin;
 }
+#subtitle:hover {
+    animation: bounce 1s 1;
+}
 #logo > img {
     display: block;
     margin: 0 auto;
@@ -95,6 +127,9 @@
     min-width: 10vmin;
     min-height: 10vmin;
     border-radius: 50%;
+}
+#logo:hover {
+    animation: jello 1s 1;
 }
 #ig {
     display: flex;
