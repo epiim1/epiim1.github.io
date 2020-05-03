@@ -6,9 +6,10 @@ var assets = [
 	'/res/img/bg.svg',
 	'/res/img/logo.jpg',
 	'/res/img/logo_240.jpg',
-	'/res/js/ig-embed.js',
+	'/res/js/wow.js',
 	'/res/js/ua-parser.min.js',
 	'/res/js/index.js',
+	'/res/css/loading.css',
 	'/res/css/index.css',
 	'/res/css/animate.min.css'
 ];
@@ -19,8 +20,8 @@ self.addEventListener('install', function(evt) {
 });
 
 self.addEventListener('fetch', function(evt) {
-    console.log('[Service] Serving Asset.');
-    console.log(evt.request);
+    // console.log('[Service] Serving Asset.');
+    // console.log(evt.request);
     evt.respondWith(fromCache(evt.request));
     if(!isPicture(evt.request.url))
         evt.waitUntil(update(evt.request));
