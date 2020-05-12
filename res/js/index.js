@@ -109,7 +109,7 @@ async function loadInstagramPosts() {
         var posts = data.edge_owner_to_timeline_media.edges, previous = "";
         var slide = document.createElement("div");
         for(var i = 0; i < posts.length; i++) {
-            if((posts[i].node.edge_media_to_caption.edges[0].node.text != previous) && (previous = posts[i].node.edge_media_to_caption.edges[0].node.text)) {
+            if((posts[i].node.edge_media_to_caption.edges[0].node.text != previous) && (previous = posts[i].node.edge_media_to_caption.edges[0].node.text) && (previous.includes("#專研介紹") || previous.includes("#重要公告"))) {
                 let post = document.createElement("div"), link = document.createElement("a"), newPost = document.createElement("div"), image = document.createElement("img");
                 newPost.classList.add("new-post");
                 image.src = posts[i].node.display_url;
