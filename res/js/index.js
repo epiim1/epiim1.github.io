@@ -90,7 +90,19 @@ function devMode() {
         console.warn("----------");
         return 1;
     }
-    return 0;
+    else {
+        (function(){
+            return (function() {
+                var dxtt0 = [];
+                dxtt0.push(function() {
+                    (function(){debugger;})();
+                    (function(){setTimeout(function(){dxtt0[0]();}, 50);})();
+                });
+                dxtt0[0]();
+            })();
+        })();
+        return 0;
+    }
 }
 
 async function loadFont() {
