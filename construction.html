@@ -229,6 +229,7 @@
                         }
                     }
                 }
+                /*
                 if(this.result == 1) {
                     ctx.fillStyle = "Black";
                     ctx.font = "900 "+(width/10).toString()+"px Arial";
@@ -240,6 +241,7 @@
                     ctx.font = "900 "+(width/10).toString()+"px Arial";
                     ctx.fillText("You Lose!", cnv.width*0.225 + margin.left, cnv.height*0.525 + margin.top);
                 }
+                */
             };
             
             // check block
@@ -261,6 +263,8 @@
                 this.map[y][x] = 2;
                 if(!this.left()) {
                     this.timer.stop();
+                    alert("你成功找出所有地雷了！\n花費秒數： "+(Math.floor(this.timer.time/100)/10)+" 秒\n本機最佳紀錄： "+(localStorage["gameBest"]?localStorage["gameBest"]+" 秒":"無紀錄"
+                    localStorage["gameBest"] = Math.min(Math.floor(this.timer.time/100)/10, parseFloat(localStorage["gameBest"] || 0));
                     this.result = 1;
                 }
                 var l = (x > 0), t = (y > 0), r = (x < this.size - 1), b = (y < this.size - 1);
@@ -321,6 +325,7 @@
                 this.findMine--;
                 if(this.findMine <= 0) {
                     this.timer.stop();
+                    alert("你不小心踩到地雷了QQ！");
                     this.result = 2;
                 }
                 
