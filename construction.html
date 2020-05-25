@@ -264,7 +264,7 @@
                 if(!this.left() && !ended) {
                     this.timer.stop();
                     alert("你成功找出所有地雷了！\n花費秒數： "+(Math.floor(this.timer.time/100)/10)+" 秒\n本機最佳紀錄： "+(localStorage["gameBest"]?localStorage["gameBest"]+" 秒":"無紀錄"));
-                    localStorage["gameBest"] = Math.min(Math.floor(this.timer.time/100)/10, parseFloat(localStorage["gameBest"] || 10e10));
+                    localStorage["gameBest"] = Math.min(Math.floor(this.timer.time/100)/10, parseFloat(localStorage["gameBest"] || 14811482));
                     this.result = 1;
                     ended++;
                 }
