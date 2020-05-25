@@ -53,7 +53,7 @@
         var canvas = document.getElementById("game");
         var height = parseInt(getComputedStyle(canvas, null).getPropertyValue("width")), width = parseInt(getComputedStyle(canvas, null).getPropertyValue("width"));
         var margin = { top: 0, right: 0, bottom: 0, left: 0 };
-        
+        var ended = 0;
         // init game
         document.body.onload = function() {
             window.game = new Game(canvas, 15, 0.1);
@@ -261,11 +261,12 @@
                     });
                 };
                 this.map[y][x] = 2;
-                if(!this.left()) {
+                if(!this.left() && !ended) {
                     this.timer.stop();
                     alert("你成功找出所有地雷了！\n花費秒數： "+(Math.floor(this.timer.time/100)/10)+" 秒\n本機最佳紀錄： "+(localStorage["gameBest"]?localStorage["gameBest"]+" 秒":"無紀錄"));
                     localStorage["gameBest"] = Math.min(Math.floor(this.timer.time/100)/10, parseFloat(localStorage["gameBest"] || 0));
                     this.result = 1;
+                    ended++;
                 }
                 var l = (x > 0), t = (y > 0), r = (x < this.size - 1), b = (y < this.size - 1);
                 var boomb = 0;
@@ -323,10 +324,11 @@
                 var l = (x > 0), t = (y > 0), r = (x < this.size - 1), b = (y < this.size - 1);
                 this.tempMap[y][x] = 1;
                 this.findMine--;
-                if(this.findMine <= 0) {
+                if(this.findMine <= 0 && !ended) {
                     this.timer.stop();
                     alert("你不小心踩到地雷了QQ！");
                     this.result = 2;
+                    ended++;
                 }
                 
                 await delay(50);
