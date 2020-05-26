@@ -39,10 +39,10 @@
             <img class="round" src="https://epii.ml/res/img/logo_240.jpg">
         </div>
         <div>
-            <canvas id="game" height="1000" width="1000" style="cursor: pointer; max-width: 95%;border: solid gray 1px;"></canvas>
+            網站維護中，先來玩個遊戲吧！
         </div>
         <div>
-            網站維護中，先來玩個遊戲吧！
+            <canvas id="game" height="1000" width="1000" style="cursor: pointer; max-width: 95%;border: solid gray 1px;"></canvas>
         </div>
     </div>
     <div style="opacity: 0;">
@@ -59,7 +59,7 @@
             window.game = new Game(canvas, 15, 0.1);
             game.draw();
         }
-        
+
         // add listeners
         canvas.addEventListener("click", function(event) {
             var x = Math.floor(event.offsetX / game.block.dSize), y = Math.floor(event.offsetY / game.block.dSize);
@@ -84,14 +84,14 @@
             game.hover = {x: -1, y: -1};
             game.draw();
         });
-        
+
         function Game(cnv=canvas, size=20, mine=0.1) {
             // canvas
             this.ctx = cnv.getContext("2d");
-            
+
             // preprocess size
             size = Math.floor(size);
-            
+
             // preprocess mine
             if(mine < 1) {
                 mine = Math.floor(size*size*mine);
@@ -99,7 +99,7 @@
             else {
                 mine = Math.floor(Math.min(size*size, mine));
             }
-            
+
             this.result = 0;
             this.size = size;
             this.mine = mine;
@@ -109,7 +109,7 @@
                 dSize: width / this.size
             };
             this.hover = {x: -1, y: -1};
-            
+
             // build empty map
             for(var i = 0; i < size; i++) {
                 var cols = [], text = [];
@@ -120,7 +120,7 @@
                 this.map.push(cols);
                 this.text.push(text);
             }
-            
+
             // place mines
             for(var i = 0; i < mine; i++) {
                 var x = Math.floor(Math.random()*size), y = Math.floor(Math.random()*size);
@@ -129,7 +129,7 @@
                     this.map[x][y] = 1;
                 }
             }
-            
+
             // timer
             this.timer = {
                 time: 0,
@@ -169,7 +169,7 @@
                     return this;
                 }
             };
-            
+
             // draw
             this.draw = function() {
                 var ctx = this.ctx;
@@ -243,7 +243,7 @@
                 }
                 */
             };
-            
+
             // check block
             this.check = function(x, y) {
                 if(this.text[y][x] == "\uf024") return;
@@ -252,7 +252,7 @@
                 }
                 else this.search(x, y);
             };
-            
+
             // search space
             this.search = async function(x, y) {
                 const delay = (t) => {
@@ -270,7 +270,7 @@
                 }
                 var l = (x > 0), t = (y > 0), r = (x < this.size - 1), b = (y < this.size - 1);
                 var boomb = 0;
-                
+
                 if(l && this.map[y][x-1] == 1) boomb++;
                 if(t && this.map[y-1][x] == 1) boomb++;
                 if(r && this.map[y][x+1] == 1) boomb++;
@@ -279,7 +279,7 @@
                 if(t && r && this.map[y-1][x+1] == 1) boomb++;
                 if(r && b && this.map[y+1][x+1] == 1) boomb++;
                 if(b && l && this.map[y+1][x-1] == 1) boomb++;
-                
+
                 if(!boomb) {
                     this.text[y][x] = "";
                     await delay(20);
@@ -289,17 +289,17 @@
                     if(b && this.map[y+1][x] == 0) this.search(x, y + 1);
                 }
                 else this.text[y][x] = boomb;
-                
+
                 this.draw();
             };
-            
+
             // flag
             this.flag = function(x, y) {
                 if(this.text[y][x] == "\uf024") this.text[y][x] = "";
                 else if(this.text[y][x] == "" && this.map[y][x] != 2) this.text[y][x] = "\uf024";
                 this.draw();
             }
-            
+
             // boomb!
             this.boomb = function(x, y) {
                 this.findMine = this.mine;
@@ -311,7 +311,7 @@
                     }
                     this.tempMap.push(cols);
                 }
-                
+
                 this.boombSearch(x, y);
             }
             //; boomb search
@@ -330,19 +330,19 @@
                     this.result = 2;
                     ended++;
                 }
-                
+
                 await delay(50);
                 if(l && this.tempMap[y][x-1] == 0) this.boombSearch(x - 1, y);
                 if(t && this.tempMap[y-1][x] == 0) this.boombSearch(x, y - 1);
                 if(r && this.tempMap[y][x+1] == 0) this.boombSearch(x + 1, y);
                 if(b && this.tempMap[y+1][x] == 0) this.boombSearch(x, y + 1);
-                
+
                 if(this.map[y][x] == 1) {
                     this.text[y][x] = "\uf1e2";
                     this.draw();
                 }
             }
-            
+
             // left mine
             this.left = function() {
                 var total = 0;
