@@ -268,7 +268,7 @@
                 this.map[y][x] = 2;
                 if(!this.left() && !ended) {
                     this.timer.stop();
-                    alert("你成功找出所有地雷了！\n花費秒數： "+(Math.floor(this.timer.time/100)/10)+" 秒\n本機最佳紀錄： "+(localStorage["gameBest"]?localStorage["gameBest"]+" 秒":"無紀錄"));
+                    Swal.fire("你成功找出所有地雷了！", "花費秒數： "+(Math.floor(this.timer.time/100)/10)+" 秒\n本機最佳紀錄： "+(localStorage["gameBest"]?localStorage["gameBest"]+" 秒":"無紀錄"), "success");
                     localStorage["gameBest"] = Math.min(Math.floor(this.timer.time/100)/10, parseFloat(localStorage["gameBest"] || 14811482));
                     this.result = 1;
                     ended++;
@@ -331,7 +331,7 @@
                 this.findMine--;
                 if(this.findMine <= 0 && !ended) {
                     this.timer.stop();
-                    alert("你不小心踩到地雷了QQ！");
+                    Swal.fire("你不小心踩到地雷了QQ！", "再玩一次吧！但記得，要更小心點！", "error");
                     this.result = 2;
                     ended++;
                 }
@@ -360,5 +360,6 @@
             }
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </body>
 </html>

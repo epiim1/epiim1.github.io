@@ -10,34 +10,106 @@
 </head>
 <body>
     <div id="loading" class="loading-barrier">
-      <div class="loading-animation">
-        <h1><span>L</span><span>o</span><span>a</span><span>d</span><span>i</span><span>n</span><span>g</span><span>.</span><span>.</span><span>.</span></h1>
-      </div>
+        <div class="loading-animation">
+            <h1><span>L</span><span>o</span><span>a</span><span>d</span><span>i</span><span>n</span><span>g</span><span>.</span><span>.</span><span>.</span></h1>
+        </div>
     </div>
     <div class="container">
-        <div id="bar"></div>
-        <div>
+        <div class="bar"></div>
+        <div class="content">
             <h2>發佈留言</h2>
+            <textarea class="form-control" id="message" rows="6" placeholder="在此寫下你的留言..."></textarea>
+            <select class="custom-select" id="classification">
+                <option selected value="未分類">給 附中數資 35 屆</option>
+                <option disabled value="未分類"> ---------- </option>
+                <option value="數學專題">給 數學組</option>
+                <option value="數學_1"> 給 數學 - {專題名稱}</option>
+                <option value="數學_2"> 給 數學 - {專題名稱}</option>
+                <option value="數學_3"> 給 數學 - {專題名稱}</option>
+                <option disabled value="未分類"> ---------- </option>
+                <option value="物理專題">給 物理組</option>
+                <option value="物理_1"> 給 物理 - {專題名稱}</option>
+                <option value="物理_2"> 給 物理 - {專題名稱}</option>
+                <option value="物理_3"> 給 物理 - {專題名稱}</option>
+                <option disabled value="未分類"> ---------- </option>
+                <option value="化學專題">給 化學組</option>
+                <option value="化學_1"> 給 化學 - {專題名稱}</option>
+                <option value="化學_2"> 給 化學 - {專題名稱}</option>
+                <option value="化學_3"> 給 化學 - {專題名稱}</option>
+                <option disabled value="未分類"> ---------- </option>
+                <option value="生物專題">給 生物組</option>
+                <option value="生物_1"> 給 生物 - {專題名稱}</option>
+                <option value="生物_2"> 給 生物 - {專題名稱}</option>
+                <option value="生物_3"> 給 生物 - {專題名稱}</option>
+                <option disabled value="未分類"> ---------- </option>
+                <option value="地科專題">給 地科組</option>
+                <option value="地科_1"> 給 地科 - {專題名稱}</option>
+                <option value="地科_2"> 給 地科 - {專題名稱}</option>
+                <option value="地科_3"> 給 地科 - {專題名稱}</option>
+                <option disabled value="未分類"> ---------- </option>
+                <option value="資訊專題">給 資訊組</option>
+                <option value="資訊_1"> 給 資訊 - {專題名稱}</option>
+                <option value="資訊_2"> 給 資訊 - {專題名稱}</option>
+                <option value="資訊_3"> 給 資訊 - {專題名稱}</option>
+            </select>
+            <button id="send" type="button" class="btn btn-primary" onclick="sendOut()">送出</button>
         </div>
     </div>
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/flatly/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: rgba(0,0,128,.5);
-        }
-        .container {
-            background-color: rgba(255,255,255,.7);
-            min-width: 80%;
-            height: 100%;
-        }
+    body {
+        background-color: rgba(0,0,128,.5);
+    }
+    .container {
+        background-color: rgba(255,255,255,.7);
+        min-width: 80%;
+        height: 100%;
+    }
+    .content {
+        padding: 24px 4px;
+    }
+    #message, #classification, #send {
+        margin: 12px 0 4px 0;
+    }
     </style>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-firestore.js"></script>
     <script src="res/js/firebase-helper.js"></script>
     <script>
-        var helper = new firebaseHelper();
-        helper.init();
-        stopLoading(document.getElementById("loading"));
+    var helper = new firebaseHelper();
+    helper.init();
+
+    function sendOut() {
+        helper.messages.make(document.getElementById("message").value, tag(document.getElementById("classification").value))
+    }
+
+    function tag(val) {
+        var tags = [];
+        switch (val) {
+            case val.includes("數學_"):
+            tags.push("數學專題");
+            break;
+            case val.includes("物理_"):
+            tags.push("物理專題");
+            break;
+            case val.includes("化學_"):
+            tags.push("化學專題");
+            break;
+            case val.includes("生物_"):
+            tags.push("生物專題");
+            break;
+            case val.includes("地科_"):
+            tags.push("地科專題");
+            break;
+            case val.includes("資訊_"):
+            tags.push("資訊專題");
+            break;
+        }
+        tags.push(val);
+        return tags;
+    }
+
+    stopLoading(document.getElementById("loading"));
     </script>
 </body>
 </html>
