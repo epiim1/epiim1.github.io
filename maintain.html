@@ -275,8 +275,12 @@
                 this.map[y][x] = 2;
                 if(!this.left() && !ended) {
                     this.timer.stop();
-                    Swal.fire("你成功找出所有地雷了！", "花費秒數： "+(Math.floor(this.timer.time/100)/10)+" 秒\n本機最佳紀錄： "+(localStorage["gameBest"]?localStorage["gameBest"]+" 秒":"無紀錄"), "success");
-                    localStorage["gameBest"] = Math.min(Math.floor(this.timer.time/100)/10, parseFloat(localStorage["gameBest"] || 14811482));
+                    Swal.fire("你成功找出所有地雷了！", "花費秒數： "+(Math.floor(this.timer.time/100)/10)+" 秒\n本機最佳紀錄： "+(localStorage["gameBest"]?localStorage["gameBest"]+" 秒":"無紀錄"), "success").then(() => {
+                        if(Math.floor(this.timer.time/100)/10 < parseFloat(localStorage["gameBest"] || 14811482)) {
+                            Swal.fire("刷新紀錄！", "你以 "+(Math.floor(this.timer.time/100)/10)+" 秒的速度刷新了自己的最佳紀錄！", "success");
+                        }
+                        localStorage["gameBest"] = Math.min(Math.floor(this.timer.time/100)/10, parseFloat(localStorage["gameBest"] || 14811482));
+                    });
                     this.result = 1;
                     ended++;
                 }
