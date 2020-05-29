@@ -6,7 +6,11 @@ function stopLoading(elm) {
     });
     }, 15);
     setTimeout(function() {
-      elm.style.animation = "loading-out 1.5s forwards";
+      elm.style.animation = "loading-out-barrier 1.5s forwards";
+      elm.getElementsByClassName("loading-animation")[0].style.animation = "loading-out-text 1.5s forwards";
     }, 1000);
+    setTimeout(function() {
+      elm.style.display = "none";
+  }, 2500);
   });
 }

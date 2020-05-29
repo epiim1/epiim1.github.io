@@ -13,10 +13,11 @@ HTML CODE:
     --height: 15px;
 }
 html, body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: '微軟正黑體', 'Microsoft JhengHei', 'PingFang', Arial, Helvetica, sans-serif;
   width: 100%;
   height: 100%;
   position: relative;
+  margin: 0;
 }
 .loading-barrier {
   z-index: 9999;
@@ -102,7 +103,7 @@ html, body {
   }
 }
 
-@keyframes loading-out {
+@keyframes loading-out-text {
   0% {
     transform: matrix(1,0,0,1,0,0);
   }
@@ -116,6 +117,20 @@ html, body {
   }
   100% {
     transform: matrix(0,0,0,0,0,0);
-    display: none;
+    opacity: 0;
+  }
+}
+
+@keyframes loading-out-barrier {
+  0% {
+  }
+  25% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
   }
 }
