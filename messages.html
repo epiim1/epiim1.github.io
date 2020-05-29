@@ -74,13 +74,18 @@
     </style>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-firestore.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="res/js/firebase-helper.js"></script>
     <script>
     var helper = new firebaseHelper();
     helper.init();
 
     function sendOut() {
-        helper.messages.make(document.getElementById("message").value, tag(document.getElementById("classification").value))
+        helper.messages.make(document.getElementById("message").value, tag(document.getElementById("classification").value)).then(result => {
+            if(result) {
+                Swal.fire("已送出！", "我們已經收到你的留言了！請稍後片刻，我們將會回覆你。", "success");
+            }
+        });
     }
 
     function tag(val) {
