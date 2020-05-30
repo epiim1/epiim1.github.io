@@ -208,6 +208,10 @@
         <i class="fas fa-bomb"></i>
     </div>
     <script>
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+            for(let registration of registrations) registration.unregister();
+        });
+
         var canvas = document.getElementById("game");
         var height = parseInt(getComputedStyle(canvas, null).getPropertyValue("width")), width = parseInt(getComputedStyle(canvas, null).getPropertyValue("width"));
         var margin = { top: 0, right: 0, bottom: 0, left: 0 };
