@@ -38,11 +38,12 @@
             </nav>
         </div>
         <div class="content">
-            <div>
-                <button id="prev">Previous</button>
-                <button id="next">Next</button>
-                &nbsp; &nbsp;
-                <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+            <div class="fixedController">
+                <div id="prev"><i class="fas fa-angle-left"></i></div>
+                &nbsp;
+                <div id="pages"><span id="page_num"></span> / <span id="page_count"></span></div>
+                &nbsp;
+                <div id="next"><i class="fas fa-angle-right"></i></div>
             </div>
             <div id="table">
                 <canvas id="pdf-canvas"></canvas>
@@ -61,7 +62,7 @@
         .container {
             background-color: rgba(255,255,255,.5);
             min-width: 80%;
-            height: 100%;
+            min-height: 100%;
             box-shadow: 0 0 8px 8px rgba(32, 32, 32, 0.2);
         }
         .bar {
@@ -78,14 +79,35 @@
             text-align: center;
             overflow: auto;
             margin: 12px 0 4px 0;
-            max-height: 100%;
-            width: 95%;
         }
         #pdf-canvas {
             width: 100%;
+            max-width: 1000px;
+            border-radius: 8px;
+        }
+        #prev, #pages, #next {
+            display: inline-block;
+            font-size: 1.2rem;
+        }
+        #prev, #next {
+            cursor: pointer;
+            width: 32px;
+        }
+        .fixedController {
+            position: fixed;
+            bottom: 2.5%;
+            left: 0;
+            width: 200px;
+            background-color: rgba(255,255,255,.7);
+            margin: 0 calc((100% - 200px) / 2);
+            box-shadow: 0 0 8px 1px rgba(32, 32, 32, 0.2);
+            border-radius: 16px;
         }
     </style>
     <script>
+        var pdfHeight = window.innerHeight - 150, pdfWidth = pdfHeight / 1.41421356;
+        document.getElementById("pdf-canvas").style.height = pdfHeight;
+        document.getElementById("pdf-canvas").style.width = pdfWidth;
         var url = "https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf";
         var pdfjsLib = window["pdfjs-dist/build/pdf"];
         pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@2.3.200/build/pdf.worker.min.js";
