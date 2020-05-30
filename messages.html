@@ -15,7 +15,28 @@
         </div>
     </div>
     <div class="container">
-        <div class="bar"></div>
+        <div class="bar">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="./">  e<sup>πi</sup> = 附1  </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bar" aria-controls="bar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="bar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="./">首頁</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./book">成發本</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./message">留言區</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
         <div class="content">
             <h2>發佈留言</h2>
             <textarea class="form-control" id="message" rows="6" placeholder="在此寫下你的留言..."></textarea>
@@ -56,6 +77,8 @@
         </div>
     </div>
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/flatly/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <style>
     body {
         background-color: rgba(0,0,128,.5);
@@ -64,6 +87,11 @@
         background-color: rgba(255,255,255,.7);
         min-width: 80%;
         height: 100%;
+        box-shadow: 0 0 8px 8px rgba(32, 32, 32, 0.3);
+    }
+    .bar {
+        margin: 0 -15px;
+        box-shadow: 0px 4px 8px 0px rgba(32, 32, 32, 0.3);
     }
     .content {
         padding: 24px 4px;
