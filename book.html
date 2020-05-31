@@ -106,6 +106,12 @@
         }
     </style>
     <script>
+        var isIOS = /\b(iPad|iPhone|iPod)(?=;)/.test(navigator.userAgent);
+        if (isIOS) {
+            pdfjsLib.disableRange = true;
+            pdfjsLib.disableStream = true;
+        }
+
         var pdfHeight = window.innerHeight - 150, pdfWidth = pdfHeight / 1.41421356;
         document.getElementById("pdf-canvas").style.height = pdfHeight;
         document.getElementById("pdf-canvas").style.width = pdfWidth;
