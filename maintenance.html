@@ -427,8 +427,11 @@
                 if(!this.left() && !ended) {
                     this.timer.stop();
                     Swal.fire("你成功找出所有地雷了！", "花費秒數： "+(Math.floor(this.timer.time/100)/10)+" 秒\n本機最佳紀錄： "+(localStorage["gameBest"]?localStorage["gameBest"]+" 秒":"無紀錄"), "success").then(() => {
-                        if(Math.floor(this.timer.time/100)/10 < parseFloat(localStorage["gameBest"] || 14811482)) {
-                            Swal.fire("刷新紀錄！", "你以 "+(Math.floor(this.timer.time/100)/10)+" 秒的速度刷新了自己的最佳紀錄！", "success");
+                        if(!localStorage["gameBest"] || Math.floor(this.timer.time/100)/10 < parseFloat(localStorage["gameBest"] || 14811482)) {
+                            Swal.fire("刷新紀錄！", "你以 "+(Math.floor(this.timer.time/100)/10)+" 秒的速度刷新了自己的最佳紀錄！", "success").then(() => {
+                                hideGame.ms[hideGameId].find = 1;
+                                allPass();
+                            });
                         }
                         localStorage["gameBest"] = Math.min(Math.floor(this.timer.time/100)/10, parseFloat(localStorage["gameBest"] || 14811482));
                     });
@@ -519,6 +522,24 @@
                     }
                 }
                 return total;
+            }
+        }
+        var hideGameId = 0;
+        var hideGame = localStorage["hideGame"] ? JSON.parse(localStorage["hideGame"]) : ({ms:[{find:0,pass:0},{find:0,pass:0},{find:0,pass:0}],got:{ms:[0,0]}});
+        hideGame.ms[hideGameId].find = 1;
+        if(hideGame.ms[0].find && hideGame.ms[1].find && hideGame.ms[2].find && !hideGame.got.ms[0]) {
+            Swal.fire("尋寶高手", "你找到了所有的隱藏遊戲", "success");
+            hideGame.got.ms[0] = 1;
+        }
+        saveHideState();
+        function saveHideState() {
+            localStorage["hideGame"] = JSON.stringify(hideGame);
+        }
+        function allPass() {
+            if(hideGame.ms[0].pass && hideGame.ms[1].pass && hideGame.ms[2].pass && !hideGame.got.ms[1]) {
+                Swal.fire("遊戲高手", "你通關了所有的隱藏遊戲", "success");
+                hideGame.got.ms[1] = 1;
+                saveHideState();
             }
         }
     </script>

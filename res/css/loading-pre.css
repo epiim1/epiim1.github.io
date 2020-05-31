@@ -19,6 +19,10 @@ html, body {
   position: relative;
   margin: 0;
 }
+a, a:visited, a:hover {
+    color: deepskyblue;
+    text-decoration: none;
+}
 .loading-barrier {
   z-index: 9999;
   width: 100%;
