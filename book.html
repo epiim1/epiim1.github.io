@@ -176,6 +176,11 @@
             queueRenderPage(pageNum);
         }
         
+        function toP(n) {
+            pageNum = n;
+            queueRenderPage(pageNum);
+        }
+        
         function Download() {
             var link = document.createElement('a');
             link.href = "./res/pdf/%E6%88%90%E7%99%BC%E6%9C%AC_1.pdf";
@@ -184,8 +189,30 @@
             link.click();
         }
         
-        function PDFLinks() {
-            
+        function PDFLinks(e) {
+            var w = parseFloat(getComputedStyle(canvas, null).getPropertyValue("width"))/canvas.width;
+            var h = parseFloat(getComputedStyle(canvas, null).getPropertyValue("height"))/canvas.height;
+            var x = e.offsetX, y = e.offsetY;
+            if(pageNum == 2) {
+                if(y > 2000*h) {
+                    toP(29);
+                }
+                else if(y > 1800*h) {
+                    toP(27);
+                }
+                else if(y > 1600*h) {
+                    toP(20);
+                }
+                else if(y > 1000*h) {
+                    toP(16);
+                }
+                else if(y > 500*h) {
+                    toP(10);
+                }
+                else {
+                    
+                }
+            }
         }
     </script>
 </body>
