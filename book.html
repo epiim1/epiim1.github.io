@@ -105,7 +105,17 @@
         }
     </style>
     <script>
-
+        if(location.href.includes("dev")) {
+            console.log = function(text) {
+                document.body.innerHTML += `<br><span>${text}</span>`;
+            };
+            console.error = function(text) {
+                document.body.innerHTML += `<br><span>${text}</span>`;
+            };
+            console.debug = function(text) {
+                document.body.innerHTML += `<br><span>${text}</span>`;
+            }
+        }
         var pdfHeight = window.innerHeight - 150, pdfWidth = pdfHeight / 1.41421356;
         document.getElementById("pdf-canvas").style.height = pdfHeight;
         document.getElementById("pdf-canvas").style.width = pdfWidth;
