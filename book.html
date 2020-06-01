@@ -177,8 +177,10 @@
         }
         
         function toP(n) {
-            pageNum = n;
-            queueRenderPage(pageNum);
+            setTimeout(function() {
+                pageNum = n;
+                queueRenderPage(pageNum);
+            }, 20);
         }
         
         function Download() {
