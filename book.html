@@ -197,6 +197,7 @@
             var x = e.offsetX, y = e.offsetY;
             var d = 140;
             setTimeout(function() {
+                if(location.href.includes("dev")) document.body.innerHTML += "<br>"+(y/h);
                 if(pageNum == 2) {
                     if(y > 3050*h) {
                         toP(28);
@@ -225,8 +226,38 @@
                     else if(y > 3050-d*8*h) {
                         toP(17);
                     }
-                    else {
-                        
+                    else if(y > 3050-d*9*h) {
+                        toP(16);
+                    }
+                    else if(y > 3050-d*10*h) {
+                        toP(14);
+                    }
+                    else if(y > 3050-d*11*h) {
+                        toP(13);
+                    }
+                    else if(y > 3050-d*12*h) {
+                        toP(12);
+                    }
+                    else if(y > 3050-d*13*h) {
+                        toP(10);
+                    }
+                    else if(y > 3050-d*14*h) {
+                        toP(9);
+                    }
+                    else if(y > 3050-d*15*h) {
+                        toP(8);
+                    }
+                    else if(y > 3050-d*16*h) {
+                        toP(7);
+                    }
+                    else if(y > 3050-d*17*h) {
+                        toP(6);
+                    }
+                    else if(y > 3050-d*18*h) {
+                        toP(5);
+                    }
+                    else if(y > 3050-d*19*h) {
+                        toP(3);
                     }
                 }
             }, 10);
