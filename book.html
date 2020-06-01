@@ -180,7 +180,7 @@
             setTimeout(function() {
                 pageNum = n;
                 queueRenderPage(pageNum);
-            }, 20);
+            }, 10);
         }
         
         function Download() {
@@ -195,27 +195,41 @@
             var w = parseFloat(getComputedStyle(canvas, null).getPropertyValue("width"))/canvas.width;
             var h = parseFloat(getComputedStyle(canvas, null).getPropertyValue("height"))/canvas.height;
             var x = e.offsetX, y = e.offsetY;
-            if(pageNum == 2) {
-                if(location.href.includes("dev")) document.body.innerHTML += "<br>" + (y / h);
-                if(y > 3050*h) {
-                    toP(28);
+            var d = 140;
+            setTimeout(function() {
+                if(pageNum == 2) {
+                    if(y > 3050*h) {
+                        toP(28);
+                    }
+                    else if(y > 3050-d*1*h) {
+                        toP(26);
+                    }
+                    else if(y > 3050-d*2*h) {
+                        toP(25);
+                    }
+                    else if(y > 3050-d*3*h) {
+                        toP(24);
+                    }
+                    else if(y > 3050-d*4*h) {
+                        toP(22);
+                    }
+                    else if(y > 3050-d*5*h) {
+                        toP(21);
+                    }
+                    else if(y > 3050-d*6*h) {
+                        toP(20);
+                    }
+                    else if(y > 3050-d*7*h) {
+                        toP(18);
+                    }
+                    else if(y > 3050-d*8*h) {
+                        toP(17);
+                    }
+                    else {
+                        
+                    }
                 }
-                else if(y > 2920*h) {
-                    toP(26);
-                }
-                else if(y > 2790*h) {
-                    toP(25);
-                }
-                else if(y > 2660*h) {
-                    toP(24);
-                }
-                else if(y > 2530*h) {
-                    toP(22);
-                }
-                else {
-                    
-                }
-            }
+            }, 10);
         }
     </script>
 </body>
