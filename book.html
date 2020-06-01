@@ -124,7 +124,7 @@
 
         document.getElementById("prev").addEventListener("click", onPrevPage);
         document.getElementById("next").addEventListener("click", onNextPage);
-        document.getElementById("pdf-home").addEventListener("click", toFirstPage);
+        document.getElementById("pdf-home").addEventListener("click", toIndex);
         document.getElementById("pdf-dl").addEventListener("click", Download);
 
         pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
@@ -170,14 +170,15 @@
             queueRenderPage(++pageNum);
         }
         
-        function toFirstPage() {
-            pageNum = 1;
+        function toIndex() {
+            pageNum = 2;
             queueRenderPage(pageNum);
         }
         
         function Download() {
             var link = document.createElement('a');
             link.href = "./res/pdf/%E6%88%90%E7%99%BC%E6%9C%AC_1.pdf";
+            link.target = "_blank";
             link.download="師大附中第35屆數理資優班成果發表會-成發本.pdf";
             link.click();
         }
