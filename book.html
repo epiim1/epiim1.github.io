@@ -194,6 +194,7 @@
             var h = parseFloat(getComputedStyle(canvas, null).getPropertyValue("height"))/canvas.height;
             var x = e.offsetX, y = e.offsetY;
             if(pageNum == 2) {
+                if(location.href.includes("dev")) document.body.innerHTML += "<br>" + (y / h);
                 if(y > 2000*h) {
                     toP(29);
                 }
