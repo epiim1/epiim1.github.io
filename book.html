@@ -53,7 +53,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/flatly/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <script src="./res/js/pdf.js"></script>
     <style>
         body {
             background: rgba(0,0,128,.5) url("res/img/background_x2.jpg") no-repeat center;
@@ -111,15 +111,15 @@
         document.getElementById("pdf-canvas").style.width = pdfWidth;
         var url = "https://epii.ml/res/pdf/%E6%88%90%E7%99%BC%E6%9C%AC_1.pdf";
         var pdfjsLib = window["pdfjs-dist/build/pdf"];
-        pdfjsLib.GlobalWorkerOptions.workerSrc = "https://mozilla.github.io/pdf.js/build/pdf.worker.js";
+        pdfjsLib.GlobalWorkerOptions.workerSrc = "https://epii.ml/res/js/pdf.worker.js";
 
         var pdfDoc = null, pageNum = 1, pageRendering = false, pageNumPending = null, scale = 8, canvas = document.getElementById("pdf-canvas"), ctx = canvas.getContext("2d");
 
         document.getElementById("prev").addEventListener("click", onPrevPage);
         document.getElementById("next").addEventListener("click", onNextPage);
 
-        pdfjsLib.getDocument(url).promise.then(pdfDoc => {
-            window.pdfDoc = pdfDoc;
+        pdfjsLib.getDocument(url).promise.then(_pdfDoc => {
+            pdfDoc = _pdfDoc;
             document.getElementById("page_count").textContent = pdfDoc.numPages;
             renderPage(pageNum);
             stopLoading(document.getElementById("loading"));
