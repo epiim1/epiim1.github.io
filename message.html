@@ -115,11 +115,12 @@
 
     function sendOut() {
         var msg = document.getElementById("message").value;
-        document.getElementById("send").disabled = "true";
         if(msg.length < 1) return;
+        document.getElementById("send").disabled = "true";
         helper.messages.make(msg, tag(document.getElementById("classification").value)).then(result => {
             if(result) {
                 Swal.fire("已送出！", "我們已經收到你的留言了！請稍後片刻，我們將會回覆你。", "success");
+                document.getElementById("message").value = "";
                 document.getElementById("send").disabled = "false";
             }
         });
