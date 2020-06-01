@@ -116,7 +116,7 @@
         var pdfHeight = window.innerHeight - 150, pdfWidth = pdfHeight / 1.41421356;
         document.getElementById("pdf-canvas").style.height = ""+pdfHeight+"px";
         document.getElementById("pdf-canvas").style.width = ""+pdfWidth+"px";
-        var url = "https://epii.ml/res/pdf/%E6%88%90%E7%99%BC%E6%9C%AC.pdf";
+        var url = "https://epii.ml/res/pdf/%E6%88%90%E7%99%BC%E6%9C%AC_3.pdf";
         var pdfjsLib = window["pdfjs-dist/build/pdf"];
         pdfjsLib.GlobalWorkerOptions.workerSrc = "https://epii.ml/res/js/pdf.worker.js";
 
@@ -183,7 +183,7 @@
         
         function Download() {
             var link = document.createElement('a');
-            link.href = "./res/pdf/%E6%88%90%E7%99%BC%E6%9C%AC_1.pdf";
+            link.href = "./res/pdf/%E6%88%90%E7%99%BC%E6%9C%AC_3.pdf";
             link.target = "_blank";
             link.download="師大附中第35屆數理資優班成果發表會-成發本.pdf";
             link.click();
@@ -198,61 +198,61 @@
                 var t = y / h;
                 if(pageNum == 2) {
                     if(t > 3050) {
-                        toP(28);
+                        toP(30);
                     }
                     else if(t > 3050-d*1) {
-                        toP(26);
+                        toP(28);
                     }
                     else if(t > 3050-d*2) {
-                        toP(25);
+                        toP(27);
                     }
                     else if(t > 3050-d*3) {
-                        toP(24);
+                        toP(26);
                     }
                     else if(t > 3050-d*4) {
-                        toP(22);
+                        toP(24);
                     }
                     else if(t > 3050-d*5) {
-                        toP(21);
+                        toP(23);
                     }
                     else if(t > 3050-d*6) {
-                        toP(20);
+                        toP(22);
                     }
                     else if(t > 3050-d*7) {
-                        toP(18);
+                        toP(20);
                     }
                     else if(t > 3050-d*8) {
-                        toP(17);
+                        toP(19);
                     }
                     else if(t > 3050-d*9) {
-                        toP(16);
+                        toP(18);
                     }
                     else if(t > 3050-d*10) {
-                        toP(14);
+                        toP(16);
                     }
                     else if(t > 3050-d*11) {
-                        toP(13);
+                        toP(15);
                     }
                     else if(t > 3050-d*12) {
-                        toP(12);
+                        toP(14);
                     }
                     else if(t > 3050-d*13) {
-                        toP(10);
+                        toP(12);
                     }
                     else if(t > 3050-d*14) {
-                        toP(9);
+                        toP(11);
                     }
                     else if(t > 3050-d*15) {
-                        toP(8);
+                        toP(10);
                     }
                     else if(t > 3050-d*16) {
-                        toP(7);
+                        toP(9);
                     }
                     else if(t > 3050-d*17) {
-                        toP(6);
+                        toP(7);
                     }
                     else if(t > 3050-d*18) {
-                        toP(5);
+                        toP(6);
                     }
                     else if(t > 3050-d*19) {
                         toP(3);
