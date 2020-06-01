@@ -177,10 +177,8 @@
         }
         
         function toP(n) {
-            setTimeout(function() {
-                pageNum = n;
-                queueRenderPage(pageNum);
-            }, 10);
+            pageNum = n;
+            queueRenderPage(pageNum);
         }
         
         function Download() {
@@ -197,66 +195,66 @@
             var x = e.offsetX, y = e.offsetY;
             var d = 140;
             setTimeout(function() {
-                if(location.href.includes("dev")) document.body.innerHTML += "<br>"+(y/h);
+                var t = y / h;
                 if(pageNum == 2) {
-                    if(y > 3050*h) {
+                    if(t > 3050) {
                         toP(28);
                     }
-                    else if(y > 3050-d*1*h) {
+                    else if(t > 3050-d*1) {
                         toP(26);
                     }
-                    else if(y > 3050-d*2*h) {
+                    else if(t > 3050-d*2) {
                         toP(25);
                     }
-                    else if(y > 3050-d*3*h) {
+                    else if(t > 3050-d*3) {
                         toP(24);
                     }
-                    else if(y > 3050-d*4*h) {
+                    else if(t > 3050-d*4) {
                         toP(22);
                     }
-                    else if(y > 3050-d*5*h) {
+                    else if(t > 3050-d*5) {
                         toP(21);
                     }
-                    else if(y > 3050-d*6*h) {
+                    else if(t > 3050-d*6) {
                         toP(20);
                     }
-                    else if(y > 3050-d*7*h) {
+                    else if(t > 3050-d*7) {
                         toP(18);
                     }
-                    else if(y > 3050-d*8*h) {
+                    else if(t > 3050-d*8) {
                         toP(17);
                     }
-                    else if(y > 3050-d*9*h) {
+                    else if(t > 3050-d*9) {
                         toP(16);
                     }
-                    else if(y > 3050-d*10*h) {
+                    else if(t > 3050-d*10) {
                         toP(14);
                     }
-                    else if(y > 3050-d*11*h) {
+                    else if(t > 3050-d*11) {
                         toP(13);
                     }
-                    else if(y > 3050-d*12*h) {
+                    else if(t > 3050-d*12) {
                         toP(12);
                     }
-                    else if(y > 3050-d*13*h) {
+                    else if(t > 3050-d*13) {
                         toP(10);
                     }
-                    else if(y > 3050-d*14*h) {
+                    else if(t > 3050-d*14) {
                         toP(9);
                     }
-                    else if(y > 3050-d*15*h) {
+                    else if(t > 3050-d*15) {
                         toP(8);
                     }
-                    else if(y > 3050-d*16*h) {
+                    else if(t > 3050-d*16) {
                         toP(7);
                     }
-                    else if(y > 3050-d*17*h) {
+                    else if(t > 3050-d*17) {
                         toP(6);
                     }
-                    else if(y > 3050-d*18*h) {
+                    else if(t > 3050-d*18) {
                         toP(5);
                     }
-                    else if(y > 3050-d*19*h) {
+                    else if(t > 3050-d*19) {
                         toP(3);
                     }
                 }
