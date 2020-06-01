@@ -126,6 +126,7 @@
         document.getElementById("next").addEventListener("click", onNextPage);
         document.getElementById("pdf-home").addEventListener("click", toIndex);
         document.getElementById("pdf-dl").addEventListener("click", Download);
+        document.getElementById("pdf-canvas").addEventListener("click", PDFLinks);
 
         pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
             pdfDoc = pdfDoc_;
@@ -181,6 +182,10 @@
             link.target = "_blank";
             link.download="師大附中第35屆數理資優班成果發表會-成發本.pdf";
             link.click();
+        }
+        
+        function PDFLinks() {
+            
         }
     </script>
 </body>
