@@ -39,11 +39,15 @@
         </div>
         <div class="content">
             <div class="fixedController">
+                <div id="pdf-home"><i class="fas fa-book"></i></div>
+                &nbsp;
                 <div id="prev"><i class="fas fa-angle-left"></i></div>
                 &nbsp;
                 <div id="pages"><span id="page_num"></span> / <span id="page_count"></span></div>
                 &nbsp;
                 <div id="next"><i class="fas fa-angle-right"></i></div>
+                &nbsp;
+                <div id="pdf-dl"><i class="fas fa-download"></i></div>
             </div>
             <div id="table">
                 <canvas id="pdf-canvas"></canvas>
@@ -86,21 +90,24 @@
             border-radius: 8px;
             /* border: solid black 1px; */
         }
-        #prev, #pages, #next {
+        #pdf-home, #prev, #pages, #next, #pdf-dl {
             display: inline-block;
             font-size: 1.2rem;
         }
-        #prev, #next {
+        #pdf-home, #prev, #next, #pdf-dl {
             cursor: pointer;
             width: 32px;
+        }
+        #pages {
+            width: 100px;
         }
         .fixedController {
             position: fixed;
             bottom: 2.5%;
             left: 0;
-            width: 200px;
+            width: 300px;
             background-color: rgba(255,255,255,.7);
-            margin: 0 calc((100% - 200px) / 2);
+            margin: 0 calc((100% - 300px) / 2);
             box-shadow: 0 0 8px 1px rgba(32, 32, 32, 0.2);
             border-radius: 16px;
         }
@@ -117,6 +124,8 @@
 
         document.getElementById("prev").addEventListener("click", onPrevPage);
         document.getElementById("next").addEventListener("click", onNextPage);
+        document.getElementById("pdf-home").addEventListener("click", toFirstPage);
+        document.getElementById("pdf-dl").addEventListener("click", Download);
 
         pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
             pdfDoc = pdfDoc_;
@@ -159,6 +168,18 @@
         function onNextPage() {
             if (pageNum >= pdfDoc.numPages) return;
             queueRenderPage(++pageNum);
+        }
+        
+        function toFirstPage() {
+            pageNum = 1;
+            queueRenderPage(pageNum);
+        }
+        
+        function Download() {
+            var link = document.createElement('a');
+            link.href = "./res/pdf/%E6%88%90%E7%99%BC%E6%9C%AC_1.pdf";
+            link.download="師大附中第35屆數理資優班成果發表會-成發本.pdf";
+            link.click();
         }
     </script>
 </body>
