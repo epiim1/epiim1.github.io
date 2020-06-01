@@ -84,7 +84,7 @@
             width: 100%;
             max-width: 1000px;
             border-radius: 8px;
-            border: solid black 1px;
+            /* border: solid black 1px; */
         }
         #prev, #pages, #next {
             display: inline-block;
@@ -113,7 +113,7 @@
         var pdfjsLib = window["pdfjs-dist/build/pdf"];
         pdfjsLib.GlobalWorkerOptions.workerSrc = "https://epii.ml/res/js/pdf.worker.js";
 
-        var pdfDoc = null, pageNum = 1, pageRendering = false, pageNumPending = null, scale = 1, canvas = document.getElementById("pdf-canvas"), ctx = canvas.getContext("2d");
+        var pdfDoc = null, pageNum = 1, pageRendering = false, pageNumPending = null, scale = 2, canvas = document.getElementById("pdf-canvas"), ctx = canvas.getContext("2d");
 
         document.getElementById("prev").addEventListener("click", onPrevPage);
         document.getElementById("next").addEventListener("click", onNextPage);
