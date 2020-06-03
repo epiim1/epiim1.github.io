@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <title> 檢討會 | e^(πi) = 附1 </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="res/css/loading-pre.css">
+    <script src="res/js/loading-pre.js"></script>
+</head>
+<body>
+    <div id="loading" class="loading-barrier">
+        <div class="loading-animation">
+            <h1><span>L</span><span>o</span><span>a</span><span>d</span><span>i</span><span>n</span><span>g</span><span>.</span><span>.</span><span>.</span></h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="bar">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="./">  e<sup>πi</sup> = 附1  </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bar" aria-controls="bar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="bar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="./">首頁</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./book">成發本</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./message">留言區</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="content">
+            <div id="stage">
+
+            </div>
+        </div>
+    </div>
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/flatly/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-firestore.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="res/js/firebase-helper.js"></script>
+    <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
+    <style>
+    body {
+        background: rgba(0,0,128,.5) url("res/img/background_x2.jpg") no-repeat center;
+        background-size: cover;
+    }
+    .container {
+        background-color: rgba(255,255,255,.5);
+        min-width: 80%;
+        min-height: 100%;
+        box-shadow: 0 0 8px 8px rgba(32, 32, 32, 0.2);
+    }
+    .bar {
+        margin: 0 -15px;
+        box-shadow: 0px 4px 8px 0px rgba(32, 32, 32, 0.3);
+    }
+    .content {
+        padding: 24px 4px;
+        height: 90%;
+        text-align: center;
+    }
+    .wrapper {
+        width: 100%;
+        text-align: center;
+    }
+    @media screen and (max-width: 350px) {
+        .card { width: 260px }
+        .above350 { display: none !important }
+    }
+    @media screen and (min-width: 350px) and (max-width: 400px) {
+        .card { width: 320px }
+    }
+    @media screen and (min-width: 400px) and (max-width: 700px) {
+        .card { width: 350px }
+    }
+    @media screen and (min-width: 700px) {
+        .card { width: 600px }
+    }
+    .msg {
+        float: left;
+        clear: left;
+        font-size: 1.2rem;
+        word-break: break-all;
+    }
+    .card {
+        opacity: 0;
+        display: inline-block;
+        max-width: 600px;
+        text-align: left;
+        animation: downfade 0.6s ease forwards 1;
+        padding: 4px 0;
+    }
+    .time {
+        float: left;
+        color: gray;
+        margin: 0 0 -2px 0;
+    }
+    @keyframes downfade {
+        0% {
+            opacity: 0;
+            top: -100px;
+            transform: scale(1.05);
+        }
+        100% {
+            opacity: 1;
+            top: 0px;
+            transform: scale(1);
+        }
+    }
+    </style>
+    <script>
+    var helper = new firebaseHelper();
+    helper.init();
+
+    helper.messages.list().then(refresh).then(()=>{
+        stopLoading(document.getElementById("loading"));
+    })
+
+    function refresh(list) {
+        var stage = document.getElementById("stage");
+        stage.innerHTML = "";
+
+        if(list.length == 0) {
+            let wrapper = document.createElement("div");
+            let card = document.createElement("div");
+            let msg = document.createElement("p");
+            wrapper.classList.add("wrapper", "w3-margin-bottom");
+            card.classList.add("card", "w3-card", "w3-round");
+            msg.classList.add("msg", "w3-margin-left");
+            msg.innerHTML = "沒有信件";
+            card.appendChild(msg);
+            wrapper.appendChild(card);
+            stage.appendChild(wrapper);
+        }
+        let animationDelay = 4;
+        list.forEach(function(data) {
+            let con = data.request;
+            let wrapper = document.createElement("div");
+            let card = document.createElement("div");
+            let time = document.createElement("p");
+            let msg = document.createElement("p");
+            wrapper.classList.add("wrapper", "w3-margin-bottom");
+            card.classList.add("card", "w3-card", "w3-round");
+            card.style.animationDelay = ""+animationDelay++/10+"s";
+            time.classList.add("time", "w3-margin-left");
+            time.innerHTML = data.time.toDate().toLocaleString();
+            msg.classList.add("msg", "w3-margin-left");
+            msg.innerHTML = data.request;
+            card.appendChild(time);
+            card.appendChild(msg);
+            wrapper.appendChild(card);
+            stage.appendChild(wrapper);
+        });
+    }
+    </script>
+</body>
+</html>
