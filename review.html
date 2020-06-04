@@ -127,7 +127,7 @@
     var helper = new firebaseHelper();
     helper.init();
 
-    helper.messages.list().then(list => {
+    helper.messages.list("未分類").then(list => {
         stopLoading(document.getElementById("loading"));
         setTimeout(function() {refresh(list)}, 2000);
     });
