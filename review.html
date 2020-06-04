@@ -94,7 +94,7 @@
         clear: left;
         font-size: 1.2rem;
         word-break: break-all;
-        white-space: pre;
+        margin: 8px 16px;
     }
     .card {
         opacity: 0;
@@ -107,7 +107,7 @@
     .time {
         float: left;
         color: gray;
-        margin: 0 0 -2px 0;
+        margin: 0 0 -2px 14px;
     }
     @keyframes downfade {
         0% {
@@ -140,7 +140,7 @@
             let msg = document.createElement("p");
             wrapper.classList.add("wrapper", "w3-margin-bottom");
             card.classList.add("card", "w3-card", "w3-round");
-            msg.classList.add("msg", "w3-margin-left");
+            msg.classList.add("msg");
             msg.innerHTML = "沒有信件";
             card.appendChild(msg);
             wrapper.appendChild(card);
@@ -159,7 +159,7 @@
             time.classList.add("time", "w3-margin-left");
             time.innerHTML = data.time.toDate().toLocaleString();
             msg.classList.add("msg", "w3-margin-left");
-            msg.innerHTML = data.request;
+            msg.innerHTML = data.request.replace(/\n/g, "<br>");
             card.appendChild(time);
             card.appendChild(msg);
             wrapper.appendChild(card);
