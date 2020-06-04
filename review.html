@@ -126,9 +126,10 @@
     var helper = new firebaseHelper();
     helper.init();
 
-    helper.messages.list().then(refresh).then(()=>{
+    helper.messages.list().then(list => {
         stopLoading(document.getElementById("loading"));
-    })
+        setTimeout(function() {refresh(list)}, 2000);
+    });
 
     function refresh(list) {
         var stage = document.getElementById("stage");
