@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> 成發 | e^(πi) = 附1 </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="res/css/loading-pre.css">
+    <script src="res/js/loading-pre.js"></script>
+</head>
+<body>
+    <div id="stage">
+		<div class="subject">Some section</div>
+		<div class="subject">Some section</div>
+		<div class="subject">Some section</div>
+		<div class="subject">Some section</div>
+		<div class="subject">Some section</div>
+		<div class="subject">Some section</div>
+	</div>
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/flatly/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/fullpage.min.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/fullpage.extensions.min.js" crossorigin="anonymous"></script>
+    <style>
+    body {
+        background: rgba(0,0,128,.5) url("res/img/background_x2.jpg") no-repeat center;
+        background-size: cover;
+    }
+    </style>
+    <script>
+	var fpc = new fullpage("#stage", {
+		licenseKey: "dddddddd-dddddddd-dddddddd-dddddddd",
+		anchors: ["數學", "物理", "化學", "生物", "地科", "資訊"],
+		autoScrolling:true,
+		scrollHorizontally: true,
+		sectionsColor : ["rgba(141, 141, 239, .75)", "rgba(123, 223, 242, .75)", "rgba(178, 247, 239, .75)", "rgba(239, 247, 246, .75)", "rgba(247, 214, 224, .75)", "rgba(242, 181, 212, .75)"],
+		sectionSelector: ".subject",
+		slideSelector: ".research"
+	});
+    stopLoading(document.getElementById("loading"));
+    </script>
+</body>
+</html>
