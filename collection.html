@@ -742,6 +742,7 @@
         position: relative;
         display: inline-flex;
         flex-flow: column nowrap;
+        justify-content: center;
         width: calc(20% - 4px);
         height: 95%;
         overflow: hidden auto;
@@ -749,19 +750,21 @@
     .list > div {
         position: relative;
         width: calc(100% - 12px);
-        height: calc(25% - 12px);
+        height: calc(24.5% - 12px);
         margin: 6px;
-        border-radius: 10px;
+        border-radius: min(10px, 1vw);
         background-color: rgba(0, 0, 0, .8);
         color: lightgray;
-        font-size: min(1.6rem, 4vmin);
-        transition: box-shadow .2s;
+        font-size: min(1.6rem, 1.8vw);
+        transition: box-shadow .2s, transform .2s;
+        cursor: pointer;
     }
     .list > div:hover {
         box-shadow: 2px 2px 8px 0px #424242;
+        transform: matrix(1.025, 0, 0, 1.025, 0, 0);
     }
     .list-icon {
-        font-size: min(3rem, 7.5vmin);
+        font-size: min(3rem, 3vw);
     }
     .list-text {
         margin-bottom: 2px;
@@ -826,17 +829,24 @@
     stopLoading(document.getElementsByClassName("loading-barrier")[0]);
 
     function switcher(list, target) {
+        this.list = list;
         this.target = target;
         this.tab = 0;
         this.switch = function(n) {
             this.tab = n;
             for(var i = 0; i < target.length; i++) {
-                if(i == n) this.target[i].style.display = "block";
-                else this.target[i].style.display = "none";
+                if(i == n) {
+                    this.target[i].style.display = "block";
+                    this.list[i].style.border = "solid 1px gray";
+                }
+                else {
+                    this.target[i].style.display = "none";
+                    this.list[i].style.border = "";
+                }
             }
         };
         for(let i = 0; i < list.length; i++) {
-            list[i].addEventListener("click", (function(self) {return function() {self.switch(i)}})(this), false);
+            this.list[i].addEventListener("click", (function(self) {return function() {self.switch(i)}})(this), false);
         }
         this.switch(0);
     }
