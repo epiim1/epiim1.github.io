@@ -116,7 +116,7 @@
         var pdfHeight = window.innerHeight - 150, pdfWidth = pdfHeight / 1.41421356;
         document.getElementById("pdf-canvas").style.height = ""+pdfHeight+"px";
         document.getElementById("pdf-canvas").style.width = ""+pdfWidth+"px";
-        var url = "https://epii.ml/res/pdf/%E6%88%90%E7%99%BC%E6%9C%AC_3.pdf";
+        var url = "https://epii.ml/res/pdf/%E6%88%90%E7%99%BC%E6%9C%AC_4.pdf";
         var pdfjsLib = window["pdfjs-dist/build/pdf"];
         pdfjsLib.GlobalWorkerOptions.workerSrc = "https://epii.ml/res/js/pdf.worker.js";
 
@@ -170,30 +170,30 @@
             if (pageNum >= pdfDoc.numPages) return;
             queueRenderPage(++pageNum);
         }
-        
+
         function toIndex() {
             pageNum = 2;
             queueRenderPage(pageNum);
         }
-        
+
         function toP(n) {
             pageNum = n;
             queueRenderPage(pageNum);
         }
-        
+
         function Download() {
             var link = document.createElement('a');
-            link.href = "./res/pdf/%E6%88%90%E7%99%BC%E6%9C%AC_3.pdf";
+            link.href = "./res/pdf/%E6%88%90%E7%99%BC%E6%9C%AC_4.pdf";
             link.target = "_blank";
             link.download="師大附中第35屆數理資優班成果發表會-成發本.pdf";
             link.click();
         }
-        
+
         function PDFLinks(e) {
             var w = parseFloat(getComputedStyle(canvas, null).getPropertyValue("width"))/canvas.width;
             var h = parseFloat(getComputedStyle(canvas, null).getPropertyValue("height"))/canvas.height;
             var x = e.offsetX, y = e.offsetY;
-            var d = 145;
+            var d = 140;
             setTimeout(function() {
                 var t = y / h;
                 if(pageNum == 2) {
