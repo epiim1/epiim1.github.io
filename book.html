@@ -127,10 +127,11 @@
         document.getElementById("pdf-home").addEventListener("click", toIndex);
         document.getElementById("pdf-dl").addEventListener("click", Download);
         document.getElementById("pdf-canvas").addEventListener("click", PDFLinks);
+        document.getElementById("pdf-canvas").addEventListener("mousemove", PDFXYT);
 
         pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
             pdfDoc = pdfDoc_;
-            document.getElementById("page_count").textContent = pdfDoc.numPages - 1;
+            document.getElementById("page_count").textContent = pdfDoc.numPages;
             renderPage(pageNum);
             stopLoading(document.getElementById("loading"));
         });
@@ -153,7 +154,7 @@
                 });
             });
             num--;
-            document.getElementById("page_num").textContent = num || "封面";
+            document.getElementById("page_num").textContent = (num===1) ? "封面" : num;
         }
 
         function queueRenderPage(num) {
@@ -172,8 +173,7 @@
         }
 
         function toIndex() {
-            pageNum = 2;
-            queueRenderPage(pageNum);
+            toP(2);
         }
 
         function toP(n) {
@@ -193,72 +193,24 @@
             var w = parseFloat(getComputedStyle(canvas, null).getPropertyValue("width"))/canvas.width;
             var h = parseFloat(getComputedStyle(canvas, null).getPropertyValue("height"))/canvas.height;
             var x = e.offsetX, y = e.offsetY;
-            var d = 140;
+            var s = 2941, d = 124;
+            var links = [32,30,29,28,26,25,24,23,21,20,19,17,16,15,13,12,11,10,9,7,6,2];
             setTimeout(function() {
                 var t = y / h;
                 if(pageNum == 2) {
-                    if(t > 3050) {
-                        toP(30);
-                    }
-                    else if(t > 3050-d*1) {
-                        toP(28);
-                    }
-                    else if(t > 3050-d*2) {
-                        toP(27);
-                    }
-                    else if(t > 3050-d*3) {
-                        toP(26);
-                    }
-                    else if(t > 3050-d*4) {
-                        toP(24);
-                    }
-                    else if(t > 3050-d*5) {
-                        toP(23);
-                    }
-                    else if(t > 3050-d*6) {
-                        toP(22);
-                    }
-                    else if(t > 3050-d*7) {
-                        toP(20);
-                    }
-                    else if(t > 3050-d*8) {
-                        toP(19);
-                    }
-                    else if(t > 3050-d*9) {
-                        toP(18);
-                    }
-                    else if(t > 3050-d*10) {
-                        toP(16);
-                    }
-                    else if(t > 3050-d*11) {
-                        toP(15);
-                    }
-                    else if(t > 3050-d*12) {
-                        toP(14);
-                    }
-                    else if(t > 3050-d*13) {
-                        toP(12);
-                    }
-                    else if(t > 3050-d*14) {
-                        toP(11);
-                    }
-                    else if(t > 3050-d*15) {
-                        toP(10);
-                    }
-                    else if(t > 3050-d*16) {
-                        toP(9);
-                    }
-                    else if(t > 3050-d*17) {
-                        toP(7);
-                    }
-                    else if(t > 3050-d*18) {
-                        toP(6);
-                    }
-                    else if(t > 3050-d*19) {
-                        toP(3);
+                    for(var i = 0; i < 22; i++) {
+                        if(t > s-d*i) {
+                            toP(links[i]);
+                        }
                     }
                 }
             }, 10);
+        }
+        function PDFXYT(e) {
+            var h = parseFloat(getComputedStyle(canvas, null).getPropertyValue("height"))/canvas.height;
+            var y = e.offsetY;
+            var t = parseInt(y / h);
+            console.log(t);
         }
     </script>
 </body>
