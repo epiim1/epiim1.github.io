@@ -801,6 +801,54 @@
     .leftArrow {
         left: 6px;
     }
+    @media screen and (orientation:portrait) {
+        .container {
+            flex-flow: column nowrap;
+            justify-content: space-between;
+            align-items: center;
+            width: calc(100vw - 12px - max(10vmin, 71.5px));
+            max-width: calc(100vw - 12px - max(10vmin, 71.5px));
+            height: calc((100vw - 12px - max(10vmin, 71.5px)) * (0.5625 + 0.2 + 0.1));
+            max-height: 96vh;
+            background-color: rgba(0, 0, 0, 0.75);
+            border-radius: 6px;
+        }
+        .screen {
+            position: relative;
+            display: inline-block;
+            width: calc(100% - 4px);
+            height: calc((100vw - 12px - max(10vmin, 71.5px)) * 0.5625);
+        }
+        .list {
+            position: relative;
+            display: inline-flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            width: calc(100% - 4px);
+            height: calc((100vw - 12px - max(10vmin, 71.5px)) * 0.25);
+            overflow: hidden auto;
+        }
+        .list > div {
+            position: relative;
+            width: calc((100vw - 12px - max(10vmin, 71.5px)) * 0.185 * 1.4);
+            height: calc((100vw - 12px - max(10vmin, 71.5px)) * 0.185);
+            margin: 6px;
+            border-radius: min(10px, 1vw);
+            background-color: rgba(0, 0, 0, .8);
+            color: lightgray;
+            font-size: min(1.6rem, 1.8vw);
+            transition: box-shadow .2s, transform .2s;
+            cursor: pointer;
+        }
+        .vl {
+            display: inline-block;
+            border-top: 1px solid gray;
+            border-left: 0px solid transparent;
+            height: 0px;
+            width: 90%;
+            margin: 4px 0;
+        }
+    }
     </style>
     <script>
     var fpc = new fullpage("#stage", {
