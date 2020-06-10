@@ -15,7 +15,7 @@
     </div>
     <div id="stage">
         <!-- 數學組  -->
-        <div class="subject">
+        <div class="subject" id="math">
             <div class="rightArrow">
                 <i class="fas fa-angle-right"></i>
             </div>
@@ -24,118 +24,30 @@
             </div>
             <div class="research">
                 <div class="container">
-                    <div class="screen">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
+                    <div class="screen"></div>
                     <div class="vl"></div>
-                    <div class="list">
-                        <div class="video">
-                            <div class="list-icon"><i class="fas fa-play"></i></div>
-                            <p class="list-text">影片</p>
-                        </div>
-                        <div class="ppt">
-                            <div class="list-icon"><i class="fas fa-file-powerpoint"></i></div>
-                            <p class="list-text">簡報</p>
-                        </div>
-                        <div class="board">
-                            <div class="list-icon"><i class="fas fa-chalkboard"></i></div>
-                            <p class="list-text">三面板</p>
-                        </div>
-                        <div class="book">
-                            <div class="list-icon"><i class="fas fa-book"></i></div>
-                            <p class="list-text">成發本</p>
-                        </div>
-                    </div>
+                    <div class="list"></div>
                 </div>
             </div>
             <div class="research">
                 <div class="container">
-                    <div class="screen">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
+                    <div class="screen"></div>
                     <div class="vl"></div>
-                    <div class="list">
-                        <div class="video">
-                            <div class="list-icon"><i class="fas fa-play"></i></div>
-                            <p class="list-text">影片</p>
-                        </div>
-                        <div class="ppt">
-                            <div class="list-icon"><i class="fas fa-file-powerpoint"></i></div>
-                            <p class="list-text">簡報</p>
-                        </div>
-                        <div class="board">
-                            <div class="list-icon"><i class="fas fa-chalkboard"></i></div>
-                            <p class="list-text">三面板</p>
-                        </div>
-                        <div class="book">
-                            <div class="list-icon"><i class="fas fa-book"></i></div>
-                            <p class="list-text">成發本</p>
-                        </div>
-                    </div>
+                    <div class="list"></div>
                 </div>
             </div>
             <div class="research">
                 <div class="container">
-                    <div class="screen">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
+                    <div class="screen"></div>
                     <div class="vl"></div>
-                    <div class="list">
-                        <div class="video">
-                            <div class="list-icon"><i class="fas fa-play"></i></div>
-                            <p class="list-text">影片</p>
-                        </div>
-                        <div class="ppt">
-                            <div class="list-icon"><i class="fas fa-file-powerpoint"></i></div>
-                            <p class="list-text">簡報</p>
-                        </div>
-                        <div class="board">
-                            <div class="list-icon"><i class="fas fa-chalkboard"></i></div>
-                            <p class="list-text">三面板</p>
-                        </div>
-                        <div class="book">
-                            <div class="list-icon"><i class="fas fa-book"></i></div>
-                            <p class="list-text">成發本</p>
-                        </div>
-                    </div>
+                    <div class="list"></div>
                 </div>
             </div>
             <div class="research">
                 <div class="container">
-                    <div class="screen">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
+                    <div class="screen"></div>
                     <div class="vl"></div>
-                    <div class="list">
-                        <div class="video">
-                            <div class="list-icon"><i class="fas fa-play"></i></div>
-                            <p class="list-text">影片</p>
-                        </div>
-                        <div class="ppt">
-                            <div class="list-icon"><i class="fas fa-file-powerpoint"></i></div>
-                            <p class="list-text">簡報</p>
-                        </div>
-                        <div class="board">
-                            <div class="list-icon"><i class="fas fa-chalkboard"></i></div>
-                            <p class="list-text">三面板</p>
-                        </div>
-                        <div class="book">
-                            <div class="list-icon"><i class="fas fa-book"></i></div>
-                            <p class="list-text">成發本</p>
-                        </div>
-                    </div>
+                    <div class="list"></div>
                 </div>
             </div>
         </div>
@@ -714,6 +626,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/vendors/scrolloverflow.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/fullpage.extensions.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" crossorigin="anonymous"></script>
     <style>
     body {
         background: rgba(0,0,128,.5) url("res/img/background_x2.jpg") no-repeat center;
@@ -764,12 +677,12 @@
         transform: matrix(1.025, 0, 0, 1.025, 0, 0);
     }
     .list-icon {
-        font-size: min(3rem, 3vw);
+        font-size: min(3rem, 5vw);
     }
     .list-text {
         margin-bottom: 2px;
     }
-    .video, .ppt, .board, .book {
+    .video, .board, .book, .comment {
         display: flex;
         flex-flow: column nowrap;
         justify-content: center;
@@ -836,7 +749,7 @@
             border-radius: min(10px, 1vw);
             background-color: rgba(0, 0, 0, .8);
             color: lightgray;
-            font-size: min(1.6rem, 1.8vw);
+            font-size: min(1.6rem, 3vw);
             transition: box-shadow .2s, transform .2s;
             cursor: pointer;
         }
@@ -869,10 +782,99 @@
         elm.addEventListener("click", function() {fullpage_api.moveSlideLeft();});
     });
 
-    var lists = Array.from(document.getElementsByClassName("list")), targets = Array.from(document.getElementsByClassName("screen")), switchers = [];
-    for (let i = 0; i < lists.length; i++) {
-        switchers.push(new switcher(lists[i].children, targets[i].children));
-    }
+    var data = {
+        math: [
+            {
+                name: "一層一層串起你的心",
+                subject: "math",
+                video: {
+                    exists: true,
+                    url: "https://raw.githubusercontent.com/epiim1/videos-math/master/%E4%B8%80%E5%B1%A4%E4%B8%80%E5%B1%A4%E4%B8%B2%E8%B5%B7%E4%BD%A0%E7%9A%84%E5%BF%83/index.m3u8"
+                },
+                book: {
+                    exists: true,
+                    page: 9
+                },
+                board: {
+                    exists: true,
+                    url: "board url"
+                },
+                comment: {
+                    exists: true,
+                    id: "數學_1"
+                }
+            },
+            {
+                name: "",
+                subject: "math",
+                video: {
+                    exists: false,
+                    url: ""
+                },
+                book: {
+                    exists: true,
+                    page: 9
+                },
+                board: {
+                    exists: true,
+                    url: "board url"
+                },
+                comment: {
+                    exists: true,
+                    id: "數學_2"
+                }
+            },
+            {
+                name: "Shoot！圓錐曲線神射手",
+                subject: "math",
+                video: {
+                    exists: true,
+                    url: "https://raw.githubusercontent.com/epiim1/videos-math/master/Shoot%EF%BC%81%E5%9C%93%E9%8C%90%E6%9B%B2%E7%B7%9A%E7%A5%9E%E5%B0%84%E6%89%8B/index.m3u8"
+                },
+                book: {
+                    exists: true,
+                    page: 9
+                },
+                board: {
+                    exists: true,
+                    url: "board url"
+                },
+                comment: {
+                    exists: true,
+                    id: "數學_3"
+                }
+            },
+            {
+                name: "",
+                subject: "math",
+                video: {
+                    exists: false,
+                    url: ""
+                },
+                book: {
+                    exists: true,
+                    page: 9
+                },
+                board: {
+                    exists: true,
+                    url: "board url"
+                },
+                comment: {
+                    exists: true,
+                    id: "數學_4"
+                }
+            }
+        ]
+    };
+
+    Array.from(document.getElementsByClassName("subject")).forEach(subject => {
+        if(subject.id == "math") {
+            let i = 0;
+            Array.from(subject.getElementsByClassName("container")).forEach(container => {
+                buildHTML(container, data[subject.id][i++]);
+            });
+        }
+    });
 
     stopLoading(document.getElementsByClassName("loading-barrier")[0]);
 
@@ -897,6 +899,107 @@
             this.list[i].addEventListener("click", (function(self) {return function() {self.switch(i)}})(this), false);
         }
         this.switch(0);
+    }
+
+    function research() {
+        return {
+            name: "name",
+            subject: "subject",
+            video: {
+                exists: true,
+                url: "video url"
+            },
+            book: {
+                exists: true,
+                page: 2
+            },
+            board: {
+                exists: true,
+                url: "board url"
+            },
+            comment: {
+                exists: true,
+                id: "id"
+            }
+        };
+    }
+
+    function buildHTML(container, research) {
+        var screen = container.getElementsByClassName("screen")[0], list = container.getElementsByClassName("list")[0];
+        var blocks = [], items = [];
+        if(research.video.exists) {
+            let block = document.createElement("div");
+            let video = document.createElement("video");
+
+            if(Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(research.video.url);
+                hls.attachMedia(video);
+            }
+            else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+                video.src = research.video.url;
+            }
+
+            block.appendChild(video);
+            blocks.push(block);
+            items.push(itemBuilder("video"));
+        }
+        if(research.book.exists) {
+            let block = document.createElement("div");
+
+            blocks.push(block);
+            items.push(itemBuilder("book"));
+        }
+        if(research.board.exists) {
+            let block = document.createElement("div");
+
+            blocks.push(block);
+            items.push(itemBuilder("board"));
+        }
+        if(research.comment.exists) {
+            let block = document.createElement("div");
+
+            blocks.push(block);
+            items.push(itemBuilder("comment"));
+        }
+        new switcher(items, blocks);
+        for(var i = 0; i < blocks.length; i++) {
+            screen.appendChild(blocks[i]);
+            list.appendChild(items[i]);
+        }
+    }
+
+    function itemBuilder(type) {
+        var item = document.createElement("div");
+        var iconWrap = document.createElement("div");
+        var icon = document.createElement("i");
+        var text = document.createElement("p");
+        iconWrap.classList.add("list-icon");
+        text.classList.add("list-text");
+        if(type == "video") {
+            item.classList.add("video");
+            icon.classList.add("fas", "fa-play");
+            text.innerHTML = "影片";
+        }
+        if(type == "book") {
+            item.classList.add("book");
+            icon.classList.add("fas", "fa-book");
+            text.innerHTML = "成發本";
+        }
+        if(type == "board") {
+            item.classList.add("board");
+            icon.classList.add("fas", "fa-chalkboard");
+            text.innerHTML = "三面板";
+        }
+        if(type == "comment") {
+            item.classList.add("comment");
+            icon.classList.add("fas", "fa-comment-alt");
+            text.innerHTML = "留言";
+        }
+        iconWrap.appendChild(icon);
+        item.appendChild(iconWrap);
+        item.appendChild(text);
+        return item;
     }
     </script>
 </body>
