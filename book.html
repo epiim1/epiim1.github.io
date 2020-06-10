@@ -59,159 +59,177 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="./res/js/pdf.js"></script>
     <style>
-        body {
-            background: rgba(0,0,128,.5) url("res/img/background_x2.jpg") no-repeat center;
-            background-size: cover;
-        }
-        .container {
-            background-color: rgba(255,255,255,.5);
-            min-width: 80%;
-            min-height: 100%;
-            box-shadow: 0 0 8px 8px rgba(32, 32, 32, 0.2);
-        }
-        .bar {
-            margin: 0 -15px;
-            box-shadow: 0px 4px 8px 0px rgba(32, 32, 32, 0.3);
-        }
-        .content {
-            padding: 24px 4px;
-            height: 90%;
-            text-align: center;
-        }
-        #table {
-            display: inline-block;
-            text-align: center;
-            overflow: auto;
-            margin: 12px 0 4px 0;
-        }
-        #pdf-canvas {
-            width: 100%;
-            max-width: 1000px;
-            border-radius: 8px;
-            /* border: solid black 1px; */
-        }
-        #pdf-home, #prev, #pages, #next, #pdf-dl {
-            display: inline-block;
-            font-size: 1.2rem;
-        }
-        #pdf-home, #prev, #next, #pdf-dl {
-            cursor: pointer;
-            width: 32px;
-        }
-        #pages {
-            width: 100px;
-        }
-        .fixedController {
-            position: fixed;
-            bottom: 2.5%;
-            left: 0;
-            width: 300px;
-            background-color: rgba(255,255,255,.7);
-            margin: 0 calc((100% - 300px) / 2);
-            box-shadow: 0 0 8px 1px rgba(32, 32, 32, 0.2);
-            border-radius: 16px;
-        }
+    body {
+        background: rgba(0,0,128,.5) url("res/img/background_x2.jpg") no-repeat center;
+        background-size: cover;
+    }
+    .container {
+        background-color: rgba(255,255,255,.5);
+        min-width: 80%;
+        min-height: 100%;
+        box-shadow: 0 0 8px 8px rgba(32, 32, 32, 0.2);
+    }
+    .bar {
+        margin: 0 -15px;
+        box-shadow: 0px 4px 8px 0px rgba(32, 32, 32, 0.3);
+    }
+    .content {
+        padding: 24px 4px;
+        height: 90%;
+        text-align: center;
+    }
+    #table {
+        display: inline-block;
+        text-align: center;
+        overflow: auto;
+        margin: 12px 0 4px 0;
+    }
+    #pdf-canvas {
+        width: 100%;
+        max-width: 1000px;
+        border-radius: 8px;
+        /* border: solid black 1px; */
+    }
+    #pdf-home, #prev, #pages, #next, #pdf-dl {
+        display: inline-block;
+        font-size: 1.2rem;
+    }
+    #pdf-home, #prev, #next, #pdf-dl {
+        cursor: pointer;
+        width: 32px;
+    }
+    #pages {
+        width: 100px;
+    }
+    .indexPageActive {
+        cursor: pointer;
+    }
+    .fixedController {
+        position: fixed;
+        bottom: 2.5%;
+        left: 0;
+        width: 300px;
+        background-color: rgba(255,255,255,.7);
+        margin: 0 calc((100% - 300px) / 2);
+        box-shadow: 0 0 8px 1px rgba(32, 32, 32, 0.2);
+        border-radius: 16px;
+    }
     </style>
     <script>
-        var pdfHeight = window.innerHeight - 150, pdfWidth = pdfHeight / 1.41421356;
-        document.getElementById("pdf-canvas").style.height = ""+pdfHeight+"px";
-        document.getElementById("pdf-canvas").style.width = ""+pdfWidth+"px";
-        var url = "https://epii.ml/res/pdf/%E6%88%90%E7%99%BC%E6%9C%AC_4.pdf";
-        var pdfjsLib = window["pdfjs-dist/build/pdf"];
-        pdfjsLib.GlobalWorkerOptions.workerSrc = "https://epii.ml/res/js/pdf.worker.js";
+    parseKey();
+    (location.key && location.key["mode"] == "dev") ? window.dev = true : window.dev = false;
+    var pdfHeight = window.innerHeight - 150, pdfWidth = pdfHeight / 1.41421356;
+    document.getElementById("pdf-canvas").style.height = ""+pdfHeight+"px";
+    document.getElementById("pdf-canvas").style.width = ""+pdfWidth+"px";
+    var url = "https://epii.ml/res/pdf/%E6%88%90%E7%99%BC%E6%9C%AC_4.pdf";
+    var pdfjsLib = window["pdfjs-dist/build/pdf"];
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://epii.ml/res/js/pdf.worker.js";
 
-        var pdfDoc = null, pageNum = 1, pageRendering = false, pageNumPending = null, scale = 4, canvas = document.getElementById("pdf-canvas"), ctx = canvas.getContext("2d");
+    var pdfDoc = null, pageNum = 1, pageRendering = false, pageNumPending = null, scale = 4, canvas = document.getElementById("pdf-canvas"), ctx = canvas.getContext("2d");
 
-        document.getElementById("prev").addEventListener("click", onPrevPage);
-        document.getElementById("next").addEventListener("click", onNextPage);
-        document.getElementById("pdf-home").addEventListener("click", toIndex);
-        document.getElementById("pdf-dl").addEventListener("click", Download);
-        document.getElementById("pdf-canvas").addEventListener("click", PDFLinks);
-        document.getElementById("pdf-canvas").addEventListener("mousemove", PDFXYT);
+    document.getElementById("prev").addEventListener("click", onPrevPage);
+    document.getElementById("next").addEventListener("click", onNextPage);
+    document.getElementById("pdf-home").addEventListener("click", toIndex);
+    document.getElementById("pdf-dl").addEventListener("click", Download);
+    document.getElementById("pdf-canvas").addEventListener("click", PDFLinks);
+    document.getElementById("pdf-canvas").addEventListener("mousemove", PDFXYT);
 
-        pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
-            pdfDoc = pdfDoc_;
-            document.getElementById("page_count").textContent = pdfDoc.numPages;
-            renderPage(pageNum);
-            stopLoading(document.getElementById("loading"));
-        });
+    pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
+        pdfDoc = pdfDoc_;
+        document.getElementById("page_count").textContent = pdfDoc.numPages;
+        renderPage(pageNum);
+        stopLoading(document.getElementById("loading"));
+    });
 
-        function renderPage(num) {
-            pageRendering = true;
-            pdfDoc.getPage(num).then(page => {
-                var viewport = page.getViewport({ scale: scale });
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
-                var renderContext = { canvasContext: ctx, viewport: viewport };
-                var renderTask = page.render(renderContext);
+    function renderPage(num) {
+        pageRendering = true;
+        pdfDoc.getPage(num).then(page => {
+            var viewport = page.getViewport({ scale: scale });
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+            var renderContext = { canvasContext: ctx, viewport: viewport };
+            var renderTask = page.render(renderContext);
+            (num == 2) ? canvas.classList.add("indexPageActive") : canvas.classList.remove("indexPageActive");
 
-                renderTask.promise.then(() => {
-                    pageRendering = false;
-                    if (pageNumPending !== null) {
-                        renderPage(pageNumPending);
-                        pageNumPending = null;
-                    }
-                });
+            renderTask.promise.then(() => {
+                pageRendering = false;
+                if (pageNumPending !== null) {
+                    renderPage(pageNumPending);
+                    pageNumPending = null;
+                }
             });
-            document.getElementById("page_num").textContent = (num===1) ? "封面" : num;
-        }
+        });
+        document.getElementById("page_num").textContent = (num===1) ? "封面" : num;
+    }
 
-        function queueRenderPage(num) {
-            if (pageRendering) pageNumPending = num;
-            else renderPage(num);
-        }
+    function queueRenderPage(num) {
+        if (pageRendering) pageNumPending = num;
+        else renderPage(num);
+    }
 
-        function onPrevPage() {
-            if (pageNum <= 1) return;
-            queueRenderPage(--pageNum);
-        }
+    function onPrevPage() {
+        if (pageNum <= 1) return;
+        queueRenderPage(--pageNum);
+    }
 
-        function onNextPage() {
-            if (pageNum >= pdfDoc.numPages) return;
-            queueRenderPage(++pageNum);
-        }
+    function onNextPage() {
+        if (pageNum >= pdfDoc.numPages) return;
+        queueRenderPage(++pageNum);
+    }
 
-        function toIndex() {
-            toP(2);
-        }
+    function toIndex() {
+        toP(2);
+    }
 
-        function toP(n) {
-            pageNum = n;
-            queueRenderPage(pageNum);
-        }
+    function toP(n) {
+        pageNum = n;
+        queueRenderPage(pageNum);
+    }
 
-        function Download() {
-            var link = document.createElement('a');
-            link.href = "./res/pdf/%E6%88%90%E7%99%BC%E6%9C%AC_4.pdf";
-            link.target = "_blank";
-            link.download="師大附中第35屆數理資優班成果發表會-成發本.pdf";
-            link.click();
-        }
+    function Download() {
+        var link = document.createElement('a');
+        link.href = "./res/pdf/%E6%88%90%E7%99%BC%E6%9C%AC_4.pdf";
+        link.target = "_blank";
+        link.download="師大附中第35屆數理資優班成果發表會-成發本.pdf";
+        link.click();
+    }
 
-        function PDFLinks(e) {
-            var w = parseFloat(getComputedStyle(canvas, null).getPropertyValue("width"))/canvas.width;
-            var h = parseFloat(getComputedStyle(canvas, null).getPropertyValue("height"))/canvas.height;
-            var x = e.offsetX, y = e.offsetY;
-            var s = 2941, d = 124;
-            var links = [32,30,29,28,26,25,24,23,21,20,19,17,16,15,13,12,11,10,9,7,6,2];
-            setTimeout(function() {
-                var t = y / h;
-                if(pageNum == 2) {
-                    for(var i = 0; i < 22; i++) {
-                        if(t > s-d*i) {
-                            toP(links[i]);
-                            break;
-                        }
+    function PDFLinks(e) {
+        var w = parseFloat(getComputedStyle(canvas, null).getPropertyValue("width"))/canvas.width;
+        var h = parseFloat(getComputedStyle(canvas, null).getPropertyValue("height"))/canvas.height;
+        var x = e.offsetX, y = e.offsetY;
+        var s = 2941, d = 124;
+        var links = [32,30,29,28,26,25,24,23,21,20,19,17,16,15,13,12,11,10,9,7,6,2];
+        setTimeout(function() {
+            var t = y / h;
+            if(pageNum == 2) {
+                for(var i = 0; i < 22; i++) {
+                    if(t > s-d*i) {
+                        toP(links[i]);
+                        break;
                     }
                 }
-            }, 10);
-        }
-        function PDFXYT(e) {
-            var h = parseFloat(getComputedStyle(canvas, null).getPropertyValue("height"))/canvas.height;
-            var y = e.offsetY;
-            var t = parseInt(y / h);
-            console.log(t);
-        }
+            }
+        }, 10);
+    }
+    function PDFXYT(e) {
+        dev ? 0 : return;
+        var w = parseFloat(getComputedStyle(canvas, null).getPropertyValue("width"))/canvas.width;
+        var h = parseFloat(getComputedStyle(canvas, null).getPropertyValue("height"))/canvas.height;
+        var x = e.offsetX, y = e.offsetY;
+        var X = parseInt(x / w), Y = parseInt(y / h);
+        console.log({x:X,y:Y});
+    }
+    function parseKey() {
+        location.key = (function(){
+            let kv = {};
+            location.search.substr(1).split("&").forEach(k => {
+                kv[k.split("=")[0]] = k.split("=")[1];
+            });
+            return kv;
+        })();
+        return location.key;
+    }
     </script>
 </body>
 </html>
