@@ -213,7 +213,7 @@
         }, 10);
     }
     function PDFXYT(e) {
-        dev ? 0 : return;
+        if(!dev) return;
         var w = parseFloat(getComputedStyle(canvas, null).getPropertyValue("width"))/canvas.width;
         var h = parseFloat(getComputedStyle(canvas, null).getPropertyValue("height"))/canvas.height;
         var x = e.offsetX, y = e.offsetY;
