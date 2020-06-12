@@ -263,7 +263,22 @@
         align-items: center;
         justify-content: center;
     }
-    .screen > div > video {
+    .screen > .block {
+        display: none;
+        z-index: 2;
+    }
+    .screen > .block.release {
+        display: flex;
+        animation: block-fade-out .2s linear 1 forwards;
+    }
+    .screen > .block.active {
+        display: flex;
+        animation: block-fade-in .2s linear 1 forwards;
+    }
+    .screen > .poster {
+        position: absolute;
+    }
+    .screen > div > video, .screen > div > img {
         position: relative;
         max-width: 100%;
         max-height: 100%;
@@ -384,6 +399,33 @@
             margin: 4px 0;
         }
     }
+    @keyframes block-fade-in {
+        0% {
+            opacity: 0;
+            display: flex;
+        }
+        99% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 1;
+            display: flex;
+        }
+    }
+    @keyframes block-fade-out {
+        0% {
+            opacity: 1;
+            display: flex;
+        }
+        99% {
+            opacity: 0;
+            display: flex;
+        }
+        100% {
+            opacity: 0;
+            display: none;
+        }
+    }
     </style>
     <script>
     var fpc = new fullpage("#stage", {
@@ -492,48 +534,48 @@
             }
         ],
         phy: [
-          {
-              name: "旋出新視界",
-              subject: "phy",
-              video: {
-                  exists: true,
-                  url: "https://raw.githubusercontent.com/epiim1/videos-physics/master/%E6%97%8B%E5%87%BA%E6%96%B0%E8%A6%96%E7%95%8C/index.m3u8",
-                  poster: "https://raw.githubusercontent.com/epiim1/videos-physics/master/%E6%97%8B%E5%87%BA%E6%96%B0%E8%A6%96%E7%95%8C/poster.jpg"
-              },
-              book: {
-                  exists: true,
-                  page: 15
-              },
-              board: {
-                  exists: true,
-                  url: "board url"
-              },
-              comment: {
-                  exists: true,
-                  id: "物理_1"
-              }
-          },
-          {
-              name: "強制水漩渦之分析",
-              subject: "phy",
-              video: {
-                  exists: true,
-                  url: "https://raw.githubusercontent.com/epiim1/videos-physics/master/%E5%BC%B7%E5%88%B6%E6%B0%B4%E6%BC%A9%E6%B8%A6%E4%B9%8B%E5%88%86%E6%9E%90/index.m3u8",
-                  poster: "https://raw.githubusercontent.com/epiim1/videos-physics/master/%E5%BC%B7%E5%88%B6%E6%B0%B4%E6%BC%A9%E6%B8%A6%E4%B9%8B%E5%88%86%E6%9E%90/poster.jpg"
-              },
-              book: {
-                  exists: true,
-                  page: 16
-              },
-              board: {
-                  exists: true,
-                  url: "board url"
-              },
-              comment: {
-                  exists: true,
-                  id: "物理_2"
-              }
-          }
+            {
+                name: "旋出新視界",
+                subject: "phy",
+                video: {
+                    exists: true,
+                    url: "https://raw.githubusercontent.com/epiim1/videos-physics/master/%E6%97%8B%E5%87%BA%E6%96%B0%E8%A6%96%E7%95%8C/index.m3u8",
+                    poster: "https://raw.githubusercontent.com/epiim1/videos-physics/master/%E6%97%8B%E5%87%BA%E6%96%B0%E8%A6%96%E7%95%8C/poster.jpg"
+                },
+                book: {
+                    exists: true,
+                    page: 15
+                },
+                board: {
+                    exists: true,
+                    url: "board url"
+                },
+                comment: {
+                    exists: true,
+                    id: "物理_1"
+                }
+            },
+            {
+                name: "強制水漩渦之分析",
+                subject: "phy",
+                video: {
+                    exists: true,
+                    url: "https://raw.githubusercontent.com/epiim1/videos-physics/master/%E5%BC%B7%E5%88%B6%E6%B0%B4%E6%BC%A9%E6%B8%A6%E4%B9%8B%E5%88%86%E6%9E%90/index.m3u8",
+                    poster: "https://raw.githubusercontent.com/epiim1/videos-physics/master/%E5%BC%B7%E5%88%B6%E6%B0%B4%E6%BC%A9%E6%B8%A6%E4%B9%8B%E5%88%86%E6%9E%90/poster.jpg"
+                },
+                book: {
+                    exists: true,
+                    page: 16
+                },
+                board: {
+                    exists: true,
+                    url: "board url"
+                },
+                comment: {
+                    exists: true,
+                    id: "物理_2"
+                }
+            }
         ],
         che: [
             {
@@ -620,34 +662,34 @@
         this.target = target;
         this.tab = 0;
         this.switch = function(n) {
-            this.tab = n;
-            for(var i = 0; i < target.length; i++) {
+            for(let i = 0; i < target.length; i++) {
                 if(i == n) {
-                    this.target[i].style.display = "";
+                    this.target[i].classList.add("active");
                     this.list[i].style.border = "solid 1px gray";
                 }
-                else {
-                    this.target[i].style.display = "none";
+                else if(i == this.tab) {
+                    this.target[i].classList.remove("active");
+                    this.target[i].classList.add("release");
+                    setTimeout((function(self){return function(){self.target[i].classList.remove("release");}})(this), 200);
                     this.list[i].style.border = "";
                 }
             }
+            this.tab = n;
         };
         for(let i = 0; i < list.length; i++) {
             this.list[i].addEventListener("click", (function(self) {return function() {self.switch(i)}})(this), false);
         }
-        this.switch(0);
     }
 
     function buildHTML(container, research) {
         var screen = container.getElementsByClassName("screen")[0], list = container.getElementsByClassName("list")[0];
-        var blocks = [], items = [];
+        var blocks = [], items = [], poster = document.createElement("div"), pic = document.createElement("img");
         if(research.video.exists) {
             let block = document.createElement("div");
             let video = document.createElement("video");
 
             video.controls = true;
             if(research.video.poster) video.poster = research.video.poster;
-
             if(Hls.isSupported()) {
                 var hls = new Hls();
                 hls.loadSource(research.video.url);
@@ -656,7 +698,7 @@
             else if (video.canPlayType("application/vnd.apple.mpegurl")) {
                 video.src = research.video.url;
             }
-
+            block.classList.add("block");
             block.appendChild(video);
             blocks.push(block);
             items.push(itemBuilder("video"));
@@ -664,11 +706,15 @@
         if(research.book.exists) {
             let block = document.createElement("div");
 
+            block.classList.add("block");
+
             blocks.push(block);
             items.push(itemBuilder("book"));
         }
         if(research.board.exists) {
             let block = document.createElement("div");
+
+            block.classList.add("block");
 
             blocks.push(block);
             items.push(itemBuilder("board"));
@@ -676,10 +722,17 @@
         if(research.comment.exists) {
             let block = document.createElement("div");
 
+            block.classList.add("block");
+
             blocks.push(block);
             items.push(itemBuilder("comment"));
         }
         new switcher(items, blocks);
+
+        pic.src = "res/img/poster.jpg";
+        poster.appendChild(pic);
+        poster.classList.add("poster");
+        screen.appendChild(poster);
         for(var i = 0; i < blocks.length; i++) {
             screen.appendChild(blocks[i]);
             list.appendChild(items[i]);
