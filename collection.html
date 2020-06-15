@@ -361,6 +361,9 @@
         overflow: hidden scroll;
         -ms-overflow-style: none;
     }
+    .qa::-webkit-scrollbar {
+        display: none;
+    }
     .question-wrap {
         width: 100%;
         text-align: center;
@@ -582,6 +585,7 @@
             helper.messages.list(research.comment.id).then(list => {
                 list.forEach(item => {
                     let wrap = document.createElement("div");
+                    let card = document.createElement("div");
                     let time = document.createElement("div");
                     let question = document.createElement("div");
                     let answer = document.createElement("div");
@@ -595,9 +599,10 @@
                     question.innerHTML = item.request.replace(/\n\n/g, "\n").replace(/\n/g, "<br>");
                     answer.innerHTML = item.response.replace(/\n\n/g, "\n").replace(/\n/g, "<br>");
 
-                    wrap.appendChild(time);
-                    wrap.appendChild(question);
-                    wrap.appendChild(answer);
+                    card.appendChild(time);
+                    card.appendChild(question);
+                    card.appendChild(answer);
+                    wrap.appendChild(card);
                     qa.appendChild(wrap);
                 });
             });
