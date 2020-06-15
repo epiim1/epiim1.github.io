@@ -231,6 +231,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/vendors/scrolloverflow.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/fullpage.extensions.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-firestore.js" crossorigin="anonymous"></script>
+    <script src="res/js/firebase-helper.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9" crossorigin="anonymous" defer></script>
     <style>
     body {
         background: rgba(0,0,128,.5) url("res/img/background_x2.jpg") no-repeat center;
@@ -351,6 +355,46 @@
     .leftArrow {
         left: 6px;
     }
+    .qa {
+        width: 100%;
+        height: calc(100% - 24px);
+        overflow: hidden scroll;
+        -ms-overflow-style: none;
+    }
+    .question-wrap {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 12px;
+    }
+    .card {
+        display: inline-block;
+        width: 85%;
+        max-width: 600px;
+        text-align: left;
+        padding: 4px 0;
+    }
+    .time {
+        float: left;
+        color: gray;
+        margin: 0 0 -2px 14px;
+        font-size: 0.9rem;
+    }
+    .question {
+        float: left;
+        clear: left;
+        font-size: 1.1rem;
+        word-break: break-all;
+        margin: 4px 16px;
+        letter-spacing: .25px;
+    }
+    .answer {
+        float: right;
+        clear: both;
+        font-size: 1.2rem;
+        word-break: break-all;
+        margin: 4px 16px;
+        letter-spacing: .25px;
+    }
     @media screen and (orientation:portrait) {
         .container {
             flex-flow: column nowrap;
@@ -446,498 +490,39 @@
         elm.addEventListener("click", function() {fullpage_api.moveSlideLeft();});
     });
 
-    var data = {
-        math: [
-            {
-                name: "一層一層串起你的心",
-                subject: "math",
-                video: {
-                    exists: true,
-                    url: "/videos-math/一層一層串起你的心/index.m3u8",
-                    poster: "/videos-math/一層一層串起你的心/poster.jpg"
-                },
-                book: {
-                    exists: true,
-                    page: 9
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "數學_1"
-                }
-            },
-            {
-                name: "圓例覺醒",
-                subject: "math",
-                video: {
-                    exists: true,
-                    url: "/videos-math/圓例覺醒/index.m3u8",
-                    poster: "/videos-math/圓例覺醒/poster.jpg"
-                },
-                book: {
-                    exists: true,
-                    page: 10
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "數學_2"
-                }
-            },
-            {
-                name: "Shoot！圓錐曲線神射手",
-                subject: "math",
-                video: {
-                    exists: true,
-                    url: "/videos-math/Shoot！圓錐曲線神射手/index.m3u8",
-                    poster: "/videos-math/Shoot！圓錐曲線神射手/poster.jpg"
-                },
-                book: {
-                    exists: true,
-                    page: 11
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "數學_3"
-                }
-            },
-            {
-                name: "Be Equal",
-                subject: "math",
-                video: {
-                    exists: true,
-                    url: "/videos-math/Be Equal/index.m3u8",
-                    poster: "/videos-math/Be Equal/poster.jpg"
-                },
-                book: {
-                    exists: true,
-                    page: 12
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "數學_4"
-                }
-            }
-        ],
-        phy: [
-            {
-                name: "旋出新視界",
-                subject: "phy",
-                video: {
-                    exists: true,
-                    url: "/videos-physics/旋出新視界/index.m3u8",
-                    poster: "/videos-physics/旋出新視界/poster.jpg"
-                },
-                book: {
-                    exists: true,
-                    page: 15
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "物理_1"
-                }
-            },
-            {
-                name: "強制水漩渦之分析",
-                subject: "phy",
-                video: {
-                    exists: true,
-                    url: "/videos-physics/強制水漩渦之分析/index.m3u8",
-                    poster: "/videos-physics/強制水漩渦之分析/poster.jpg"
-                },
-                book: {
-                    exists: true,
-                    page: 16
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "物理_2"
-                }
-            }
-        ],
-        che: [
-            {
-                name: "2D 奈米二硫化鉬-新型汙水救星相關研究",
-                subject: "che",
-                video: {
-                    exists: true,
-                    url: "/videos-chemistry/2D 奈米二硫化鉬-新型汙水救星相關研究/index.m3u8",
-                    poster: "/videos-chemistry/2D 奈米二硫化鉬-新型汙水救星相關研究/poster.jpg"
-                },
-                book: {
-                    exists: true,
-                    page: 19
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "化學_1"
-                }
-            },
-            {
-                name: "如何微笑",
-                subject: "che",
-                video: {
-                    exists: true,
-                    url: "/videos-chemistry/如何微笑/index.m3u8",
-                    poster: "/videos-chemistry/如何微笑/poster.jpg"
-                },
-                book: {
-                    exists: true,
-                    page: 20
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "化學_2"
-                }
-            },
-            {
-                name: "利用銅網型液晶分析法檢測空氣中微粒",
-                subject: "che",
-                video: {
-                    exists: true,
-                    url: "/videos-chemistry/利用銅網型液晶分析法檢測空氣中微粒/index.m3u8",
-                    poster: "/videos-chemistry/利用銅網型液晶分析法檢測空氣中微粒/poster.jpg"
-                },
-                book: {
-                    exists: false,
-                    page: 1
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "化學_3"
-                }
-            }
-        ],
-        bio: [
-            {
-                name: "利用班馬魚胚胎測試Cisplatin導致的傷害及NAC的保護效果",
-                subject: "bio",
-                video: {
-                    exists: true,
-                    url: "/videos-biology/利用班馬魚胚胎測試Cisplatin導致的傷害及NAC的保護效果/index.m3u8",
-                    poster: "/videos-biology/利用班馬魚胚胎測試Cisplatin導致的傷害及NAC的保護效果/poster.jpg"
-                },
-                book: {
-                    exists: true,
-                    page: 23
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "生物_1"
-                }
-            },
-            {
-                name: "探討粒線體對果蠅卵巢生殖幹細胞維持的影響",
-                subject: "bio",
-                video: {
-                    exists: true,
-                    url: "/videos-biology/探討粒線體對果蠅卵巢生殖幹細胞維持的影響/index.m3u8",
-                    poster: "/videos-biology/探討粒線體對果蠅卵巢生殖幹細胞維持的影響/poster.jpg"
-                },
-                book: {
-                    exists: true,
-                    page: 24
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "生物_2"
-                }
-            },
-            {
-                name: "以蛋白質體分析探討細胞複製與分化",
-                subject: "bio",
-                video: {
-                    exists: false,
-                    url: ""
-                },
-                book: {
-                    exists: false,
-                    page: 1
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "生物_3"
-                }
-            },
-            {
-                name: "比較脂質體及非脂質體轉染試劑",
-                subject: "bio",
-                video: {
-                    exists: true,
-                    url: "/videos-biology/比較脂質體及非脂質體轉染試劑/index.m3u8"
-                },
-                book: {
-                    exists: true,
-                    page: 0
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "生物_4"
-                }
-            },
-            {
-                name: "記憶猶新—Scopolamine 對斑馬魚記憶能力與社交行為的影響",
-                subject: "bio",
-                video: {
-                    exists: true,
-                    url: "/videos-biology/記憶猶新-Scopolamine 對斑馬魚記憶能力與社交行為的影響/index.m3u8"
-                },
-                book: {
-                    exists: true,
-                    page: 25
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "生物_5"
-                }
-            },
-            {
-                name: "中華珈蟌水蠆環境偏好探討",
-                subject: "bio",
-                video: {
-                    exists: false,
-                    url: ""
-                },
-                book: {
-                    exists: false,
-                    page: 0
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "生物_6"
-                }
-            },
-            {
-                name: "酒精對水蚤趨光性影響之探討",
-                subject: "bio",
-                video: {
-                    exists: false,
-                    url: ""
-                },
-                book: {
-                    exists: false,
-                    page: 0
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "生物_7"
-                }
-            }
-        ],
-        esc: [
-            {
-                name: "近岸波與單樁式離岸風電基座關係初探",
-                subject: "esc",
-                video: {
-                    exists: false,
-                    url: ""
-                },
-                book: {
-                    exists: false,
-                    page: 0
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "地科_1"
-                }
-            },
-            {
-                name: "熱力風模擬與分析",
-                subject: "esc",
-                video: {
-                    exists: false,
-                    url: ""
-                },
-                book: {
-                    exists: false,
-                    page: 0
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "地科_2"
-                }
-            },
-            {
-                name: "雙眼牆颱風的內眼滾動",
-                subject: "esc",
-                video: {
-                    exists: false,
-                    url: ""
-                },
-                book: {
-                    exists: false,
-                    page: 0
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "地科_3"
-                }
-            }
-        ],
-        csc: [
-            {
-                name: "遷移學習如何建立辨識日式插畫角色之神經網路",
-                subject: "csc",
-                video: {
-                    exists: false,
-                    url: ""
-                },
-                book: {
-                    exists: false,
-                    page: 0
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "資訊_1"
-                }
-            },
-            {
-                name: "利用 RFID 增進校園安全",
-                subject: "csc",
-                video: {
-                    exists: false,
-                    url: ""
-                },
-                book: {
-                    exists: false,
-                    page: 0
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "資訊_2"
-                }
-            },
-            {
-                name: "用機器學習判斷文本的主觀資訊",
-                subject: "csc",
-                video: {
-                    exists: false,
-                    url: ""
-                },
-                book: {
-                    exists: false,
-                    page: 0
-                },
-                board: {
-                    exists: true,
-                    url: "board url"
-                },
-                comment: {
-                    exists: true,
-                    id: "資訊_3"
-                }
-            }
-        ]
-    };
+    var helper = new firebaseHelper();
+    var switchers = [], data = {};
 
-    var switchers = [];
-    Array.from(document.getElementsByClassName("subject")).forEach(subject => {
-        if(subject.id == "math" || subject.id == "phy" || subject.id == "che") {
-            let i = 0;
-            Array.from(subject.getElementsByClassName("container")).forEach(container => {
-                buildHTML(container, data[subject.id][i++]);
-            });
-        }
+    fetch("res/file/data.json").then(r => r.json()).then(_data => {
+        data = _data;
+        buildHTML(data);
+        setTimeout(function() {stopLoading(document.getElementsByClassName("loading-barrier")[0])}, 200);
     });
 
-    stopLoading(document.getElementsByClassName("loading-barrier")[0]);
+    function buildHTML(data) {
+        Array.from(document.getElementsByClassName("subject")).forEach(subject => {
+            let i = 0;
+            Array.from(subject.getElementsByClassName("container")).forEach(container => {
+                builder(container, data[subject.id][i++]);
+            });
+        });
+    }
 
-    function switcher(list, target) {
+    function switcher(list, target, poster = null) {
         this.list = list;
         this.target = target;
         this.tab = 0;
         this.switch = function(n) {
+            if(poster) poster.style.animation = "block-fade-out .2s linear 1 forwards";
             for(let i = 0; i < target.length; i++) {
                 if(i == n) {
-                    this.target[i].classList.add("active");
+                    setTimeout((function(self){return function(){self.target[i].classList.add("active");}})(this), 150);
                     this.list[i].style.border = "solid 1px gray";
                 }
                 else if(i == this.tab) {
                     this.target[i].classList.remove("active");
                     this.target[i].classList.add("release");
-                    setTimeout((function(self){return function(){self.target[i].classList.remove("release");}})(this), 200);
+                    setTimeout((function(self){return function(){self.target[i].classList.remove("release");}})(this), 150);
                     this.list[i].style.border = "";
                 }
             }
@@ -948,7 +533,7 @@
         }
     }
 
-    function buildHTML(container, research) {
+    async function builder(container, research) {
         var screen = container.getElementsByClassName("screen")[0], list = container.getElementsByClassName("list")[0];
         var blocks = [], items = [], poster = document.createElement("div"), pic = document.createElement("img");
         if(research.video.exists) {
@@ -988,17 +573,43 @@
         }
         if(research.comment.exists) {
             let block = document.createElement("div");
+            let qa = document.createElement("div");
 
             block.classList.add("block");
+            qa.classList.add("qa");
+            helper.messages.list(research.comment.id).then(list => {
+                list.forEach(item => {
+                    let wrap = document.createElement("div");
+                    let time = document.createElement("div");
+                    let question = document.createElement("div");
+                    let answer = document.createElement("div");
+
+                    wrap.classList.add("question-wrap");
+                    time.classList.add("time");
+                    question.classList.add("question");
+                    answer.classList.add("answer");
+
+                    time.innerHTML = item.time.toDate().toLocaleString();
+                    question.innerHTML = item.request.replace(/\n\n/g, "\n").replace(/\n/g, "<br>");
+                    answer.innerHTML = item.response.replace(/\n\n/g, "\n").replace(/\n/g, "<br>");
+
+                    wrap.appendChild(time);
+                    wrap.appendChild(question);
+                    wrap.appendChild(answer);
+                    qa.appendChild(wrap);
+                });
+            });
 
             blocks.push(block);
             items.push(itemBuilder("comment"));
         }
-        switchers.push(new switcher(items, blocks));
 
         pic.src = "res/img/poster.jpg";
         poster.appendChild(pic);
         poster.classList.add("poster");
+
+        switchers.push(new switcher(items, blocks, poster));
+
         screen.appendChild(poster);
         for(var i = 0; i < blocks.length; i++) {
             screen.appendChild(blocks[i]);
@@ -1038,6 +649,18 @@
         item.appendChild(text);
         return item;
     }
+
+    /*
+
+    <div class="qa">
+    <div class="question-wrap">
+    <div class="time"></div>
+    <div class="question"></div>
+    <div class="answer"></div>
+    </div>
+    </div>
+
+    */
     </script>
 </body>
 </html>
