@@ -547,14 +547,23 @@
             video.controls = true;
             video.preload = "metadata";
             if(research.video.poster) video.poster = research.video.poster;
-            if(Hls.isSupported()) {
-                var hls = new Hls();
-                hls.loadSource(research.video.url);
-                hls.attachMedia(video);
-            }
-            else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-                video.src = research.video.url;
-            }
+            video.addEventListener("click", function() {
+                if(Hls.isSupported()) {
+                    var hls = new Hls();
+                    hls.loadSource(research.video.url);
+                    hls.attachMedia(video);
+                    hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                        video.play();
+                    });
+                }
+                else if(video.canPlayType("application/vnd.apple.mpegurl")) {
+                    video.src = research.video.url;
+                    video.addEventListener('loadedmetadata', function() {
+                        video.play();
+                    });
+                }
+            }, {once: true});
+            
             block.classList.add("block");
             block.appendChild(video);
             blocks.push(block);
