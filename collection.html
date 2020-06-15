@@ -542,6 +542,7 @@
             let video = document.createElement("video");
 
             video.controls = true;
+            video.preload = "metadata";
             if(research.video.poster) video.poster = research.video.poster;
             if(Hls.isSupported()) {
                 var hls = new Hls();
