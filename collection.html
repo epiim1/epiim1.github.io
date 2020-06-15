@@ -491,6 +491,7 @@
     });
 
     var helper = new firebaseHelper();
+    helper.init();
     var switchers = [], data = {};
 
     fetch("res/file/data.json").then(r => r.json()).then(_data => {
