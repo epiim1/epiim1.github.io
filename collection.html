@@ -453,7 +453,7 @@
                 subject: "math",
                 video: {
                     exists: true,
-                    url: "https://raw.githubusercontent.com/epiim1/videos-math/master/%E4%B8%80%E5%B1%A4%E4%B8%80%E5%B1%A4%E4%B8%B2%E8%B5%B7%E4%BD%A0%E7%9A%84%E5%BF%83/index.m3u8",
+                    url: "/videos-math/一層一層串起你的心/index.m3u8",
                     poster: "https://raw.githubusercontent.com/epiim1/videos-math/master/%E4%B8%80%E5%B1%A4%E4%B8%80%E5%B1%A4%E4%B8%B2%E8%B5%B7%E4%BD%A0%E7%9A%84%E5%BF%83/poster.jpg"
                 },
                 book: {
@@ -641,11 +641,153 @@
                 }
             }
         ],
-        bio: [],
+        bio: [
+            {
+                name: "利用班馬魚胚胎測試Cisplatin導致的傷害及NAC的保護效果",
+                subject: "bio",
+                video: {
+                    exists: false,
+                    url: ""
+                },
+                book: {
+                    exists: true,
+                    page: 0
+                },
+                board: {
+                    exists: true,
+                    url: "board url"
+                },
+                comment: {
+                    exists: true,
+                    id: "生物_1"
+                }
+            },
+            {
+                name: "探討粒線體對果蠅卵巢生殖幹細胞維持的影響",
+                subject: "bio",
+                video: {
+                    exists: false,
+                    url: ""
+                },
+                book: {
+                    exists: true,
+                    page: 0
+                },
+                board: {
+                    exists: true,
+                    url: "board url"
+                },
+                comment: {
+                    exists: true,
+                    id: "生物_2"
+                }
+            },
+            {
+                name: "以蛋白質體分析探討細胞複製與分化",
+                subject: "bio",
+                video: {
+                    exists: false,
+                    url: ""
+                },
+                book: {
+                    exists: true,
+                    page: 0
+                },
+                board: {
+                    exists: true,
+                    url: "board url"
+                },
+                comment: {
+                    exists: true,
+                    id: "生物_3"
+                }
+            },
+            {
+                name: "比較脂質體及非脂質體轉染試劑",
+                subject: "bio",
+                video: {
+                    exists: false,
+                    url: ""
+                },
+                book: {
+                    exists: true,
+                    page: 0
+                },
+                board: {
+                    exists: true,
+                    url: "board url"
+                },
+                comment: {
+                    exists: true,
+                    id: "生物_4"
+                }
+            },
+            {
+                name: "記憶猶新—Scopolamine 對斑馬魚記憶能力與社交行為的影響",
+                subject: "bio",
+                video: {
+                    exists: false,
+                    url: ""
+                },
+                book: {
+                    exists: true,
+                    page: 0
+                },
+                board: {
+                    exists: true,
+                    url: "board url"
+                },
+                comment: {
+                    exists: true,
+                    id: "生物_5"
+                }
+            },
+            {
+                name: "中華珈蟌水蠆環境偏好探討",
+                subject: "bio",
+                video: {
+                    exists: false,
+                    url: ""
+                },
+                book: {
+                    exists: true,
+                    page: 0
+                },
+                board: {
+                    exists: true,
+                    url: "board url"
+                },
+                comment: {
+                    exists: true,
+                    id: "生物_6"
+                }
+            },
+            {
+                name: "酒精對水蚤趨光性影響之探討",
+                subject: "bio",
+                video: {
+                    exists: false,
+                    url: ""
+                },
+                book: {
+                    exists: true,
+                    page: 0
+                },
+                board: {
+                    exists: true,
+                    url: "board url"
+                },
+                comment: {
+                    exists: true,
+                    id: "生物_7"
+                }
+            }
+        ],
         esc: [],
         csc: []
     };
 
+    var switchers = [];
     Array.from(document.getElementsByClassName("subject")).forEach(subject => {
         if(subject.id == "math" || subject.id == "phy" || subject.id == "che") {
             let i = 0;
@@ -727,7 +869,7 @@
             blocks.push(block);
             items.push(itemBuilder("comment"));
         }
-        new switcher(items, blocks);
+        switchers.push(new switcher(items, blocks));
 
         pic.src = "res/img/poster.jpg";
         poster.appendChild(pic);
