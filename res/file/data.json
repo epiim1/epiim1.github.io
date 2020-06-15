@@ -344,7 +344,8 @@
             "subject":"esc",
             "video":{
                 "exists":true,
-                "url":"/videos-earth-science/近岸波與單樁式離岸風電基座關係初探/poster.jpg"
+                "url":"/videos-earth-science/近岸波與單樁式離岸風電基座關係初探/index.m3u8",
+                "poster":"/videos-earth-science/近岸波與單樁式離岸風電基座關係初探/poster.jpg"
             },
             "book":{
                 "exists":true,
