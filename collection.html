@@ -232,6 +232,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/vendors/scrolloverflow.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/fullpage.extensions.min.js" crossorigin="anonymous"></script>
     <script src="https://vjs.zencdn.net/7.8.2/video.js"></script>
+    <script src="https://unpkg.com/@videojs/http-streaming/dist/videojs-http-streaming.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-firestore.js"></script>
     <script src="res/js/firebase-helper.js"></script>
@@ -367,7 +368,7 @@
         -ms-overflow-style: none;
     }
     .qa::-webkit-scrollbar {
-        display: none;
+        /* display: none; */
     }
     .question-wrap {
         width: 100%;
@@ -619,7 +620,7 @@
                         qa.appendChild(wrap);
                     });
                 });
-            });
+            }, {once: true});
 
             block.appendChild(qa);
             blocks.push(block);
