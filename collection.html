@@ -555,6 +555,7 @@
                 var source = document.createElement("source");
                 source.src = research.video.url;
                 source.type = "application/x-mpegURL";
+                video.appendChild(source);
                 var player = videojs(video, { "techOrder": ["hls","html5"] }, function () { });
                 players.push(player);
                 player.play();
