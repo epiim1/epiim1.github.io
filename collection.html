@@ -546,17 +546,17 @@
             let video = document.createElement("video");
 
             video.controls = true;
-            video.preload = "metadata";
+            video.preload = "none";
             video.dataset.setup = "{}";
             if(research.video.poster) video.poster = research.video.poster;
-            video.classList.add("video-js", "vjs-default-skin", "vjs-big-play-centered");
+            video.classList.add("video-js", "vjs-default-skin", "vjs-big-play-centered", "video");
             
             video.addEventListener("click", function() {
-                var source = document.createElement("source");
+                let source = document.createElement("source");
                 source.src = research.video.url;
                 source.type = "application/x-mpegURL";
                 video.appendChild(source);
-                var player = videojs(video, { "techOrder": ["hls","html5"] }, function () { });
+                let player = videojs(video);
                 players.push(player);
                 player.play();
             }, {once: true});
