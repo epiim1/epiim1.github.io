@@ -590,37 +590,40 @@
         if(research.comment.exists) {
             let block = document.createElement("div");
             let qa = document.createElement("div");
+            let btn = itemBuilder("comment");
 
             block.classList.add("block");
             qa.classList.add("qa");
-            helper.messages.list(research.comment.id).then(list => {
-                list.forEach(item => {
-                    let wrap = document.createElement("div");
-                    let card = document.createElement("div");
-                    let time = document.createElement("div");
-                    let question = document.createElement("div");
-                    let answer = document.createElement("div");
+            btn.addEventListener("click", function() {
+                helper.messages.list(research.comment.id).then(list => {
+                    list.forEach(item => {
+                        let wrap = document.createElement("div");
+                        let card = document.createElement("div");
+                        let time = document.createElement("div");
+                        let question = document.createElement("div");
+                        let answer = document.createElement("div");
 
-                    wrap.classList.add("question-wrap");
-                    time.classList.add("time");
-                    question.classList.add("question");
-                    answer.classList.add("answer");
+                        wrap.classList.add("question-wrap");
+                        time.classList.add("time");
+                        question.classList.add("question");
+                        answer.classList.add("answer");
 
-                    time.innerHTML = item.time.toDate().toLocaleString();
-                    question.innerHTML = item.request.replace(/\n\n/g, "\n").replace(/\n/g, "<br>");
-                    answer.innerHTML = item.response.replace(/\n\n/g, "\n").replace(/\n/g, "<br>");
+                        time.innerHTML = item.time.toDate().toLocaleString();
+                        question.innerHTML = item.request.replace(/\n\n/g, "\n").replace(/\n/g, "<br>");
+                        answer.innerHTML = item.response.replace(/\n\n/g, "\n").replace(/\n/g, "<br>");
 
-                    card.appendChild(time);
-                    card.appendChild(question);
-                    card.appendChild(answer);
-                    wrap.appendChild(card);
-                    qa.appendChild(wrap);
+                        card.appendChild(time);
+                        card.appendChild(question);
+                        card.appendChild(answer);
+                        wrap.appendChild(card);
+                        qa.appendChild(wrap);
+                    });
                 });
             });
 
             block.appendChild(qa);
             blocks.push(block);
-            items.push(itemBuilder("comment"));
+            items.push(btn);
         }
 
         pic.src = "res/img/poster.jpg";
