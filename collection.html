@@ -290,7 +290,8 @@
         border-radius: min(5px, .5vw);
     }
     .video {
-        width: 100%;
+        width: max(1920px, 80vw);
+        height: max(1080px, 45vw);
     }
     .list {
         position: relative;
@@ -554,6 +555,13 @@
             if(research.video.poster) video.poster = research.video.poster;
             video.classList.add("video-js", "vjs-default-skin", "vjs-big-play-centered", "video");
             
+            let source = document.createElement("source");
+            source.src = research.video.url;
+            source.type = "application/x-mpegURL";
+            video.appendChild(source);
+            let player = videojs(video);
+            players.push(player);
+            /*
             video.addEventListener("click", function() {
                 let source = document.createElement("source");
                 source.src = research.video.url;
@@ -563,6 +571,7 @@
                 players.push(player);
                 player.play();
             }, {once: true});
+            */
             
             block.classList.add("block");
             block.appendChild(video);
