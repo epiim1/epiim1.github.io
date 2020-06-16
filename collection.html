@@ -557,10 +557,11 @@
             if(research.video.poster) video.poster = research.video.poster;
             video.classList.add("video-js", "vjs-default-skin", "vjs-big-play-centered", "Video");
             
-            let source = document.createElement("source");
-            source.src = research.video.url;
-            source.type = "application/x-mpegURL";
-            video.appendChild(source);
+            //let source = document.createElement("source");
+            //source.src = research.video.url;
+            //source.type = "application/x-mpegURL";
+            //video.appendChild(source);
+            video.src = research.video.url;
             let player = videojs(video);
             
             video.addEventListener("click", function() {
