@@ -559,19 +559,12 @@
             source.src = research.video.url;
             source.type = "application/x-mpegURL";
             video.appendChild(source);
-            let player = videojs(video);
-            players.push(player);
-            /*
+            let player = videojs(video, {}, function() {});
+            
             video.addEventListener("click", function() {
-                let source = document.createElement("source");
-                source.src = research.video.url;
-                source.type = "application/x-mpegURL";
-                video.appendChild(source);
-                let player = videojs(video);
-                players.push(player);
                 player.play();
             }, {once: true});
-            */
+            
             
             block.classList.add("block");
             block.appendChild(video);
