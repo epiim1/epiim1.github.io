@@ -289,7 +289,7 @@
         max-height: 100%;
         border-radius: min(5px, .5vw);
     }
-    .video {
+    .Video {
         width: max(1920px, 80vw);
         height: max(1080px, 45vw);
     }
@@ -553,13 +553,13 @@
             video.preload = "none";
             video.dataset.setup = "{}";
             if(research.video.poster) video.poster = research.video.poster;
-            video.classList.add("video-js", "vjs-default-skin", "vjs-big-play-centered", "video");
+            video.classList.add("video-js", "vjs-default-skin", "vjs-big-play-centered", "Video");
             
             let source = document.createElement("source");
             source.src = research.video.url;
             source.type = "application/x-mpegURL";
             video.appendChild(source);
-            let player = videojs(video, {}, function() {});
+            let player = videojs(video);
             
             video.addEventListener("click", function() {
                 player.play();
