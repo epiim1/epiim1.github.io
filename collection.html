@@ -421,9 +421,15 @@
     .board-image {
         width: 29%;
         margin: auto 1%;
+        border-radius: min(5px, .5vw);
     }
     .board-image-center {
         width: 34%;
+        border-radius: min(5px, .5vw);
+    }
+    .book-image {
+        max-height: 100%;
+        border-radius: min(5px, .5vw);
     }
     #full-img-viewer {
         display: none;
@@ -441,6 +447,7 @@
         position: relative;
         max-width: 95%;
         max-height: 95%;
+        border-radius: min(5px, .5vw);
     }
     @media screen and (orientation:portrait) {
         .container {
@@ -540,7 +547,7 @@
     var helper = new firebaseHelper();
     helper.init();
     var switchers = [], players = [], data = {};
-    var board_base = "res/img/三面板/";
+    var board_base = "res/img/三面板/", book_base = "res/img/摘要/";
 
     var meta = location.href.includes("local") ? "https://epii.ml/res/file/data.json" : "res/file/data.json";
     fetch(meta).then(r => r.json()).then(_data => {
@@ -588,11 +595,22 @@
         var blocks = [], items = [], poster = document.createElement("div"), pic = document.createElement("img");
         if(research.book.exists && research.book.url) {
             let block = document.createElement("div");
+            let btn = itemBuilder("book");
 
             block.classList.add("block");
+            let img = document.createElement("img");
+            img.classList.add("book-image");
+            img.dataset.src = book_base + research.book.url;
+            img.addEventListener("click", function() {
+                fiv(book_base + research.book.url);
+            });
+            btn.addEventListener("click", function() {
+                img.src = book_base + research.book.url;
+            }, {once: true});
+            block.appendChild(img);
 
             blocks.push(block);
-            items.push(itemBuilder("book"));
+            items.push(btn);
         }
         if(research.video.exists && research.video.url) {
             let block = document.createElement("div");
