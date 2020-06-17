@@ -223,6 +223,9 @@
             </div>
         </div>
     </div>
+    <div id="full-img-viewer">
+        <img id="fiv-src">
+    </div>
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/flatly/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/fullpage.min.css" />
@@ -415,6 +418,30 @@
         margin: 4px 16px;
         letter-spacing: .25px;
     }
+    .board-image {
+        width: 29%;
+        margin: auto 1%;
+    }
+    .board-image-center {
+        width: 34%;
+    }
+    #full-img-viewer {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -100;
+        background: rgba(0,0,0,.75);
+        justify-content: center;
+        align-items: center;
+    }
+    #fiv-src {
+        position: relative;
+        max-width: 95%;
+        max-height: 95%;
+    }
     @media screen and (orientation:portrait) {
         .container {
             flex-flow: column nowrap;
@@ -513,6 +540,7 @@
     var helper = new firebaseHelper();
     helper.init();
     var switchers = [], players = [], data = {};
+    var board_base = "res/img/三面板/";
 
     var meta = location.href.includes("local") ? "https://epii.ml/res/file/data.json" : "res/file/data.json";
     fetch(meta).then(r => r.json()).then(_data => {
@@ -558,7 +586,7 @@
     async function builder(container, research) {
         var screen = container.getElementsByClassName("screen")[0], list = container.getElementsByClassName("list")[0];
         var blocks = [], items = [], poster = document.createElement("div"), pic = document.createElement("img");
-        if(research.book.exists) {
+        if(research.book.exists && research.book.url) {
             let block = document.createElement("div");
 
             block.classList.add("block");
@@ -566,7 +594,7 @@
             blocks.push(block);
             items.push(itemBuilder("book"));
         }
-        if(research.video.exists) {
+        if(research.video.exists && research.video.url) {
             let block = document.createElement("div");
             let video = document.createElement("video");
             let btn = itemBuilder("video");
@@ -597,15 +625,34 @@
             blocks.push(block);
             items.push(btn);
         }
-        if(research.board.exists) {
+        if(research.board.exists && research.board.img) {
             let block = document.createElement("div");
+            let btn = itemBuilder("board");
 
             block.classList.add("block");
+            let imgs = [];
+            for(let i = 0; i < research.board.img.length; i++) {
+                let img = document.createElement("img");
+                img.classList.add("board-image");
+                if(i === 1) img.classList.add("board-image-center");
+                img.dataset.src = board_base + research.board.img[i];
+                img.addEventListener("click", function() {
+                    fiv(board_base + research.board.img[i]);
+                });
+                imgs.push(img);
+                block.appendChild(img);
+            }
+
+            btn.addEventListener("click", function() {
+                imgs.forEach(img => {
+                    img.src = img.dataset.src;
+                });
+            }, {once: true});
 
             blocks.push(block);
-            items.push(itemBuilder("board"));
+            items.push(btn);
         }
-        if(research.comment.exists) {
+        if(research.comment.exists && research.comment.id) {
             let block = document.createElement("div");
             let qa = document.createElement("div");
             let btn = itemBuilder("comment");
@@ -697,6 +744,15 @@
         return item;
     }
 
+    function fiv(src) {
+        document.getElementById("fiv-src").src = src;
+        document.getElementById("full-img-viewer").style.zIndex = 100;
+        document.getElementById("full-img-viewer").onclick = function(e) {
+            if(e.target === this) {
+                this.style.zIndex = -100;
+            }
+        };
+    }
     /*
 
     <div class="qa">
