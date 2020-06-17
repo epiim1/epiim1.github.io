@@ -553,7 +553,11 @@
 
             video.controls = true;
             video.preload = "none";
-            video.dataset.setup = "{}";
+            video.dataset.setup = JSON.stringify({
+                controlBar: {
+                    playbackRateMenuButton: true
+                }
+            });
             if(research.video.poster) video.poster = research.video.poster;
             video.classList.add("video-js", "vjs-default-skin", "vjs-big-play-centered", "Video");
             
@@ -563,6 +567,7 @@
                     src: research.video.url,
                     type: "application/x-mpegURL"
                 });
+                video.dataset.playerId = players.length;
                 players.push(player);
             }, {once: true});
             
