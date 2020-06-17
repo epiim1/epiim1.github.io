@@ -764,11 +764,13 @@
     }
 
     function fiv(src) {
+        fullpage_api.setAutoScrolling(false);
         document.getElementById("fiv-src").src = src;
         document.getElementById("full-img-viewer").style.display = "flex";
         document.getElementById("full-img-viewer").onclick = function(e) {
             if(e.target === this) {
                 this.style.display = "none";
+                fullpage_api.setAutoScrolling(true);
             }
         };
     }
