@@ -546,6 +546,14 @@
     async function builder(container, research) {
         var screen = container.getElementsByClassName("screen")[0], list = container.getElementsByClassName("list")[0];
         var blocks = [], items = [], poster = document.createElement("div"), pic = document.createElement("img");
+        if(research.book.exists) {
+            let block = document.createElement("div");
+
+            block.classList.add("block");
+
+            blocks.push(block);
+            items.push(itemBuilder("book"));
+        }
         if(research.video.exists) {
             let block = document.createElement("div");
             let video = document.createElement("video");
@@ -577,14 +585,6 @@
             blocks.push(block);
             items.push(btn);
         }
-        if(research.book.exists) {
-            let block = document.createElement("div");
-
-            block.classList.add("block");
-
-            blocks.push(block);
-            items.push(itemBuilder("book"));
-        }
         if(research.board.exists) {
             let block = document.createElement("div");
 
@@ -601,29 +601,11 @@
             block.classList.add("block");
             qa.classList.add("qa");
             btn.addEventListener("click", function() {
+                qa.appendChild(cardBuilder("Loading...", "載入中，請稍後...",""));
                 helper.messages.list(research.comment.id).then(list => {
+                    qa.innerHTML = "";
                     list.forEach(item => {
-                        let wrap = document.createElement("div");
-                        let card = document.createElement("div");
-                        let time = document.createElement("div");
-                        let question = document.createElement("div");
-                        let answer = document.createElement("div");
-
-                        wrap.classList.add("question-wrap");
-                        card.classList.add("card");
-                        time.classList.add("time");
-                        question.classList.add("question");
-                        answer.classList.add("answer");
-
-                        time.innerHTML = item.time.toDate().toLocaleString();
-                        question.innerHTML = item.request.replace(/\n/g, "<br>");
-                        answer.innerHTML = item.response.replace(/\n/g, "<br>");
-
-                        card.appendChild(time);
-                        card.appendChild(question);
-                        card.appendChild(answer);
-                        wrap.appendChild(card);
-                        qa.appendChild(wrap);
+                        qa.appendChild(cardBuilder(item.time.toDate().toLocaleString(), item.request.replace(/\n/g, "<br>"), item.response.replace(/\n/g, "<br>")));
                     });
                 });
             }, {once: true});
@@ -645,7 +627,31 @@
             list.appendChild(items[i]);
         }
     }
+    
+    function cardBuilder(t="", q="", a="") {
+        let wrap = document.createElement("div");
+        let card = document.createElement("div");
+        let time = document.createElement("div");
+        let question = document.createElement("div");
+        let answer = document.createElement("div");
 
+        wrap.classList.add("question-wrap");
+        card.classList.add("card");
+        time.classList.add("time");
+        question.classList.add("question");
+        answer.classList.add("answer");
+
+        time.innerHTML = t;
+        question.innerHTML = q;
+        answer.innerHTML = a;
+
+        card.appendChild(time);
+        card.appendChild(question);
+        card.appendChild(answer);
+        wrap.appendChild(card);
+        return wrap;
+    }
+    
     function itemBuilder(type) {
         var item = document.createElement("div");
         var iconWrap = document.createElement("div");
@@ -661,7 +667,7 @@
         if(type == "book") {
             item.classList.add("book");
             icon.classList.add("fas", "fa-book");
-            text.innerHTML = "成發本";
+            text.innerHTML = "摘要";
         }
         if(type == "board") {
             item.classList.add("board");
