@@ -567,6 +567,9 @@
             
             btn.addEventListener("click", function() {
                 let player = videojs(video);
+                video.addEventListener("click", function() {
+                player.play();
+                }, {once: true});
             }, {once: true});
             
             
@@ -613,8 +616,8 @@
                         answer.classList.add("answer");
 
                         time.innerHTML = item.time.toDate().toLocaleString();
-                        question.innerHTML = item.request.replace(/\n\n/g, "\n").replace(/\n/g, "<br>");
-                        answer.innerHTML = item.response.replace(/\n\n/g, "\n").replace(/\n/g, "<br>");
+                        question.innerHTML = item.request.replace(/\n/g, "<br>");
+                        answer.innerHTML = item.response.replace(/\n/g, "<br>");
 
                         card.appendChild(time);
                         card.appendChild(question);
