@@ -550,6 +550,7 @@
         if(research.video.exists) {
             let block = document.createElement("div");
             let video = document.createElement("video");
+            let btn = itemBuilder("video");
 
             video.controls = true;
             video.preload = "none";
@@ -562,17 +563,17 @@
             //source.type = "application/x-mpegURL";
             //video.appendChild(source);
             video.src = research.video.url;
-            let player = videojs(video);
+           
             
-            video.addEventListener("click", function() {
-                player.play();
+            btn.addEventListener("click", function() {
+                let player = videojs(video);
             }, {once: true});
             
             
             block.classList.add("block");
             block.appendChild(video);
             blocks.push(block);
-            items.push(itemBuilder("video"));
+            items.push(btn);
         }
         if(research.book.exists) {
             let block = document.createElement("div");
