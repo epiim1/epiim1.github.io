@@ -231,8 +231,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/vendors/scrolloverflow.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/fullpage.extensions.min.js" crossorigin="anonymous"></script>
-    <script src="https://vjs.zencdn.net/7.8.2/video.js"></script>
-    <script src="https://unpkg.com/@videojs/http-streaming/dist/videojs-http-streaming.js"></script>
+    <script src="https://vjs.zencdn.net/7.8.2/video.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-firestore.js"></script>
     <script src="res/js/firebase-helper.js"></script>
@@ -291,8 +290,8 @@
         border-radius: min(5px, .5vw);
     }
     .Video {
-        width: max(1920px, 80vw);
-        height: max(1080px, 45vw);
+        width: 100%;
+        height: 90%;
     }
     .list {
         position: relative;
@@ -567,9 +566,7 @@
             
             btn.addEventListener("click", function() {
                 let player = videojs(video);
-                // video.addEventListener("click", function() {
-                // player.play();
-                // }, {once: true});
+                players.push(player);
             }, {once: true});
             
             
@@ -611,6 +608,7 @@
                         let answer = document.createElement("div");
 
                         wrap.classList.add("question-wrap");
+                        card.classList.add("card");
                         time.classList.add("time");
                         question.classList.add("question");
                         answer.classList.add("answer");
