@@ -363,11 +363,22 @@
     .qa {
         width: 100%;
         height: calc(100% - 24px);
-        overflow: hidden scroll;
+        overflow: hidden auto;
         -ms-overflow-style: none;
     }
     .qa::-webkit-scrollbar {
-        display: none;
+        width: 10px;
+    }
+    .qa::-webkit-scrollbar-track {
+        background: rgba(255,255,255,.2);
+        border-radius: 5px;
+    }
+    .qa::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,.45);
+        border-radius: 5px;
+    }
+    .qa::-webkit-scrollbar-thumb:hover {
+        background: rgba(255,255,255,.7);
     }
     .question-wrap {
         width: 100%;
@@ -503,7 +514,8 @@
     helper.init();
     var switchers = [], players = [], data = {};
 
-    fetch("res/file/data.json").then(r => r.json()).then(_data => {
+    var meta = location.href.includes("local") ? "https://epii.ml/res/file/data.json" : "res/file/data.json";
+    fetch(meta).then(r => r.json()).then(_data => {
         data = _data;
         buildHTML(data);
         setTimeout(function() {stopLoading(document.getElementsByClassName("loading-barrier")[0])}, 200);
@@ -568,7 +580,7 @@
             });
             if(research.video.poster) video.poster = research.video.poster;
             video.classList.add("video-js", "vjs-default-skin", "vjs-big-play-centered", "Video");
-            
+
             btn.addEventListener("click", function() {
                 let player = videojs(video);
                 player.src({
@@ -578,8 +590,8 @@
                 video.dataset.playerId = players.length;
                 players.push(player);
             }, {once: true});
-            
-            
+
+
             block.classList.add("block");
             block.appendChild(video);
             blocks.push(block);
@@ -627,7 +639,7 @@
             list.appendChild(items[i]);
         }
     }
-    
+
     function cardBuilder(t="", q="", a="") {
         let wrap = document.createElement("div");
         let card = document.createElement("div");
@@ -651,7 +663,7 @@
         wrap.appendChild(card);
         return wrap;
     }
-    
+
     function itemBuilder(type) {
         var item = document.createElement("div");
         var iconWrap = document.createElement("div");
