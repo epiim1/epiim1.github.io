@@ -705,6 +705,27 @@
                 qa.appendChild(cardBuilder("Loading...", "載入中，請稍後...",""));
                 helper.messages.list(research.comment.id).then(list => {
                     qa.innerHTML = "";
+
+                    // send
+                    /*
+                    let wrap = document.createElement("div");
+                    let card = document.createElement("div");
+                    let title = document.createElement("div");
+                    let input = document.createElement("textarea");
+                    let send = document.createElement("button");
+
+                    wrap.classList.add("question-wrap");
+                    card.classList.add("card");
+
+                    title.innerHTML = "提問或留言";
+
+                    card.appendChild(title);
+                    card.appendChild(input);
+                    card.appendChild(send);
+                    wrap.appendChild(card);
+
+*/
+
                     list.forEach(item => {
                         qa.appendChild(cardBuilder(item.time.toDate().toLocaleString(), item.request.replace(/\n/g, "<br>"), item.response.replace(/\n/g, "<br>")));
                     });
