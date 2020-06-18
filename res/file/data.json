@@ -35,7 +35,7 @@
             },
             "board":{
                 "exists":true,
-                "url":"board url"
+                "img":["math/圓例覺醒/左.jpg", "math/圓例覺醒/中.jpg", "math/圓例覺醒/右.jpg"]
             },
             "comment":{
                 "exists":true,
@@ -56,7 +56,7 @@
             },
             "board":{
                 "exists":true,
-                "url":"board url"
+                "img":["math/Shoot!圓錐曲線神射手/左.jpg", "math/Shoot!圓錐曲線神射手/中.jpg", "math/Shoot!圓錐曲線神射手/右.jpg"]
             },
             "comment":{
                 "exists":true,
@@ -77,7 +77,7 @@
             },
             "board":{
                 "exists":true,
-                "url":"board url"
+                "img":["math/be equal/左.jpg", "math/be equal/中.jpg", "math/be equal/右.jpg"]
             },
             "comment":{
                 "exists":true,

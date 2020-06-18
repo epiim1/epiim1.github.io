@@ -224,7 +224,10 @@
         </div>
     </div>
     <div id="full-img-viewer">
-        <img id="fiv-src">
+        <img id="fiv-src" title="點擊切換視角">
+        <div id="fiv-wide-viewer" title="點擊切換視角">
+            <img id="fiv-wv-src">
+        </div>
     </div>
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/flatly/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
@@ -369,18 +372,18 @@
         overflow: hidden auto;
         -ms-overflow-style: none;
     }
-    .qa::-webkit-scrollbar {
+    ::-webkit-scrollbar {
         width: 10px;
     }
-    .qa::-webkit-scrollbar-track {
+    ::-webkit-scrollbar-track {
         background: rgba(255,255,255,.2);
         border-radius: 5px;
     }
-    .qa::-webkit-scrollbar-thumb {
+    ::-webkit-scrollbar-thumb {
         background: rgba(255,255,255,.45);
         border-radius: 5px;
     }
-    .qa::-webkit-scrollbar-thumb:hover {
+    ::-webkit-scrollbar-thumb:hover {
         background: rgba(255,255,255,.7);
     }
     .question-wrap {
@@ -418,18 +421,18 @@
         margin: 4px 16px;
         letter-spacing: .25px;
     }
-    .board-image {
+    .screen > div > img.board-image {
         cursor: pointer;
         width: 29%;
         margin: auto 1%;
         border-radius: min(5px, .5vw);
     }
-    .board-image-center {
+    .screen > div > img.board-image-center {
         cursor: pointer;
         width: 34%;
         border-radius: min(5px, .5vw);
     }
-    .book-image {
+    .screen > div > img.book-image {
         cursor: pointer;
         max-height: 90%;
         border-radius: min(5px, .5vw);
@@ -442,7 +445,7 @@
         width: 100%;
         height: 100%;
         z-index: 100;
-        background: rgba(0,0,0,.75);
+        background: rgba(0,0,0,.8182);
         justify-content: center;
         align-items: center;
     }
@@ -450,6 +453,22 @@
         position: relative;
         max-width: 95%;
         max-height: 95%;
+        border-radius: min(5px, .5vw);
+    }
+    #fiv-wide-viewer {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: flex-start;
+        overflow: auto;
+    }
+    #fiv-wv-src {
+        position: relative;
+        max-width: 90%;
         border-radius: min(5px, .5vw);
     }
     @media screen and (orientation:portrait) {
@@ -552,7 +571,7 @@
     var switchers = [], players = [], data = {};
     var board_base = "res/img/三面板/", book_base = "res/img/摘要/";
 
-    var meta = location.href.includes("local") ? "https://epii.ml/res/file/data.json" : "res/file/data.json";
+    var meta = location.href.includes("file://") ? "https://epii.ml/res/file/data.json" : "res/file/data.json";
     fetch(meta).then(r => r.json()).then(_data => {
         data = _data;
         buildHTML(data);
@@ -609,6 +628,7 @@
             });
             btn.addEventListener("click", function() {
                 img.src = book_base + research.book.url;
+                fiv(book_base + research.book.url);
             }, {once: true});
             block.appendChild(img);
 
@@ -765,13 +785,24 @@
 
     function fiv(src) {
         fullpage_api.setAllowScrolling(false);
+        document.getElementById("fiv-wide-viewer").style.display = "none";
+        document.getElementById("fiv-src").style.display = "inline-block";
         document.getElementById("fiv-src").src = src;
+        document.getElementById("fiv-wv-src").src = src;
         document.getElementById("full-img-viewer").style.display = "flex";
         document.getElementById("full-img-viewer").onclick = function(e) {
             if(e.target === this) {
                 this.style.display = "none";
                 fullpage_api.setAllowScrolling(true);
             }
+        };
+        document.getElementById("fiv-src").onclick = function(e) {
+            this.style.display = "none";
+            document.getElementById("fiv-wide-viewer").style.display = "flex";
+        };
+        document.getElementById("fiv-wide-viewer").onclick = function(e) {
+            this.style.display = "none";
+            document.getElementById("fiv-src").style.display = "inline-block";
         };
     }
     /*
