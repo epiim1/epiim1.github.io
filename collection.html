@@ -247,6 +247,9 @@
         background: rgba(0,0,128,.5) url("res/img/background_x2.jpg") no-repeat center;
         background-size: cover;
     }
+    body::-webkit-scrollbar {
+        display: none;
+    }
     .container {
         position: relative;
         display: flex;
@@ -784,7 +787,8 @@
     }
 
     function fiv(src) {
-        fullpage_api.setAllowScrolling(false);
+        if ("ontouchstart" in document.documentElement) fullpage_api.setAllowScrolling(false);
+        else fullpage_api.setAutoScrolling(false);
         document.getElementById("fiv-wide-viewer").style.display = "none";
         document.getElementById("fiv-src").style.display = "inline-block";
         document.getElementById("fiv-src").src = src;
@@ -794,6 +798,7 @@
             if(e.target === this) {
                 this.style.display = "none";
                 fullpage_api.setAllowScrolling(true);
+                fullpage_api.setAutoScrolling(true);
             }
         };
         document.getElementById("fiv-src").onclick = function(e) {
