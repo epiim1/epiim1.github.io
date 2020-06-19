@@ -545,7 +545,7 @@
                 img.classList.add("board-image");
                 if(i === 1) img.classList.add("board-image-center");
                 img.addEventListener("click", function() {
-                    fiv([board_base + research.board.img[i], board_base + research.board.img[(i+1)%l], board_base + research.board.img[(i-1)%l]]);
+                    fiv([board_base + research.board.img[i], board_base + research.board.img[(i+1)%l], board_base + research.board.img[(i+l-1)%l]]);
                 });
                 btn.addEventListener("click", function() {
                     img.src = board_base + research.board.img[i];
