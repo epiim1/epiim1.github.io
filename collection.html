@@ -397,17 +397,6 @@
     }
     </style>
     <script>
-    var fpc = new fullpage("#stage", {
-        licenseKey: "dddddddd-dddddddd-dddddddd-dddddddd",
-        anchors: ["數學組", "物理組", "化學組", "生物組", "地科組", "資訊組"],
-        autoScrolling:true,
-        scrollHorizontally: true,
-        sectionsColor : ["rgba(141, 141, 239, .75)", "rgba(123, 223, 242, .75)", "rgba(178, 247, 239, .75)", "rgba(239, 247, 246, .75)", "rgba(247, 214, 224, .75)", "rgba(242, 181, 212, .75)"],
-        sectionSelector: ".subject",
-        slideSelector: ".research",
-        controlArrows: false,
-        scrollOverflow: true
-    });
     Array.from(document.getElementsByClassName("rightArrow")).forEach(elm => {
         elm.addEventListener("click", function() {fullpage_api.moveSlideRight();});
     });
@@ -425,7 +414,8 @@
     fetch(meta).then(r => r.json()).then(async (_data) => {
         console.log("[Meta Fetcher]: Success.", _data);
         data = _data;
-        buildHTML(data);
+        await buildHTML(data);
+        FP();
         setTimeout(function() {stopLoading(document.getElementsByClassName("loading-barrier")[0])}, 200);
     });
 
@@ -548,13 +538,13 @@
 
             block.classList.add("block");
             let imgs = [];
-            for(let i = 0; i < research.board.img.length; i++) {
+            let l = research.board.img.length;
+            for(let i = 0; i < l; i++) {
                 let img = document.createElement("img");
                 img.classList.add("board-image");
                 if(i === 1) img.classList.add("board-image-center");
-                img.dataset.src = board_base + research.board.img[i];
                 img.addEventListener("click", function() {
-                    fiv(board_base + research.board.img[i]);
+                    fiv([board_base + research.board.img[i], board_base + research.board.img[(i+1)%l], board_base + research.board.img[(i-1)%l]]);
                 });
                 btn.addEventListener("click", function() {
                     img.src = board_base + research.board.img[i];
@@ -562,7 +552,6 @@
                 imgs.push(img);
                 block.appendChild(img);
             }
-
 
             blocks.push(block);
             items.push(btn);
@@ -680,13 +669,15 @@
         return item;
     }
 
-    function fiv(src) {
+    function fiv(set = [], at = 0) {
+        if(typeof set == "string") set = [set];
+        console.log("[FIV]: Got Set.", {set, at});
         if ("ontouchstart" in document.documentElement) fullpage_api.setAllowScrolling(false);
         else fullpage_api.setAutoScrolling(false);
         document.getElementById("fiv-wide-viewer").style.display = "none";
         document.getElementById("fiv-src").style.display = "inline-block";
-        document.getElementById("fiv-src").src = src;
-        document.getElementById("fiv-wv-src").src = src;
+        document.getElementById("fiv-src").src = set[at];
+        document.getElementById("fiv-wv-src").src = set[at];
         document.getElementById("full-img-viewer").style.display = "flex";
         document.getElementById("full-img-viewer").onclick = function(e) {
             if(e.target === this) {
@@ -699,22 +690,36 @@
             this.style.display = "none";
             document.getElementById("fiv-wide-viewer").style.display = "flex";
         };
+        let touchX=0;
+        document.getElementById("fiv-src").ontouchstart = function(e) {
+            touchX = e.touches[0].clientX;
+        };
+        document.getElementById("fiv-src").ontouchend = function(e) {
+            let dX = e.changedTouches[0].clientX - touchX;
+            touchX = 0;
+            console.log("[Touch Tracer]: ", {dX});
+            if(dX < 100) fiv(set, (at+1)%set.length);
+            if(dX > 100) fiv(set, (at+set.length-1)%set.length);
+        };
         document.getElementById("fiv-wide-viewer").onclick = function(e) {
             this.style.display = "none";
             document.getElementById("fiv-src").style.display = "inline-block";
         };
     }
-    /*
 
-    <div class="qa">
-    <div class="question-wrap">
-    <div class="time"></div>
-    <div class="question"></div>
-    <div class="answer"></div>
-    </div>
-    </div>
-
-    */
+    function FP() {
+        window.fpc = new fullpage("#stage", {
+            licenseKey: "dddddddd-dddddddd-dddddddd-dddddddd",
+            anchors: ["數學組", "物理組", "化學組", "生物組", "地科組", "資訊組"],
+            autoScrolling:true,
+            scrollHorizontally: true,
+            sectionsColor : ["rgba(141, 141, 239, .75)", "rgba(123, 223, 242, .75)", "rgba(178, 247, 239, .75)", "rgba(239, 247, 246, .75)", "rgba(247, 214, 224, .75)", "rgba(242, 181, 212, .75)"],
+            sectionSelector: ".subject",
+            slideSelector: ".research",
+            controlArrows: false,
+            scrollOverflow: true
+        });
+    }
     </script>
 </body>
 </html>
