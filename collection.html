@@ -22,34 +22,6 @@
             <div class="leftArrow">
                 <i class="fas fa-angle-left"></i>
             </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
-            </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
-            </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
-            </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
-            </div>
         </div>
         <!-- 物理組  -->
         <div class="subject" id="phy">
@@ -58,20 +30,6 @@
             </div>
             <div class="leftArrow">
                 <i class="fas fa-angle-left"></i>
-            </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
-            </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
             </div>
         </div>
         <!-- 化學組  -->
@@ -82,27 +40,6 @@
             <div class="leftArrow">
                 <i class="fas fa-angle-left"></i>
             </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
-            </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
-            </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
-            </div>
         </div>
         <!-- 生物組  -->
         <div class="subject" id="bio">
@@ -111,55 +48,6 @@
             </div>
             <div class="leftArrow">
                 <i class="fas fa-angle-left"></i>
-            </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
-            </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
-            </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
-            </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
-            </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
-            </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
-            </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
             </div>
         </div>
         <!-- 地科組  -->
@@ -170,27 +58,6 @@
             <div class="leftArrow">
                 <i class="fas fa-angle-left"></i>
             </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
-            </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
-            </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
-            </div>
         </div>
         <!-- 資訊組  -->
         <div class="subject" id="csc">
@@ -199,27 +66,6 @@
             </div>
             <div class="leftArrow">
                 <i class="fas fa-angle-left"></i>
-            </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
-            </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
-            </div>
-            <div class="research">
-                <div class="container">
-                    <div class="screen"></div>
-                    <div class="vl"></div>
-                    <div class="list"></div>
-                </div>
             </div>
         </div>
     </div>
@@ -575,19 +421,43 @@
     var board_base = "res/img/三面板/", book_base = "res/img/摘要/";
 
     var meta = location.href.includes("file://") ? "https://epii.ml/res/file/data.json" : "res/file/data.json";
+    console.log("[Meta Fetcher]: Progress Start.");
     fetch(meta).then(r => r.json()).then(_data => {
+        console.log("[Meta Fetcher]: Success.", _data);
         data = _data;
         buildHTML(data);
         setTimeout(function() {stopLoading(document.getElementsByClassName("loading-barrier")[0])}, 200);
     });
 
     function buildHTML(data) {
+        console.log("[Builder]: Start Building HTML.");
         Array.from(document.getElementsByClassName("subject")).forEach(subject => {
-            let i = 0;
-            Array.from(subject.getElementsByClassName("container")).forEach(container => {
-                builder(container, data[subject.id][i++]);
-            });
+            console.log("[Builder]: Start Building Subject " + subject.id);
+            for(let i = 0; i < data[subject.id].length; i++) {
+                console.log("[Builder]: Data Received.", data[subject.id][i]);
+                console.log("[Builder]: Task Start.");
+                let research = document.createElement("div");
+                let container = document.createElement("div");
+                let screen = document.createElement("div");
+                let vl = document.createElement("div");
+                let list = document.createElement("div");
+
+                research.classList.add("research");
+                container.classList.add("container");
+                screen.classList.add("screen");
+                vl.classList.add("vl");
+                list.classList.add("list");
+
+                container.appendChild(screen);
+                container.appendChild(vl);
+                container.appendChild(list);
+                research.appendChild(container);
+                subject.appendChild(research);
+                builder(container, data[subject.id][i]);
+                console.log("[Builder]: Task Finished.");
+            }
         });
+        console.log("[Builder]: All HTML Elements Were Built.");
     }
 
     function switcher(list, target, poster = null) {
