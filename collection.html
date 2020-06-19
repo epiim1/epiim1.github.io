@@ -269,6 +269,7 @@
         word-break: break-all;
         margin: 4px 16px;
         letter-spacing: .25px;
+        color: deepskyblue;
     }
     .screen > div > img.board-image {
         cursor: pointer;
@@ -563,13 +564,12 @@
 
             block.classList.add("block");
             qa.classList.add("qa");
-            btn.addEventListener("click", function() {
+
+            let load = function() {
                 qa.appendChild(cardBuilder("Loading...", "載入中，請稍後...",""));
                 helper.messages.list(research.comment.id).then(list => {
                     qa.innerHTML = "";
 
-                    // send
-                    /*
                     let wrap = document.createElement("div");
                     let card = document.createElement("div");
                     let title = document.createElement("div");
@@ -580,19 +580,39 @@
                     card.classList.add("card");
 
                     title.innerHTML = "提問或留言";
+                    title.style.float = "left";
+                    title.style.margin = "0px 14px";
+                    title.style.color = "black";
+                    title.style.fontSize = "1.2rem";
+                    input.rows = 2;
+                    input.placeholder = "請在此寫下你的留言...";
+                    input.classList.add("form-control");
+                    input.style.margin = "4px 14px";
+                    input.style.width = "calc(100% - 28px)";
+                    send.innerHTML = "發送";
+                    send.classList.add("btn", "btn-primary");
+                    send.style.margin = "0px 14px";
+                    send.style.float = "right";
+
+                    send.addEventListener("click", function() {
+                        Question(input.value, research.comment.id).then(() => {
+                            input.value = "";
+                        });
+                    });
 
                     card.appendChild(title);
                     card.appendChild(input);
                     card.appendChild(send);
                     wrap.appendChild(card);
-
-*/
+                    qa.appendChild(wrap);
 
                     list.forEach(item => {
-                        qa.appendChild(cardBuilder(item.time.toDate().toLocaleString(), item.request.replace(/\n/g, "<br>"), item.response.replace(/\n/g, "<br>")));
+                        if(item.response)
+                            qa.appendChild(cardBuilder(item.time.toDate().toLocaleString(), item.request.replace(/\n/g, "<br>"), item.response.replace(/\n/g, "<br>")));
                     });
                 });
-            }, {once: true});
+            };
+            btn.addEventListener("click", load.bind(load), {once: true});
 
             block.appendChild(qa);
             blocks.push(block);
@@ -718,6 +738,52 @@
             slideSelector: ".research",
             controlArrows: false,
             scrollOverflow: true
+        });
+    }
+
+    async function Question(q, n) {
+        while(q.includes("\n\n")) {
+            q = q.replace(/\n\n/g, "\n");
+        }
+        while(q.includes("  ")) {
+            q = q.replace(/\s\s/g, " ");
+        }
+        console.log("[Messenger]: Questioned: \n" + q + "\nTo " + n);
+        if(q.length < 5) {
+            swal.fire("發送失敗", "原因：字數不足，最低限制為 5 個字", "error");
+            return;
+        }
+        let tag = function(val) {
+            var tags = [];
+            switch (val) {
+                case val.includes("數學_"):
+                tags.push("數學專題");
+                break;
+                case val.includes("物理_"):
+                tags.push("物理專題");
+                break;
+                case val.includes("化學_"):
+                tags.push("化學專題");
+                break;
+                case val.includes("生物_"):
+                tags.push("生物專題");
+                break;
+                case val.includes("地科_"):
+                tags.push("地科專題");
+                break;
+                case val.includes("資訊_"):
+                tags.push("資訊專題");
+                break;
+            }
+            tags.push(val);
+            return tags;
+        };
+        this.disabled = true;
+        await helper.messages.make(q, tag(n)).then(result => {
+            if(result) {
+                Swal.fire("已送出！", "我們已經收到你的留言了！請稍後片刻，我們將會回覆你。", "success");
+                this.disabled = false;
+            }
         });
     }
     </script>
