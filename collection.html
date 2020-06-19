@@ -422,20 +422,20 @@
 
     var meta = location.href.includes("file://") ? "https://epii.ml/res/file/data.json" : "res/file/data.json";
     console.log("[Meta Fetcher]: Progress Start.");
-    fetch(meta).then(r => r.json()).then(_data => {
+    fetch(meta).then(r => r.json()).then(async (_data) => {
         console.log("[Meta Fetcher]: Success.", _data);
         data = _data;
         buildHTML(data);
         setTimeout(function() {stopLoading(document.getElementsByClassName("loading-barrier")[0])}, 200);
     });
 
-    function buildHTML(data) {
+    async function buildHTML(data) {
         console.log("[Builder]: Start Building HTML.");
+        var tasks = [];
         Array.from(document.getElementsByClassName("subject")).forEach(subject => {
-            console.log("[Builder]: Start Building Subject " + subject.id);
+            console.log("[Builder]: Start Building Subject: " + subject.id);
             for(let i = 0; i < data[subject.id].length; i++) {
-                console.log("[Builder]: Data Received.", data[subject.id][i]);
-                console.log("[Builder]: Task Start.");
+                console.log("[Builder]: Data Received. Task Created.", data[subject.id][i]);
                 let research = document.createElement("div");
                 let container = document.createElement("div");
                 let screen = document.createElement("div");
@@ -453,10 +453,13 @@
                 container.appendChild(list);
                 research.appendChild(container);
                 subject.appendChild(research);
-                builder(container, data[subject.id][i]);
-                console.log("[Builder]: Task Finished.");
+                tasks.push(builder(container, data[subject.id][i]).then(() => {
+                    console.log("[Builder]: Element Created.", container);
+                    console.log("[Builder]: Task Finished.");
+                }));
             }
         });
+        await Promise.all(tasks);
         console.log("[Builder]: All HTML Elements Were Built.");
     }
 
