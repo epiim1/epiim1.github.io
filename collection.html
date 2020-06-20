@@ -400,6 +400,9 @@
         display: block;
     }
     @media screen and (orientation:portrait) {
+        .mobile-flex-start {
+            justify-content: flex-start;
+        }
         .container {
             flex-flow: column nowrap;
             justify-content: space-between;
@@ -695,6 +698,7 @@
                     block.style.alignItems = "flex-start";
                     block.style.justifyContent = "space-around";
                     block.style.overflowY = "auto";
+                    block.classList.add("mobile-flex-start");
                     for(let k = 0; k < d[i].team.length; k++) {
                         let link = document.createElement("a");
                         link.classList.add("inblock-link");
