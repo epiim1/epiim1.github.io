@@ -79,6 +79,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/fullpage.min.css" />
     <link href="https://vjs.zencdn.net/7.8.2/video-js.min.css" rel="stylesheet" />
+    <script src="res/js/functions.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/vendors/scrolloverflow.min.js" crossorigin="anonymous"></script>
@@ -399,6 +400,7 @@
     }
     </style>
     <script>
+    if(!location.href.includes("dev")) antiCheat();
     // Main Thread
     Array.from(document.getElementsByClassName("rightArrow")).forEach(elm => {
         elm.addEventListener("click", function() {fullpage_api.moveSlideRight();});
