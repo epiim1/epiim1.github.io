@@ -31,7 +31,7 @@
             },
             "book":{
                 "exists":true,
-                "page":10
+                "url":"math/圓例覺醒/1.jpg"
             },
             "board":{
                 "exists":true,
@@ -52,7 +52,7 @@
             },
             "book":{
                 "exists":true,
-                "page":11
+                "url":"math/Shoot!圓錐曲線神射手/1.jpg"
             },
             "board":{
                 "exists":true,
@@ -73,7 +73,7 @@
             },
             "book":{
                 "exists":true,
-                "page":12
+                "url":"math/be equal/1.jpg"
             },
             "board":{
                 "exists":true,
@@ -96,7 +96,7 @@
             },
             "book":{
                 "exists":true,
-                "page":15
+                "url":"physics/旋出新視界/1.jpg"
             },
             "board":{
                 "exists":true,
@@ -117,7 +117,7 @@
             },
             "book":{
                 "exists":true,
-                "page":16
+                "url":"physics/強制水漩渦之分析/1.jpg"
             },
             "board":{
                 "exists":true,
