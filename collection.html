@@ -399,6 +399,7 @@
     }
     </style>
     <script>
+    // Main Thread
     Array.from(document.getElementsByClassName("rightArrow")).forEach(elm => {
         elm.addEventListener("click", function() {fullpage_api.moveSlideRight();});
     });
@@ -418,9 +419,13 @@
         data = _data;
         await buildHTML(data);
         FP();
+        console.log("[Font]: Loading Font.");
+        await loadFont();
+        console.log("OK!");
         setTimeout(function() {stopLoading(document.getElementsByClassName("loading-barrier")[0])}, 200);
     });
 
+    // Functions
     async function buildHTML(data) {
         console.log("[Builder]: Start Building HTML.");
         var tasks = [];
@@ -791,6 +796,15 @@
                 Swal.fire("已送出！", "我們已經收到你的留言了！請稍後片刻，我們將會回覆你。", "success");
                 this.disabled = false;
             }
+        });
+    }
+
+    async function loadFont() {
+        var font_huninn = new FontFace('huninn', 'url("res/font/jf-openhuninn-10.woff2") format("woff2")');
+        return await font_huninn.load().then(loaded_face => {
+            document.fonts.add(loaded_face);
+            document.body.style.fontFamily = "'huninn', '微軟正黑體', 'Microsoft JhengHei', 'PingFang', sans-serif";
+            return true;
         });
     }
     </script>
