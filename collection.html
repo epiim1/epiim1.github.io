@@ -14,6 +14,52 @@
         </div>
     </div>
     <div id="stage">
+        <!-- 目錄  -->
+        <div class="subject" id="index">
+            <div class="bar">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="./">  e<sup>πi</sup> = 附1  </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bar" aria-controls="bar" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="bar">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="./">首頁</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./collection">研究成果</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./message">留言區</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./others">其他</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="sub-link" style="position: absolute; top: calc(80px + (100% - 80px) * 0.02);">
+                <a href="#數學組">數學組</a>
+            </div>
+            <div class="sub-link" style="position: absolute; top: calc(80px + (100% - 80px) * 0.15);">
+                <a href="#物理組">物理組</a>
+            </div>
+            <div class="sub-link" style="position: absolute; top: calc(80px + (100% - 80px) * 0.28);">
+                <a href="#化學組">化學組</a>
+            </div>
+            <div class="sub-link" style="position: absolute; top: calc(80px + (100% - 80px) * 0.41);">
+                <a href="#生物組">生物組</a>
+            </div>
+            <div class="sub-link" style="position: absolute; top: calc(80px + (100% - 80px) * 0.54);">
+                <a href="#地科組">地科組</a>
+            </div>
+            <div class="sub-link" style="position: absolute; top: calc(80px + (100% - 80px) * 0.67);">
+                <a href="#資訊組">資訊組</a>
+            </div>
+        </div>
         <!-- 數學組  -->
         <div class="subject" id="math">
             <div class="rightArrow">
@@ -22,6 +68,7 @@
             <div class="leftArrow">
                 <i class="fas fa-angle-left"></i>
             </div>
+            <div class="research introduction"></div>
         </div>
         <!-- 物理組  -->
         <div class="subject" id="phy">
@@ -31,6 +78,7 @@
             <div class="leftArrow">
                 <i class="fas fa-angle-left"></i>
             </div>
+            <div class="research introduction"></div>
         </div>
         <!-- 化學組  -->
         <div class="subject" id="che">
@@ -40,6 +88,7 @@
             <div class="leftArrow">
                 <i class="fas fa-angle-left"></i>
             </div>
+            <div class="research introduction"></div>
         </div>
         <!-- 生物組  -->
         <div class="subject" id="bio">
@@ -49,6 +98,7 @@
             <div class="leftArrow">
                 <i class="fas fa-angle-left"></i>
             </div>
+            <div class="research introduction"></div>
         </div>
         <!-- 地科組  -->
         <div class="subject" id="esc">
@@ -58,6 +108,7 @@
             <div class="leftArrow">
                 <i class="fas fa-angle-left"></i>
             </div>
+            <div class="research introduction"></div>
         </div>
         <!-- 資訊組  -->
         <div class="subject" id="csc">
@@ -67,6 +118,7 @@
             <div class="leftArrow">
                 <i class="fas fa-angle-left"></i>
             </div>
+            <div class="research introduction"></div>
         </div>
     </div>
     <div id="full-img-viewer">
@@ -96,6 +148,26 @@
     }
     body::-webkit-scrollbar {
         display: none !important;
+    }
+    .bar {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        box-shadow: 0px 4px 8px 0px rgba(32, 32, 32, 0.3);
+    }
+    .sub-link {
+        font-size: 8vmin;
+    }
+    .sub-link > a {
+        color: black;
+    }
+    .sub-link > a:hover {
+        color: rgba(0, 0, 0, .65);
+        text-decoration: none;
+    }
+    .sub-link > a:visited {
+        color: black;
+        text-decoration: none;
     }
     .container {
         position: relative;
@@ -184,7 +256,7 @@
     .list-text {
         margin-bottom: 2px;
     }
-    .video, .board, .book, .comment {
+    .video, .board, .book, .comment, .intro-intro, .intro-index {
         display: flex;
         flex-flow: column nowrap;
         justify-content: center;
@@ -323,6 +395,9 @@
         max-width: 90%;
         border-radius: min(5px, .5vw);
     }
+    .inblock-link {
+        display: block;
+    }
     @media screen and (orientation:portrait) {
         .container {
             flex-flow: column nowrap;
@@ -411,6 +486,7 @@
 
     var helper = new firebaseHelper();
     helper.init();
+    moveSubLinks();
     var switchers = [], players = [], data = {};
     var board_base = "res/img/三面板/", book_base = "res/img/摘要/";
 
@@ -419,6 +495,7 @@
     fetch(meta).then(r => r.json()).then(async (_data) => {
         console.log("[Meta Fetcher]: Success.", _data);
         data = _data;
+        await buildIntro();
         await buildHTML(data);
         FP();
         console.log("[Font]: Loading Font.");
@@ -428,10 +505,219 @@
     });
 
     // Functions
+    async function buildIntro() {
+        let d = [
+            {
+                name: "數專",
+                poster: "",
+                file: ["res/img/intro/math/Document-page-001.jpg", "res/img/intro/math/Document-page-002.jpg"],
+                team: [
+                    {
+                        name: "Shoot！圓錐曲線神射手",
+                        link: "#數學組/1"
+                    },
+                    {
+                        name: "圓例覺醒",
+                        link: "#數學組/2"
+                    },
+                    {
+                        name: "一層一層串起你的心",
+                        link: "#數學組/3"
+                    },
+                    {
+                        name: "Be Equal",
+                        link: "#數學組/4"
+                    }
+                ]
+            },
+            {
+                name: "物專",
+                poster: "",
+                file: ["res/img/intro/phy/Document-page-001.jpg", "res/img/intro/phy/Document-page-002.jpg"],
+                team: [
+                    {
+                        name: "旋出新視界",
+                        link: "#物理組/1"
+                    },
+                    {
+                        name: "強制水漩渦之分析",
+                        link: "#物理組/2"
+                    }
+                ]
+            },
+            {
+                name: "化專",
+                poster: "",
+                file: ["res/img/intro/che/Document-page-001.jpg", "res/img/intro/che/Document-page-002.jpg"],
+                team: [
+                    {
+                        name: "如何微笑",
+                        link: "#化學組/1"
+                    },
+                    {
+                        name: "2D 奈米二硫化鉬-新型汙水救星相關研究",
+                        link: "#化學組/2"
+                    },
+                    {
+                        name: "利用銅網型液晶分析法檢測空氣中微粒",
+                        link: "#化學組/3"
+                    }
+                ]
+            },
+            {
+                name: "生專",
+                poster: "",
+                file: ["res/img/intro/bio/Document-page-001.jpg", "res/img/intro/bio/Document-page-002.jpg"],
+                team: [
+                    {
+                        name: "利用班馬魚胚胎測試Cisplatin導致的傷害及NAC的保護效果",
+                        link: "#生物組/1"
+                    },
+                    {
+                        name: "探討粒線體對果蠅卵巢生殖幹細胞維持的影響",
+                        link: "#生物組/2"
+                    },
+                    {
+                        name: "以蛋白質體分析探討細胞複製與分化",
+                        link: "#生物組/3"
+                    },
+                    {
+                        name: "比較脂質體及非脂質體轉染試劑",
+                        link: "#生物組/4"
+                    },
+                    {
+                        name: "記憶猶新—Scopolamine 對斑馬魚記憶能力與社交行為的影響",
+                        link: "#生物組/5"
+                    },
+                    {
+                        name: "中華珈蟌水蠆環境偏好探討",
+                        link: "#生物組/6"
+                    },
+                    {
+                        name: "酒精對水蚤趨光性影響之探討",
+                        link: "#生物組/7"
+                    }
+                ]
+            },
+            {
+                name: "地專",
+                poster: "",
+                file: ["res/img/intro/earth/Document-page-001.jpg", "res/img/intro/earth/Document-page-002.jpg"],
+                team: [
+                    {
+                        name: "近岸波與單樁式離岸風電基座關係初探",
+                        link: "#地科組/1"
+                    },
+                    {
+                        name: "熱力風模擬與分析",
+                        link: "#地科組/2"
+                    },
+                    {
+                        name: "雙眼牆颱風的內眼滾動",
+                        link: "#地科組/3"
+                    }
+                ]
+            },
+            {
+                name: "資專",
+                poster: "",
+                file: ["res/img/intro/computer/Document-page-001.jpg", "res/img/intro/computer/Document-page-002.jpg"],
+                team: [
+                    {
+                        name: "遷移學習如何建立辨識日式插畫角色之神經網路",
+                        link: "#資訊組/1"
+                    },
+                    {
+                        name: "利用 RFID 增進校園安全",
+                        link: "#資訊組/2"
+                    },
+                    {
+                        name: "用機器學習判斷文本的主觀資訊",
+                        link: "#資訊組/3"
+                    }
+                ]
+            }
+        ];
+        let parant = document.getElementsByClassName("introduction");
+        for(let i = 0; i < parant.length; i++) {
+            let container = document.createElement("div");
+            let screen = document.createElement("div");
+            let vl = document.createElement("div");
+            let list = document.createElement("div");
+
+            container.classList.add("container");
+            screen.classList.add("screen");
+            vl.classList.add("vl");
+            list.classList.add("list");
+
+            container.appendChild(screen);
+            container.appendChild(vl);
+            container.appendChild(list);
+            parant[i].appendChild(container);
+
+            let poster = document.createElement("div");
+            poster.classList.add("poster");
+            //let posterImg = document.createElement("img");
+            //posterImg.src = d[i].poster;
+            let big = document.createElement("h1");
+            big.style.color = "white";
+            big.innerHTML = d[i].name + "！";
+            poster.appendChild(big);
+            screen.appendChild(poster);
+
+            let List = [itemBuilder("intro-intro"), itemBuilder("intro-index")];
+            let blocks = [];
+
+            for(let j = 0; j < 2; j++) {
+                let block = document.createElement("div");
+                block.classList.add("block");
+
+                if(!j) {
+                    if(typeof d[i].file == "string") d[i].file = [d[i].file];
+                    let imgs = [];
+                    let l = d[i].file.length;
+                    for(let k = 0; k < l; k++) {
+                        let img = document.createElement("img");
+                        img.classList.add("book-image");
+                        img.addEventListener("click", function() {
+                            fiv(d[i].file, k);
+                        });
+                        List[0].addEventListener("click", function() {
+                            img.src = d[i].file[k];
+                        }, {once: true});
+                        imgs.push(img);
+                        block.appendChild(img);
+                    }
+                }
+                if(j) {
+                    block.style.flexDirection = "column";
+                    block.style.alignItems = "flex-start";
+                    block.style.justifyContent = "space-around";
+                    for(let k = 0; k < d[i].team.length; k++) {
+                        let link = document.createElement("a");
+                        link.classList.add("inblock-link");
+                        link.innerHTML = d[i].team[k].name;
+                        link.href = d[i].team[k].link;
+                        block.appendChild(link);
+                    }
+                }
+                screen.appendChild(block);
+                blocks.push(block);
+            }
+            List.forEach(btn => {list.appendChild(btn)});
+            new switcher(List, blocks, poster);
+        }
+    }
+
     async function buildHTML(data) {
         console.log("[Builder]: Start Building HTML.");
         var tasks = [];
+        var index = 1;
         Array.from(document.getElementsByClassName("subject")).forEach(subject => {
+            if(index) {
+                index = !index;
+                return;
+            }
             console.log("[Builder]: Start Building Subject: " + subject.id);
             for(let i = 0; i < data[subject.id].length; i++) {
                 console.log("[Builder]: Data Received. Task Created.", data[subject.id][i]);
@@ -697,6 +983,16 @@
             icon.classList.add("fas", "fa-comment-alt");
             text.innerHTML = "留言";
         }
+        if(type == "intro-intro") {
+            item.classList.add("intro-intro");
+            icon.classList.add("fas", "fa-users");
+            text.innerHTML = "介紹";
+        }
+        if(type == "intro-index") {
+            item.classList.add("intro-index");
+            icon.classList.add("fas", "fa-list");
+            text.innerHTML = "組別";
+        }
         iconWrap.appendChild(icon);
         item.appendChild(iconWrap);
         item.appendChild(text);
@@ -744,10 +1040,10 @@
     function FP() {
         window.fpc = new fullpage("#stage", {
             licenseKey: "dddddddd-dddddddd-dddddddd-dddddddd",
-            anchors: ["數學組", "物理組", "化學組", "生物組", "地科組", "資訊組"],
-            autoScrolling:true,
+            anchors: ["目錄", "數學組", "物理組", "化學組", "生物組", "地科組", "資訊組"],
+            autoScrolling: true,
             scrollHorizontally: true,
-            sectionsColor : ["rgba(141, 141, 239, .75)", "rgba(123, 223, 242, .75)", "rgba(178, 247, 239, .75)", "rgba(239, 247, 246, .75)", "rgba(247, 214, 224, .75)", "rgba(242, 181, 212, .75)"],
+            sectionsColor : ["rgba(0, 0, 0, 0)", "rgba(141, 141, 239, .75)", "rgba(123, 223, 242, .75)", "rgba(178, 247, 239, .75)", "rgba(239, 247, 246, .75)", "rgba(247, 214, 224, .75)", "rgba(242, 181, 212, .75)"],
             sectionSelector: ".subject",
             slideSelector: ".research",
             controlArrows: false,
@@ -801,13 +1097,13 @@
         });
     }
 
-    async function loadFont() {
-        var font_huninn = new FontFace('huninn', 'url("res/font/jf-openhuninn-10.woff2") format("woff2")');
-        return await font_huninn.load().then(loaded_face => {
-            document.fonts.add(loaded_face);
-            document.body.style.fontFamily = "'huninn', '微軟正黑體', 'Microsoft JhengHei', 'PingFang', sans-serif";
-            return true;
-        });
+    function moveSubLinks() {
+        let elms = document.getElementsByClassName("sub-link");
+        for(let i = 0; i < elms.length; i++) {
+            let d = Math.floor(Math.random() * 15 + 10);
+            if(i%2) elms[i].style.right = d + "%";
+            else elms[i].style.left = d + "%";
+        }
     }
     </script>
 </body>
