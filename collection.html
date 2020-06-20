@@ -43,21 +43,27 @@
             </div>
             <div class="sub-link" style="position: absolute; top: calc(80px + (100% - 80px) * 0.02);">
                 <a href="#數學組">數學組</a>
+                <img class="sub-link-icon" src="res/img/icons/math.png">
             </div>
             <div class="sub-link" style="position: absolute; top: calc(80px + (100% - 80px) * 0.15);">
                 <a href="#物理組">物理組</a>
+                <img class="sub-link-icon" src="res/img/icons/physics.png">
             </div>
             <div class="sub-link" style="position: absolute; top: calc(80px + (100% - 80px) * 0.28);">
                 <a href="#化學組">化學組</a>
+                <img class="sub-link-icon" src="res/img/icons/chemistry.png">
             </div>
             <div class="sub-link" style="position: absolute; top: calc(80px + (100% - 80px) * 0.41);">
                 <a href="#生物組">生物組</a>
+                <img class="sub-link-icon" src="res/img/icons/biology.png">
             </div>
             <div class="sub-link" style="position: absolute; top: calc(80px + (100% - 80px) * 0.54);">
                 <a href="#地科組">地科組</a>
+                <img class="sub-link-icon" src="res/img/icons/earth_science.png">
             </div>
             <div class="sub-link" style="position: absolute; top: calc(80px + (100% - 80px) * 0.67);">
                 <a href="#資訊組">資訊組</a>
+                <img class="sub-link-icon" src="res/img/icons/computer_science.png">
             </div>
         </div>
         <!-- 數學組  -->
@@ -169,6 +175,11 @@
     .sub-link > a:visited {
         color: black;
         text-decoration: none;
+    }
+    .sub-link-icon {
+        width: 15vmin;
+        position: absolute;
+        right: -50%;
     }
     .container {
         position: relative;
@@ -1105,10 +1116,14 @@
 
     function moveSubLinks() {
         let elms = document.getElementsByClassName("sub-link");
+        let icons = document.getElementsByClassName("sub-link-icon");
         for(let i = 0; i < elms.length; i++) {
-            let d = Math.floor(Math.random() * 15 + 10);
+            let d = Math.floor(Math.random() * 10 + 15);
             if(i%2) elms[i].style.right = d + "%";
             else elms[i].style.left = d + "%";
+            icons[i].style.right = (-1 * Math.floor(Math.random() * 10 + 55)) + "%";
+            icons[i].style.bottom = (-1 * Math.floor(Math.random() * 40 + 20)) + "%";
+            icons[i].style.transform = `rotate(${Math.floor(Math.random() * 40 - 15)}deg)`;
         }
     }
     </script>
