@@ -1121,7 +1121,7 @@
         for(let i = 0; i < elms.length; i++) {
             let d = Math.floor(Math.random() * 10 + 15);
             if(i%2) elms[i].style.right = d + "%";
-            else elms[i].style.left = d + "%";
+            else elms[i].style.left = (d-7) + "%";
             icons[i].style.right = (-1 * Math.floor(Math.random() * 10 + 55)) + "%";
             icons[i].style.bottom = (-1 * Math.floor(Math.random() * 40 + 20)) + "%";
             icons[i].style.transform = `rotate(${Math.floor(Math.random() * 40 - 15)}deg)`;
