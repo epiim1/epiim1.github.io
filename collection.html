@@ -137,6 +137,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/fullpage.min.css" />
     <link href="https://vjs.zencdn.net/7.8.2/video-js.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
     <script src="res/js/functions.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"crossorigin="anonymous"></script>
@@ -538,8 +539,8 @@
         await buildIntro();
         await buildHTML(data);
         FP();
-        console.log("[Font]: Loading Font.");
-        await loadFont();
+        //console.log("[Font]: Loading Font.");
+        //await loadFont();
         console.log("OK!");
         setTimeout(function() {stopLoading(document.getElementsByClassName("loading-barrier")[0])}, 200);
     });
