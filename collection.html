@@ -842,7 +842,7 @@
                 title.innerHTML = "資訊組";
                 break;
         }
-        subtitle.innerHTML = research.name;
+        subtitle.innerHTML = research.shortcut || research.name;
         if(research.book.exists && research.book.url) {
             let url = research.book.url;
             if(typeof url == "string") url = [url];
