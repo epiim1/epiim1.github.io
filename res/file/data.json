@@ -6,7 +6,7 @@
             "video":{
                 "exists":true,
                 "url":"/videos-math/Shoot！圓錐曲線神射手/index.m3u8",
-                "poster":"/videos-math/Shoot！圓錐曲線神射手/poster.jpg"
+                "poster":"/res/img/posters/math/1.jpg"
             },
             "book":{
                 "exists":true,
@@ -27,7 +27,7 @@
             "video":{
                 "exists":true,
                 "url":"/videos-math/圓例覺醒/index.m3u8",
-                "poster":"/videos-math/圓例覺醒/poster.jpg"
+                "poster":"/res/img/posters/math/2.jpg"
             },
             "book":{
                 "exists":true,
@@ -48,7 +48,7 @@
             "video":{
                 "exists":true,
                 "url":"/videos-math/一層一層串起你的心/index.m3u8",
-                "poster":"/videos-math/一層一層串起你的心/poster.jpg"
+                "poster":"/res/img/posters/math/3.jpg"
             },
             "book":{
                 "exists":true,
@@ -69,7 +69,7 @@
             "video":{
                 "exists":true,
                 "url":"/videos-math/Be Equal/index.m3u8",
-                "poster":"/videos-math/Be Equal/poster.jpg"
+                "poster":"/res/img/posters/math/4.jpg"
             },
             "book":{
                 "exists":true,
@@ -92,7 +92,7 @@
             "video":{
                 "exists":true,
                 "url":"/videos-physics/旋出新視界/index.m3u8",
-                "poster":"/videos-physics/旋出新視界/poster.jpg"
+                "poster":"/res/img/posters/physics/1.jpg"
             },
             "book":{
                 "exists":true,
@@ -113,7 +113,7 @@
             "video":{
                 "exists":true,
                 "url":"/videos-physics/強制水漩渦之分析/index.m3u8",
-                "poster":"/videos-physics/強制水漩渦之分析/poster.jpg"
+                "poster":"/res/img/posters/physics/2.jpg"
             },
             "book":{
                 "exists":true,
@@ -136,7 +136,7 @@
             "video":{
                 "exists":true,
                 "url":"/videos-chemistry/如何微笑/index.m3u8",
-                "poster":"/videos-chemistry/如何微笑/poster.jpg"
+                "poster":"/res/img/posters/chemistry/1.jpg"
             },
             "book":{
                 "exists":true,
@@ -157,7 +157,7 @@
             "video":{
                 "exists":true,
                 "url":"/videos-chemistry/2D 奈米二硫化鉬-新型汙水救星相關研究/index.m3u8",
-                "poster":"/videos-chemistry/2D 奈米二硫化鉬-新型汙水救星相關研究/poster.jpg"
+                "poster":"/res/img/posters/chemistry/2.jpg"
             },
             "book":{
                 "exists":true,
@@ -178,7 +178,7 @@
             "video":{
                 "exists":true,
                 "url":"/videos-chemistry/利用銅網型液晶分析法檢測空氣中微粒/index.m3u8",
-                "poster":"/videos-chemistry/利用銅網型液晶分析法檢測空氣中微粒/poster.jpg"
+                "poster":"/res/img/posters/chemistry/3.jpg"
             },
             "book":{
                 "exists":true,
@@ -201,7 +201,7 @@
             "video":{
                 "exists":true,
                 "url":"/videos-biology/利用班馬魚胚胎測試Cisplatin導致的傷害及NAC的保護效果/index.m3u8",
-                "poster":"/videos-biology/利用班馬魚胚胎測試Cisplatin導致的傷害及NAC的保護效果/poster.jpg"
+                "poster":"/res/img/posters/biology/1.jpg"
             },
             "book":{
                 "exists":true,
@@ -222,7 +222,7 @@
             "video":{
                 "exists":true,
                 "url":"/videos-biology/探討粒線體對果蠅卵巢生殖幹細胞維持的影響/index.m3u8",
-                "poster":"/videos-biology/探討粒線體對果蠅卵巢生殖幹細胞維持的影響/poster.jpg"
+                "poster":"/res/img/posters/biology/2.jpg"
             },
             "book":{
                 "exists":true,
@@ -239,10 +239,12 @@
         },
         {
             "name":"記憶猶新—Scopolamine 對斑馬魚記憶能力與社交行為的影響",
+            "shortcut": "記憶猶新"
             "subject":"bio",
             "video":{
                 "exists":true,
-                "url":"/videos-biology/記憶猶新-Scopolamine 對斑馬魚記憶能力與社交行為的影響/index.m3u8"
+                "url":"/videos-biology/記憶猶新-Scopolamine 對斑馬魚記憶能力與社交行為的影響/index.m3u8",
+                "poster": "/res/img/posters/biology/3.jpg"
             },
             "book":{
                 "exists":true,
@@ -262,7 +264,8 @@
             "subject":"bio",
             "video":{
                 "exists":true,
-                "url":"/videos-biology/比較脂質體及非脂質體轉染試劑/index.m3u8"
+                "url":"/videos-biology/比較脂質體及非脂質體轉染試劑/index.m3u8",
+                "poster": "/res/img/posters/biology/4.jpg"
             },
             "book":{
                 "exists":true,
@@ -345,7 +348,7 @@
             "video":{
                 "exists":true,
                 "url":"/videos-earth-science/近岸波與單樁式離岸風電基座關係初探/index.m3u8",
-                "poster":"/videos-earth-science/近岸波與單樁式離岸風電基座關係初探/poster.jpg"
+                "poster":"/res/img/posters/earth_science/3.jpg"
             },
             "book":{
                 "exists":true,
@@ -385,7 +388,8 @@
             "subject":"esc",
             "video":{
                 "exists":true,
-                "url":"/videos-earth-science/雙眼牆颱風的內眼滾動/index.m3u8"
+                "url":"/videos-earth-science/雙眼牆颱風的內眼滾動/index.m3u8",
+                "poster": "/res/img/posters/earth_science/1.jpg"
             },
             "book":{
                 "exists":true,
@@ -408,7 +412,7 @@
             "video":{
                 "exists":false,
                 "url":"/videos-computer-science/遷移學習如何建立辨識日式插畫角色之神經網路/index.m3u8",
-                "poster":"/videos-computer-science/遷移學習如何建立辨識日式插畫角色之神經網路/poster.jpg"
+                "poster":"/res/img/posters/information/1.jpg"
             },
             "book":{
                 "exists":true,

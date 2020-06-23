@@ -137,6 +137,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/fullpage.min.css" />
     <link href="https://vjs.zencdn.net/7.8.2/video-js.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
     <script src="res/js/functions.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"crossorigin="anonymous"></script>
@@ -410,7 +411,31 @@
     .inblock-link {
         display: block;
     }
+    .block-title {
+        font-size: 1.4rem;
+        position: absolute;
+        top: calc(-1.4rem - 4px);
+        left: 0;
+    }
+    .block-subtitle {
+        font-size: 1.2rem;
+        position: absolute;
+        top: calc(-1.2rem - 4px);
+        right: 0;
+    }
     @media screen and (orientation:portrait) {
+        .block-title {
+            font-size: 1.4rem;
+            position: absolute;
+            top: calc(-2.6rem - 8px);
+            left: 0;
+        }
+        .block-subtitle {
+            font-size: 1.2rem;
+            position: absolute;
+            top: calc(-1.2rem - 4px);
+            left: 0;
+        }
         .mobile-flex-start {
             justify-content: flex-start !important;
             font-size: min(15px, 3.2vmin);
@@ -514,8 +539,8 @@
         await buildIntro();
         await buildHTML(data);
         FP();
-        console.log("[Font]: Loading Font.");
-        await loadFont();
+        //console.log("[Font]: Loading Font.");
+        //await loadFont();
         console.log("OK!");
         setTimeout(function() {stopLoading(document.getElementsByClassName("loading-barrier")[0])}, 200);
     });
@@ -794,6 +819,31 @@
     async function builder(container, research) {
         var screen = container.getElementsByClassName("screen")[0], list = container.getElementsByClassName("list")[0];
         var blocks = [], items = [], poster = document.createElement("div"), pic = document.createElement("img");
+        var title = document.createElement("h2"), subtitle = document.createElement("h3");
+        title.classList.add("block-title");
+        subtitle.classList.add("block-subtitle");
+        switch(research.subject) {
+            case "math":
+                title.innerHTML = "數學組";
+                break;
+            case "phy":
+                title.innerHTML = "物理組";
+                break;
+            case "che":
+                title.innerHTML = "化學組";
+                break;
+            case "bio":
+                title.innerHTML = "生物組";
+                break;
+            case "esc":
+                title.innerHTML = "地科組";
+                break;
+            case "csc":
+                title.innerHTML = "資訊組";
+                break;
+        }
+        if(window.innerWidth < 600 && research.shortcut) subtitle.innerHTML = research.shortcut;
+        else subtitle.innerHTML = research.name;
         if(research.book.exists && research.book.url) {
             let url = research.book.url;
             if(typeof url == "string") url = [url];
@@ -942,7 +992,9 @@
         poster.classList.add("poster");
 
         switchers.push(new switcher(items, blocks, poster));
-
+        
+        container.appendChild(title);
+        container.appendChild(subtitle);
         screen.appendChild(poster);
         for(var i = 0; i < blocks.length; i++) {
             screen.appendChild(blocks[i]);
