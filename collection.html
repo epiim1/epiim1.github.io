@@ -433,7 +433,7 @@
         .block-subtitle {
             font-size: 1.2rem;
             position: absolute;
-            top: calc(-1.2rem - 4px);
+            top: calc(-1.2rem - 6px);
             left: 0;
         }
         .mobile-flex-start {
@@ -844,6 +844,15 @@
         }
         if(window.innerWidth < 600 && research.shortcut) subtitle.innerHTML = research.shortcut;
         else subtitle.innerHTML = research.name;
+
+        if(window.innerWidth < window.innerHeight) {
+            if(subtitle.innerHTML.length > 16) {
+                subtitle.style.top = `calc(-2.4rem - 12px)`;
+                title.style.top = `calc(-3.8rem - 16px)`;
+                subtitle.innerHTML = subtitle.innerHTML.substr(0, 16) + "<br>" + subtitle.innerHTML.substr(16);
+            }
+        }
+
         if(research.book.exists && research.book.url) {
             let url = research.book.url;
             if(typeof url == "string") url = [url];
@@ -992,7 +1001,7 @@
         poster.classList.add("poster");
 
         switchers.push(new switcher(items, blocks, poster));
-        
+
         container.appendChild(title);
         container.appendChild(subtitle);
         screen.appendChild(poster);
