@@ -824,23 +824,23 @@
         subtitle.classList.add("block-subtitle");
         switch(research.subject) {
             case "math":
-                title.innerHTML = "數學組";
-                break;
+            title.innerHTML = "數學組";
+            break;
             case "phy":
-                title.innerHTML = "物理組";
-                break;
+            title.innerHTML = "物理組";
+            break;
             case "che":
-                title.innerHTML = "化學組";
-                break;
+            title.innerHTML = "化學組";
+            break;
             case "bio":
-                title.innerHTML = "生物組";
-                break;
+            title.innerHTML = "生物組";
+            break;
             case "esc":
-                title.innerHTML = "地科組";
-                break;
+            title.innerHTML = "地科組";
+            break;
             case "csc":
-                title.innerHTML = "資訊組";
-                break;
+            title.innerHTML = "資訊組";
+            break;
         }
         if(window.innerWidth < 600 && research.shortcut) subtitle.innerHTML = research.shortcut;
         else subtitle.innerHTML = research.name;
@@ -1188,6 +1188,41 @@
             icons[i].style.transform = `rotate(${Math.floor(Math.random() * 40 - 15)}deg)`;
         }
     }
-    </script>
+
+    function easterEgg() {
+        setTimeout(function() {
+            console.log("讚!");
+            console.log("輸入 eggOpen() 以開啟彩蛋");
+        }, 5000);
+        this.easterScore = localStorage["easterScore"] || 0;
+        window.eggOpen = function(){ console.log("限時60秒答題!"); console.log("輸入 ans(答案) 來回答"); this.newQ(); setTimeout((function() { this.end(); }).bind(this), 60000); }.bind(this);
+        window.ans = function(ans) {
+            if(ans == this.answer) {
+                console.log("對喔! +10分");
+                this.easterScore += 10;
+                console.log("現時總分: "+this.easterScore);
+                this.newQ();
+            }
+            else {
+                console.log("不對喔!");
+                console.log("答案是 "+this.answer);
+                console.log("下一題");
+                this.newQ();
+            }
+        }.bind(this);
+        this.end = function() {
+            window.ans = function() {
+                console.log("已經結束了喔!");
+            };
+            console.log("分數: "+this.easterScore);
+        };
+        this.newQ = function() {
+            let a = Math.floor(2+Math.random()*20), b = Math.floor(2+Math.random()*4);
+            this.answer = Math.pow(a, b);
+            console.log(`Q: ${a} 的 ${b} 次方是多少?`);
+        };
+    }
+    new easterEgg();
+</script>
 </body>
 </html>

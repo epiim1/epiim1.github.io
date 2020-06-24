@@ -343,6 +343,27 @@
     ],
     "esc":[
         {
+            "name":"雙眼牆颱風的內眼滾動",
+            "subject":"esc",
+            "video":{
+                "exists":true,
+                "url":"/videos-earth-science/雙眼牆颱風的內眼滾動/index.m3u8",
+                "poster": "/res/img/posters/earth_science/1.jpg"
+            },
+            "book":{
+                "exists":true,
+                "url":"earth_science/雙眼牆颱風內眼滾動/1.jpg"
+            },
+            "board":{
+                "exists":true,
+                "img":["earth_science/雙眼牆颱風內眼滾動/左.jpg", "earth_science/雙眼牆颱風內眼滾動/中.jpg", "earth_science/雙眼牆颱風內眼滾動/右.jpg"]
+            },
+            "comment":{
+                "exists":true,
+                "id":"地科_3"
+            }
+        },
+        {
             "name":"近岸波與單樁式離岸風電基座關係初探",
             "subject":"esc",
             "video":{
@@ -381,27 +402,6 @@
             "comment":{
                 "exists":true,
                 "id":"地科_2"
-            }
-        },
-        {
-            "name":"雙眼牆颱風的內眼滾動",
-            "subject":"esc",
-            "video":{
-                "exists":true,
-                "url":"/videos-earth-science/雙眼牆颱風的內眼滾動/index.m3u8",
-                "poster": "/res/img/posters/earth_science/1.jpg"
-            },
-            "book":{
-                "exists":true,
-                "url":"earth_science/雙眼牆颱風內眼滾動/1.jpg"
-            },
-            "board":{
-                "exists":true,
-                "img":["earth_science/雙眼牆颱風內眼滾動/左.jpg", "earth_science/雙眼牆颱風內眼滾動/中.jpg", "earth_science/雙眼牆颱風內眼滾動/右.jpg"]
-            },
-            "comment":{
-                "exists":true,
-                "id":"地科_3"
             }
         }
     ],
