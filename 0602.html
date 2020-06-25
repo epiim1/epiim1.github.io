@@ -42,11 +42,14 @@
             </nav>
         </div>
     <div class="container">
-        <video id="v" controls></video>
+        <video id="v" class="video-js vjs-default-skin vjs-big-play-centered" controls>
+            <source src="0602-1/v/index.m3u8" type="application/x-mpegURL" />
+        </video>
     </div>
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/flatly/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://vjs.zencdn.net/7.8.2/video.min.js"></script>
     <style>
     body {
         background: rgba(0,0,128,.5) url("res/img/background_x2.jpg") no-repeat center;
@@ -88,14 +91,6 @@
     </style>
     <script>
     var video = document.getElementById("v");
-    if(Hls.isSupported()) {
-        var hls = new Hls();
-        hls.loadSource("https://raw.githubusercontent.com/epiim1/videos-math/master/Shoot%EF%BC%81%E5%9C%93%E9%8C%90%E6%9B%B2%E7%B7%9A%E7%A5%9E%E5%B0%84%E6%89%8B/index.m3u8");
-        hls.attachMedia(video);
-    }
-    else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = 'https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8';
-    }
     stopLoading(document.getElementById("loading"));
     </script>
 </body>
